@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { BootScreen } from '@/components/BootScreen'
 import { AtmosphericBackground } from '@/components/AtmosphericBackground'
 import { CustomCursor } from '@/components/CustomCursor'
 import { HeroSection } from '@/components/HeroSection'
@@ -16,12 +14,8 @@ import { ItchSection } from '@/components/ItchSection'
 import { ContactSection } from '@/components/ContactSection'
 
 export default function Index() {
-  const [bootCompleted, setBootCompleted] = useState(false)
-
   return (
     <div className="relative min-h-screen bg-[#080808] text-[#EDEDED]">
-      {!bootCompleted && <BootScreen onComplete={() => setBootCompleted(true)} />}
-
       <AtmosphericBackground />
       <CustomCursor />
 

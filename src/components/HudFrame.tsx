@@ -17,14 +17,17 @@ export function HudFrame({
   return (
     <div
       className={cn(
-        'relative border border-[#2a2a35] bg-[#1A1A20]/90 backdrop-blur-md p-6 sm:p-8 hud-corners traveling-border shadow-[0_10px_30px_rgba(0,0,0,0.6)] transition-all duration-300 hover:border-cyan-500/40',
+        'relative border border-[#2a2a35] bg-[#1A1A20]/85 backdrop-blur-lg p-6 sm:p-8 hud-corners shadow-[0_10px_40px_rgba(0,0,0,0.6)] transition-all duration-500 hover:border-cyan-500/30 hud-frame-glow overflow-hidden',
         className,
       )}
     >
-      {/* Sci-Fi Header Strip */}
-      <div className="flex items-center justify-between border-b border-[#2a2a35] pb-3 mb-6 text-[10px] font-mono text-gray-400">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent hud-scanline" />
+      </div>
+
+      <div className="flex items-center justify-between border-b border-[#2a2a35] pb-3 mb-6 text-[10px] font-mono text-gray-400 relative z-10">
         <div className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-ping" />
+          <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-ping shadow-[0_0_6px_rgba(0,240,255,0.6)]" />
           <span className="text-cyan-400 font-bold uppercase tracking-wider">[{label}]</span>
         </div>
         <div className="flex items-center gap-3 text-gray-500">
@@ -33,9 +36,8 @@ export function HudFrame({
         </div>
       </div>
 
-      {children}
+      <div className="relative z-10">{children}</div>
 
-      {/* Sci-Fi Corner Decals & Coordinates */}
       <div className="absolute bottom-1 right-2 text-[8px] font-mono text-gray-600 tracking-widest pointer-events-none">
         COORD: 23.5505° S, 46.6333° W
       </div>

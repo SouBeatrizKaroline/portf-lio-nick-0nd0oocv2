@@ -37,9 +37,9 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
         scrolled
-          ? 'bg-[#080808]/95 backdrop-blur-md border-b border-[#2a2a35] py-2 shadow-[0_4px_20px_rgba(0,0,0,0.8)]'
+          ? 'bg-[#080808]/90 backdrop-blur-xl border-b border-cyan-500/15 py-2 shadow-[0_4px_20px_rgba(0,0,0,0.8)] hud-navbar'
           : 'bg-transparent py-3.5'
       }`}
     >
@@ -72,9 +72,9 @@ export function Navbar() {
 
           {/* Active Section Indicator */}
           {isHome && activeSection && (
-            <div className="flex items-center gap-1.5 text-[10px] font-mono text-cyan-400 bg-[#121218] border border-cyan-500/30 px-2 py-0.5 ml-2">
-              <span className="w-1 h-1 bg-cyan-400 rounded-full animate-ping" />
-              <span className="uppercase font-semibold tracking-wider">{activeSection}</span>
+            <div className="flex items-center gap-1.5 text-[10px] font-mono text-cyan-300 bg-cyan-950/30 border border-cyan-500/50 px-2.5 py-1 ml-2 shadow-[0_0_12px_rgba(0,240,255,0.2)] transition-all duration-300">
+              <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-ping shadow-[0_0_6px_rgba(0,240,255,0.8)]" />
+              <span className="uppercase font-bold tracking-wider">{activeSection}</span>
             </div>
           )}
         </nav>

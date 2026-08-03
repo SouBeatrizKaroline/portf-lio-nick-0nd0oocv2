@@ -2,6 +2,7 @@ import { useLanguage } from '@/hooks/use-language'
 import { HudFrame } from './HudFrame'
 import { SectionReveal } from './SectionReveal'
 import { NickAvatarShowcase } from './NickAvatarShowcase'
+import { CyberMicroDetails } from './CyberMicroDetails'
 
 export function AboutSection() {
   const { t } = useLanguage()
@@ -31,6 +32,10 @@ export function AboutSection() {
         <SectionReveal delay={150}>
           <NickAvatarShowcase />
         </SectionReveal>
+      </div>
+
+      <div className="max-w-5xl mx-auto">
+        <CyberMicroDetails className="justify-center pt-4" count={4} offset={2} />
       </div>
     </section>
   )

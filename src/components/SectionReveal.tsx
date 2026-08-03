@@ -38,7 +38,9 @@ export function SectionReveal({ children, className, delay = 0 }: SectionRevealP
       ref={ref}
       className={cn(
         'transition-all duration-700 ease-out',
-        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',
+        visible
+          ? 'opacity-100 translate-y-0 blur-0 scale-100'
+          : 'opacity-0 translate-y-6 blur-sm scale-[0.98]',
         className,
       )}
       style={{ transitionDelay: `${delay}ms` }}

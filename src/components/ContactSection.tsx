@@ -2,6 +2,7 @@ import { useLanguage } from '@/hooks/use-language'
 import { HudFrame } from './HudFrame'
 import { SectionReveal } from './SectionReveal'
 import { CyberDecal } from './CyberDecals'
+import { CyberMicroDetails } from './CyberMicroDetails'
 import {
   ExternalLink,
   Github,
@@ -128,6 +129,8 @@ export function ContactSection() {
             </div>
           </HudFrame>
         </SectionReveal>
+
+        <CyberMicroDetails className="justify-center mt-8" count={5} offset={4} />
       </div>
     </section>
   )
