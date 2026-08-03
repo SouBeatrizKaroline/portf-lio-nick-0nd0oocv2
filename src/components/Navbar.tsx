@@ -13,7 +13,7 @@ export function Navbar() {
 
   const isHome = location.pathname === '/'
   const activeSection = useScrollSpy(
-    isHome ? ['about', 'timeline', 'experience', 'skills', 'projects', 'systems', 'contact'] : [],
+    isHome ? ['about', 'timeline', 'experience', 'projects', 'systems', 'contact'] : [],
   )
 
   useEffect(() => {
