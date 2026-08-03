@@ -37,7 +37,7 @@ export function HolographicCat() {
 
   return (
     <div
-      className="fixed pointer-events-none z-30"
+      className="fixed pointer-events-none z-[2]"
       style={{
         top: `${position.top}%`,
         left: '-40px',

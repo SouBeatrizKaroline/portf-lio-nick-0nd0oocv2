@@ -5,7 +5,7 @@ export function HeroFloatingPanels() {
     <>
       <div
         className="hidden xl:block absolute left-2 top-1/2 -translate-y-1/2 space-y-3 animate-fade-in opacity-50"
-        style={{ animationDelay: '0.3s', zIndex: 3 }}
+        style={{ animationDelay: '0.3s', zIndex: 2 }}
       >
         <div className="glass-panel px-3 py-2.5 space-y-1.5 w-40 border-l-2 border-cyan-400/25">
           <div className="flex items-center justify-between text-[8px] font-mono">
@@ -31,7 +31,7 @@ export function HeroFloatingPanels() {
 
       <div
         className="hidden xl:block absolute right-2 top-1/2 -translate-y-1/2 space-y-3 animate-fade-in opacity-50"
-        style={{ animationDelay: '0.5s', zIndex: 3 }}
+        style={{ animationDelay: '0.5s', zIndex: 2 }}
       >
         <div className="glass-panel px-3 py-2.5 space-y-1.5 w-40 border-r-2 border-purple-400/25">
           <div className="flex items-center justify-between text-[8px] font-mono">

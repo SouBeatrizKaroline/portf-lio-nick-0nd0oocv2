@@ -382,10 +382,10 @@
 @keyframes character-breathe {
   0%,
   100% {
-    transform: scaleY(1);
+    transform: translateY(0) scale(1);
   }
   50% {
-    transform: scaleY(1.02);
+    transform: translateY(-1.5px) scale(1.003);
   }
 }
 
