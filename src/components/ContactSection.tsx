@@ -3,7 +3,6 @@ import { SectionReveal } from './SectionReveal'
 import { CyberMicroDetails } from './CyberMicroDetails'
 import { HudFrame } from './HudFrame'
 import { Linkedin, Github, Mail, MessageSquare, ChevronUp } from 'lucide-react'
-import { Link } from 'react-router-dom'
 import { cn } from '@/lib/utils'
 
 export function ContactSection() {
@@ -190,13 +189,14 @@ export function ContactSection() {
                 <MessageSquare className="w-4 h-4" />
                 {t('end_connect_whatsapp')}
               </button>
-              <Link
-                to="/#projects"
-                className="inline-flex items-center gap-2 bg-[#14141D]/80 hover:bg-[#1c1c28] text-cyan-300 font-bold font-mono text-xs px-6 py-3 border border-cyan-500/50 transition-all hover:border-cyan-400 touch-min"
+              <button
+                type="button"
+                onClick={handleScrollToProjects}
+                className="inline-flex items-center gap-2 bg-[#14141D]/80 hover:bg-[#1c1c28] text-cyan-300 font-bold font-mono text-xs px-6 py-3 border border-cyan-500/50 transition-all hover:border-cyan-400 touch-min cursor-pointer relative z-10"
               >
                 <ChevronUp className="w-4 h-4" />
                 {t('end_connect_contact')}
-              </Link>
+              </button>
             </div>
           </div>
         </SectionReveal>
