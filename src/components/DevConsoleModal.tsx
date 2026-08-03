@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { PixelCat } from './PixelCat'
+import { PixelNick } from './PixelNick'
 import { X, Terminal } from 'lucide-react'
 
 interface DevConsoleModalProps {
@@ -10,6 +10,7 @@ interface DevConsoleModalProps {
 export function DevConsoleModal({ isOpen, onClose }: DevConsoleModalProps) {
   const [command, setCommand] = useState('')
   const [history, setHistory] = useState<string[]>([
+    '🏆 ACHIEVEMENT UNLOCKED: Konami Master!',
     'DEVELOPER MODE ACTIVATED via Konami Code (↑↑↓↓←→←→BA)',
     "Welcome to Nick's Secret Dev Console!",
     'Type "help" for available easter egg commands.',
@@ -65,13 +66,13 @@ export function DevConsoleModal({ isOpen, onClose }: DevConsoleModalProps) {
         </div>
 
         <form onSubmit={handleCommandSubmit} className="flex items-center gap-2">
-          <PixelCat state="walk" />
+          <PixelNick pose="achievement" scale={0.7} />
           <span className="text-purple-400">&gt;</span>
           <input
             type="text"
             value={command}
             onChange={(e) => setCommand(e.target.value)}
-            placeholder="Type command..."
+            placeholder="Type command (e.g. stats, cat)..."
             className="flex-1 bg-[#181818] border border-[#2A2A2A] px-2 py-1 text-white focus:outline-none focus:border-purple-500"
             autoFocus
           />

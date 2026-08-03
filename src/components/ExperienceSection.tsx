@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useLanguage } from '@/hooks/use-language'
 import { getExperience, ExperienceRecord } from '@/services/experience'
+import { PixelNick } from './PixelNick'
 
 export function ExperienceSection() {
   const { locale, t } = useLanguage()
@@ -15,7 +16,10 @@ export function ExperienceSection() {
   return (
     <section id="experience" className="py-20 px-6 bg-[#090909]">
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 flex flex-col items-center justify-center">
+          <div className="mb-3">
+            <PixelNick pose="coding" scale={0.9} />
+          </div>
           <div className="text-xs font-mono text-purple-400 tracking-widest uppercase">
             [{t('exp_subtitle')}]
           </div>

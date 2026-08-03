@@ -1,11 +1,13 @@
 import { useLanguage } from '@/hooks/use-language'
 import { HudFrame } from './HudFrame'
+import { NickAvatarShowcase } from './NickAvatarShowcase'
+import { PixelNick } from './PixelNick'
 
 export function AboutSection() {
   const { t } = useLanguage()
 
   return (
-    <section id="about" className="py-20 px-6 bg-[#090909]">
+    <section id="about" className="py-20 px-6 bg-[#090909] space-y-12">
       <div className="max-w-4xl mx-auto">
         <HudFrame label="CHARACTER_BIO" className="p-8 sm:p-10">
           <div className="text-xs font-mono text-purple-400 mb-1 tracking-widest uppercase">
@@ -16,13 +18,17 @@ export function AboutSection() {
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8 items-center">
-            <div className="relative group">
-              <div className="aspect-square bg-[#181818] border-2 border-purple-500/50 p-2 overflow-hidden flex items-center justify-center">
-                <img
-                  src="https://img.usecurling.com/p/300/300?q=pixel%20art%20avatar%20game%20developer&color=purple"
-                  alt="Nicole Maira"
-                  className="w-full h-full object-cover image-rendering-pixelated"
+            <div className="relative group flex flex-col items-center justify-center">
+              <div className="aspect-square w-full bg-[#181818] border-2 border-purple-500/50 p-4 overflow-hidden flex flex-col items-center justify-center relative shadow-[0_0_20px_rgba(139,92,246,0.2)]">
+                <PixelNick
+                  pose="coding"
+                  scale={1.2}
+                  showSpeechBubble
+                  speechText="C# & Unity Engine ✨"
                 />
+                <div className="mt-2 text-[10px] font-mono text-purple-300 text-center">
+                  Nick (Nicole Maira)
+                </div>
               </div>
             </div>
 
@@ -33,6 +39,11 @@ export function AboutSection() {
             </div>
           </div>
         </HudFrame>
+      </div>
+
+      {/* Interactive Avatar Showcase */}
+      <div className="max-w-4xl mx-auto">
+        <NickAvatarShowcase />
       </div>
     </section>
   )

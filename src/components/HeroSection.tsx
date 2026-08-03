@@ -1,11 +1,13 @@
+import { useState } from 'react'
 import { useLanguage } from '@/hooks/use-language'
 import { HudFrame } from './HudFrame'
+import { PixelNick, NickPose } from './PixelNick'
 import { PixelCat } from './PixelCat'
-import { ArrowDown, Github, ExternalLink, Mail, FileText } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { ArrowDown, Github, ExternalLink, Mail } from 'lucide-react'
 
 export function HeroSection() {
   const { t } = useLanguage()
+  const [heroPose, setHeroPose] = useState<NickPose>('idle')
 
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-24 pb-16 px-6 overflow-hidden">
@@ -22,11 +24,28 @@ export function HeroSection() {
 
       <div className="max-w-4xl w-full mx-auto relative z-10">
         <HudFrame label="SYSTEM.ONLINE" className="p-8 sm:p-12">
-          <div className="flex items-center justify-between mb-6">
-            <div className="inline-block bg-purple-950/60 border border-purple-500/40 text-purple-300 text-xs font-mono px-3 py-1">
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+            <div className="inline-flex items-center gap-2 bg-purple-950/60 border border-purple-500/40 text-purple-300 text-xs font-mono px-3 py-1">
+              <span className="w-2 h-2 rounded-full bg-green-400 animate-ping" />
               {t('hero_player')}
             </div>
-            <PixelCat state="sit" />
+
+            {/* Interactive Nick Avatar in Hero */}
+            <div
+              className="cursor-pointer group flex items-center gap-3 bg-[#181818] border border-purple-500/30 px-3 py-1.5 hover:border-purple-500 transition-all rounded"
+              onClick={() => {
+                const poses: NickPose[] = ['idle', 'gaming', 'with-cat', 'coding', 'achievement']
+                const next = poses[(poses.indexOf(heroPose) + 1) % poses.length]
+                setHeroPose(next)
+              }}
+              title="Click to cycle Nick's pose!"
+            >
+              <PixelNick pose={heroPose} scale={0.8} />
+              <div className="text-left font-mono text-[11px] hidden sm:block">
+                <span className="text-purple-400 font-bold block">Nick (Dev Avatar)</span>
+                <span className="text-gray-400 text-[10px]">Pose: {heroPose} ⚡</span>
+              </div>
+            </div>
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#EDEDED] font-mono tracking-tight mb-3">
