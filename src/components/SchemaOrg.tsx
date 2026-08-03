@@ -11,7 +11,6 @@ export function SchemaOrg() {
       description:
         'Game Developer specialized in Unity, C#, State Machines, Physics & Combat Systems.',
       url: 'https://nick.goskip.app',
-      email: 'mailto:nicolemairaplsilva@gmail.com',
       knowsAbout: ['Unity', 'C#', 'Game Development', 'Gameplay Programming', 'ASP.NET Core'],
       sameAs: [
         'https://github.com/NicolePLSilva',

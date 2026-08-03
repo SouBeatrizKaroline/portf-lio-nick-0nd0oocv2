@@ -128,7 +128,7 @@ export function HeroSection() {
             <span>EMAIL</span>
           </a>
           <a
-            href="https://wa.me/5571985304202"
+            href="https://wa.me/5511991467419"
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center justify-center gap-2 bg-[#14141D]/80 hover:bg-[#1c1c28] text-emerald-300 font-bold px-5 py-3 text-xs border border-emerald-500/50 transition-all hover:border-emerald-400 backdrop-blur-sm"

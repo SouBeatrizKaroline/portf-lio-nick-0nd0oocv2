@@ -73,19 +73,6 @@ export function ContactSection() {
       icon: Linkedin,
       color: 'text-blue-400 hover:border-blue-400 hover:shadow-[0_0_15px_rgba(59,130,246,0.2)]',
     },
-    {
-      platform: 'WhatsApp',
-      url: 'https://wa.me/5571985304202',
-      icon: MessageSquare,
-      color:
-        'text-emerald-400 hover:border-emerald-400 hover:shadow-[0_0_15px_rgba(16,185,129,0.2)]',
-    },
-    {
-      platform: 'Email',
-      url: 'mailto:nicolemairaplsilva@gmail.com',
-      icon: Mail,
-      color: 'text-purple-400 hover:border-purple-400 hover:shadow-[0_0_15px_rgba(168,85,247,0.2)]',
-    },
   ]
 
   return (
@@ -128,6 +115,25 @@ export function ContactSection() {
               })}
             </div>
 
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8">
+              <a
+                href="https://wa.me/5511991467419"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-[#EDEDED] font-bold font-mono text-xs border border-emerald-400/60 shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all hover:scale-105 active:scale-95 w-full sm:w-auto justify-center touch-min"
+              >
+                <MessageSquare className="w-4 h-4" />
+                {t('contact_whatsapp')}
+              </a>
+              <a
+                href="mailto:nicolemairaplsilva@gmail.com"
+                className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-[#EDEDED] font-bold font-mono text-xs border border-purple-400/60 shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all hover:scale-105 active:scale-95 w-full sm:w-auto justify-center touch-min"
+              >
+                <Mail className="w-4 h-4" />
+                {t('contact_email')}
+              </a>
+            </div>
+
             <div className="grid md:grid-cols-5 gap-6">
               <div className="md:col-span-2 flex flex-col justify-between space-y-4">
                 <div className="bg-[#0C0C10] border border-[#1a1a22] p-4 font-mono text-xs space-y-1">
@@ -141,6 +147,9 @@ export function ContactSection() {
                   <div className="text-purple-400/70">{'> '} Scanning communication nodes...</div>
                   <div className="text-emerald-400/70">
                     {'> '} 5 channels detected. CAT_CORE monitoring.
+                  </div>
+                  <div className="text-cyan-400/60">
+                    {'> '} Direct contact buttons ready. Awaiting input...
                   </div>
                 </div>
 
@@ -292,7 +301,3 @@ export function ContactSection() {
     </section>
   )
 }
-
-import { useLanguage as useLang } from '@/hooks/use-language'
-const { locale } = { locale: 'pt' as const }
-void useLang

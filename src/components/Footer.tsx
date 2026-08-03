@@ -1,6 +1,7 @@
 import { CyberDecal } from './CyberDecals'
 import { CyberMicroDetails } from './CyberMicroDetails'
-import { Github, Gamepad2, Linkedin, Mail, MessageSquare, ScanLine, Play } from 'lucide-react'
+import { useLanguage } from '@/hooks/use-language'
+import { Terminal, Linkedin, Mail, MessageSquare, ScanLine, Play } from 'lucide-react'
 
 interface FooterProps {
   scanlines?: boolean
@@ -9,6 +10,7 @@ interface FooterProps {
 }
 
 export function Footer({ scanlines = true, onToggleScanlines, onPressStart }: FooterProps) {
+  const { t } = useLanguage()
   return (
     <footer className="relative bg-[#060608] border-t border-cyan-500/15 py-8 sm:py-12 px-4 sm:px-6 font-mono text-xs text-gray-400 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
@@ -53,20 +55,18 @@ export function Footer({ scanlines = true, onToggleScanlines, onPressStart }: Fo
 
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a
-              href="https://pls-nick.itch.io/"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-purple-400 transition-colors flex items-center gap-1"
-            >
-              <Gamepad2 className="w-3.5 h-3.5 text-purple-400" /> Itch.io
-            </a>
-            <a
-              href="https://github.com/NicolePLSilva"
-              target="_blank"
-              rel="noreferrer"
+              href="#contact"
               className="hover:text-cyan-400 transition-colors flex items-center gap-1"
             >
-              <Github className="w-3.5 h-3.5 text-cyan-400" /> GitHub
+              <Terminal className="w-3.5 h-3.5 text-cyan-400" /> {t('footer_contact')}
+            </a>
+            <a
+              href="https://wa.me/5511991467419"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-emerald-400 transition-colors flex items-center gap-1"
+            >
+              <MessageSquare className="w-3.5 h-3.5 text-emerald-400" /> WhatsApp
             </a>
             <a
               href="https://www.linkedin.com/in/nicole-maira/"
@@ -75,14 +75,6 @@ export function Footer({ scanlines = true, onToggleScanlines, onPressStart }: Fo
               className="hover:text-blue-400 transition-colors flex items-center gap-1"
             >
               <Linkedin className="w-3.5 h-3.5 text-blue-400" /> LinkedIn
-            </a>
-            <a
-              href="https://wa.me/5571985304202"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-emerald-400 transition-colors flex items-center gap-1"
-            >
-              <MessageSquare className="w-3.5 h-3.5 text-emerald-400" /> WhatsApp
             </a>
             <a
               href="mailto:nicolemairaplsilva@gmail.com"

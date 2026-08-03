@@ -81,6 +81,9 @@ export const translations = {
     contact_connection_title: 'CENTRAL DE CONTATO OFICIAL',
     contact_terminal_prompt: 'NICK_OS@TERMINAL:~$',
     contact_connect: 'CONECTAR',
+    contact_whatsapp: '📱 CONVERSAR PELO WHATSAPP',
+    contact_email: 'ENVIAR E-MAIL',
+    footer_contact: 'CONTATO',
 
     pose_idle: 'IDLE',
     pose_coding: 'CODIFICANDO',
@@ -176,6 +179,9 @@ export const translations = {
     contact_connection_title: 'OFFICIAL CONTACT HUB',
     contact_terminal_prompt: 'NICK_OS@TERMINAL:~$',
     contact_connect: 'CONNECT',
+    contact_whatsapp: '📱 CHAT ON WHATSAPP',
+    contact_email: 'SEND EMAIL',
+    footer_contact: 'CONTACT',
 
     pose_idle: 'IDLE',
     pose_coding: 'CODING',
@@ -271,6 +277,9 @@ export const translations = {
     contact_connection_title: 'CENTRAL DE CONTACTO OFICIAL',
     contact_terminal_prompt: 'NICK_OS@TERMINAL:~$',
     contact_connect: 'CONECTAR',
+    contact_whatsapp: '📱 CHATEAR POR WHATSAPP',
+    contact_email: 'ENVIAR CORREO',
+    footer_contact: 'CONTACTO',
 
     pose_idle: 'IDLE',
     pose_coding: 'CODIFICANDO',
