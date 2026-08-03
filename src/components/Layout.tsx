@@ -7,6 +7,8 @@ import { CustomCursor } from './CustomCursor'
 import { CursorParticles } from './CursorParticles'
 import { ScanlinesOverlay } from './ScanlinesOverlay'
 import { DevConsoleModal } from './DevConsoleModal'
+import { HolographicCat } from './HolographicCat'
+import { DigitalFootprints } from './DigitalFootprints'
 import { useKonami } from '@/hooks/use-konami'
 import { useAchievements } from '@/hooks/use-achievements'
 import { useLanguage } from '@/hooks/use-language'
@@ -45,6 +47,8 @@ export default function Layout() {
       {booting && <BootScreen onComplete={handleBootComplete} />}
       <CustomCursor />
       <CursorParticles />
+      <DigitalFootprints />
+      <HolographicCat />
       <ScanlinesOverlay visible={scanlines} />
 
       <Navbar />

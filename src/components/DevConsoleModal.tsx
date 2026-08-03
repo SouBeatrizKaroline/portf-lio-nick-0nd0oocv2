@@ -14,6 +14,7 @@ export function DevConsoleModal({ isOpen, onClose }: DevConsoleModalProps) {
     'DEVELOPER MODE ACTIVATED via Konami Code (↑↑↓↓←→←→BA)',
     "Welcome to Nick's Secret Dev Console!",
     'Type "help" for available easter egg commands.',
+    '// CAT_CORE: Monitoring terminal session...',
   ])
 
   if (!isOpen) return null
@@ -25,11 +26,13 @@ export function DevConsoleModal({ isOpen, onClose }: DevConsoleModalProps) {
 
     let response = ''
     if (cmd === 'help') {
-      response = 'Available commands: cat, stats, cheat, clear'
+      response = 'Available commands: cat, stats, cheat, unity, clear'
     } else if (cmd === 'cat') {
-      response = '🐈 The cat purrs softly and grants +10 Mana!'
+      response = '🐈 The holographic cat purrs softly... CAT_CORE purrformance +10!'
     } else if (cmd === 'stats') {
-      response = 'HP: 100% | MP: 100% | Unity: MAX | C#: MAX | Coffee Level: 99%'
+      response = 'HP: 100% | MP: 100% | Unity: MAX | C#: MAX | Coffee: 99% | CoyoteTime: ON'
+    } else if (cmd === 'unity') {
+      response = 'UnityEngine.Debug.Log("Hello from Nick_OS!"); // State Machine Ready'
     } else if (cmd === 'cheat') {
       response = 'God Mode: Enabled! All projects unlocked.'
     } else if (cmd === 'clear') {

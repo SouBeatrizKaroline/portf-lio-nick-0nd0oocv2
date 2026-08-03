@@ -4,7 +4,7 @@ import { getSkills, SkillRecord } from '@/services/skills'
 import { HudFrame } from './HudFrame'
 import { SectionReveal } from './SectionReveal'
 import { CyberDecal } from './CyberDecals'
-import { Cpu, Code, Server, Gamepad, Wrench } from 'lucide-react'
+import { Cpu, Code, Server, Gamepad, Wrench, Crosshair, Layers } from 'lucide-react'
 
 export function SkillRegistrySection() {
   const { t, locale } = useLanguage()
@@ -25,6 +25,11 @@ export function SkillRegistrySection() {
       icon: Gamepad,
     },
     {
+      id: 'gameplay',
+      label: 'GAMEPLAY',
+      icon: Crosshair,
+    },
+    {
       id: 'languages',
       label: locale === 'pt' ? 'LINGUAGENS' : locale === 'es' ? 'LENGUAJES' : 'LANGUAGES',
       icon: Code,
@@ -34,6 +39,11 @@ export function SkillRegistrySection() {
       id: 'engines',
       label: locale === 'pt' ? 'ENGINES' : locale === 'es' ? 'MOTORES' : 'ENGINES',
       icon: Cpu,
+    },
+    {
+      id: 'frameworks',
+      label: locale === 'pt' ? 'FRAMEWORKS' : locale === 'es' ? 'FRAMEWORKS' : 'FRAMEWORKS',
+      icon: Layers,
     },
     {
       id: 'tools',

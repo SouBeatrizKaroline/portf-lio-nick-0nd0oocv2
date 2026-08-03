@@ -47,7 +47,7 @@ export function Navbar() {
         {/* Brand OS Logo */}
         <Link to="/" className="flex items-center gap-3 group">
           <div className="relative border border-cyan-500/60 bg-[#14141A] px-3 py-1 text-xs sm:text-sm font-mono font-bold text-cyan-400 group-hover:border-purple-400 group-hover:text-purple-300 transition-colors shadow-[0_0_12px_rgba(0,240,255,0.2)]">
-            NICK_OS // V2.0
+            NICK_OS // V3.0
             <PixelCat state="sit" className="absolute -top-3.5 -right-2 scale-75" />
           </div>
 

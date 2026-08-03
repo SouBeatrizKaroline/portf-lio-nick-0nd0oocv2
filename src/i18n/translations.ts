@@ -36,17 +36,61 @@ export const translations = {
     exp_subtitle: 'HISTÓRICO PROFISSIONAL',
     exp_title: 'EXPERIÊNCIA PROFISSIONAL',
 
+    module_mission: 'SISTEMA // MISSÃO',
+    timeline_subtitle: 'LINHA DO TEMPO',
+    timeline_title: 'JORNADA DE DESENVOLVIMENTO',
+
     projects_subtitle: 'MÓDULOS DE PROJETO',
     projects_title: 'PROJETOS EM DESTAQUE',
     projects_view: 'INSPECIONAR MÓDULO',
+
+    systems_subtitle: 'SISTEMAS DE GAMEPLAY',
+    systems_title: 'ARQUITETURA & SISTEMAS',
+
+    module_gamejam: 'SISTEMA // GAME JAM',
+    jam_subtitle: 'PROJETOS DE GAME JAM',
+    jam_title: 'GAME JAMS',
+    jam_quote: '// 48 HORAS. CÓDIGO. CAFÉ. GATOS.',
+
+    module_itch: 'SISTEMA // ITCH.IO',
+    itch_games_subtitle: 'JOGOS PUBLICADOS',
+    itch_games_title: 'SHOWCASE ITCH.IO',
+    itch_play: 'JOGAR',
+    itch_view_project: 'VER PROJETO',
+    itch_title: 'VER TODOS NO ITCH.IO',
+
+    module_github: 'SISTEMA // GITHUB',
+    github_subtitle: 'REPOSITÓRIOS & CÓDIGO',
+    github_title: 'CENTRAL GITHUB',
+    github_syncing: 'SINCRONIZANDO REPOSITÓRIOS...',
+
+    module_tech: 'SISTEMA // STACK',
+    stack_subtitle: 'TECNOLOGIAS & FERRAMENTAS',
+    stack_title: 'STACK TECNOLÓGICO',
 
     skills_subtitle: 'REGISTRO DE CAPACIDADES',
     skills_title: 'REGISTRO DE HABILIDADES',
 
     cert_subtitle: 'CERTIFICAÇÕES VERIFICADAS',
     cert_title: 'CERTIFICADOS & BADGES',
+    cert_verified: 'VERIFICADO',
+    cert_issued: 'EMITIDO',
+    cert_institution: 'INSTITUIÇÃO',
+    cert_skills: 'COMPETÊNCIAS',
 
     contact_connection_title: 'CENTRAL DE CONTATO OFICIAL',
+    contact_terminal_prompt: 'NICK_OS@TERMINAL:~$',
+    contact_connect: 'CONECTAR',
+
+    pose_idle: 'IDLE',
+    pose_coding: 'CODIFICANDO',
+    'pose_with-cat': 'COM GATO',
+    pose_gaming: 'JOGANDO',
+    pose_achievement: 'CONQUISTA',
+
+    ach_title: 'CONQUISTA DESBLOQUEADA',
+    ach_dev_desc: 'Modo Desenvolvedor Ativado!',
+    ach_quest_desc: 'Missão Completada: Explorou todo o portfólio!',
   },
   en: {
     nav_home: 'HOME',
@@ -83,17 +127,61 @@ export const translations = {
     exp_subtitle: 'PROFESSIONAL LOG',
     exp_title: 'PROFESSIONAL EXPERIENCE',
 
+    module_mission: 'SYSTEM // MISSION',
+    timeline_subtitle: 'TIMELINE',
+    timeline_title: 'DEVELOPMENT JOURNEY',
+
     projects_subtitle: 'PROJECT MODULES',
     projects_title: 'FEATURED PROJECTS',
     projects_view: 'INSPECT MODULE',
+
+    systems_subtitle: 'GAMEPLAY SYSTEMS',
+    systems_title: 'ARCHITECTURE & SYSTEMS',
+
+    module_gamejam: 'SYSTEM // GAME JAM',
+    jam_subtitle: 'GAME JAM PROJECTS',
+    jam_title: 'GAME JAMS',
+    jam_quote: '// 48 HOURS. CODE. COFFEE. CATS.',
+
+    module_itch: 'SYSTEM // ITCH.IO',
+    itch_games_subtitle: 'PUBLISHED GAMES',
+    itch_games_title: 'ITCH.IO SHOWCASE',
+    itch_play: 'PLAY',
+    itch_view_project: 'VIEW PROJECT',
+    itch_title: 'SEE ALL ON ITCH.IO',
+
+    module_github: 'SYSTEM // GITHUB',
+    github_subtitle: 'REPOSITORIES & CODE',
+    github_title: 'GITHUB CENTRAL',
+    github_syncing: 'SYNCING REPOSITORIES...',
+
+    module_tech: 'SYSTEM // STACK',
+    stack_subtitle: 'TECHNOLOGIES & TOOLS',
+    stack_title: 'TECH STACK',
 
     skills_subtitle: 'CAPABILITIES REGISTRY',
     skills_title: 'SKILL REGISTRY',
 
     cert_subtitle: 'VERIFIED CERTIFICATIONS',
     cert_title: 'CERTIFICATES & BADGES',
+    cert_verified: 'VERIFIED',
+    cert_issued: 'ISSUED',
+    cert_institution: 'INSTITUTION',
+    cert_skills: 'SKILLS ACQUIRED',
 
     contact_connection_title: 'OFFICIAL CONTACT HUB',
+    contact_terminal_prompt: 'NICK_OS@TERMINAL:~$',
+    contact_connect: 'CONNECT',
+
+    pose_idle: 'IDLE',
+    pose_coding: 'CODING',
+    'pose_with-cat': 'WITH CAT',
+    pose_gaming: 'GAMING',
+    pose_achievement: 'ACHIEVEMENT',
+
+    ach_title: 'ACHIEVEMENT UNLOCKED',
+    ach_dev_desc: 'Developer Mode Activated!',
+    ach_quest_desc: 'Quest Completed: Explored the entire portfolio!',
   },
   es: {
     nav_home: 'INICIO',
@@ -130,16 +218,60 @@ export const translations = {
     exp_subtitle: 'HISTORIAL PROFESIONAL',
     exp_title: 'EXPERIENCIA PROFESIONAL',
 
+    module_mission: 'SISTEMA // MISIÓN',
+    timeline_subtitle: 'LÍNEA DE TIEMPO',
+    timeline_title: 'JORNADA DE DESARROLLO',
+
     projects_subtitle: 'MÓDULOS DE PROYECTO',
     projects_title: 'PROYECTOS DESTACADOS',
     projects_view: 'INSPECCIONAR MÓDULO',
+
+    systems_subtitle: 'SISTEMAS DE GAMEPLAY',
+    systems_title: 'ARQUITECTURA & SISTEMAS',
+
+    module_gamejam: 'SISTEMA // GAME JAM',
+    jam_subtitle: 'PROYECTOS DE GAME JAM',
+    jam_title: 'GAME JAMS',
+    jam_quote: '// 48 HORAS. CÓDIGO. CAFÉ. GATOS.',
+
+    module_itch: 'SISTEMA // ITCH.IO',
+    itch_games_subtitle: 'JUEGOS PUBLICADOS',
+    itch_games_title: 'SHOWCASE ITCH.IO',
+    itch_play: 'JUGAR',
+    itch_view_project: 'VER PROYECTO',
+    itch_title: 'VER TODO EN ITCH.IO',
+
+    module_github: 'SISTEMA // GITHUB',
+    github_subtitle: 'REPOSITORIOS & CÓDIGO',
+    github_title: 'CENTRAL GITHUB',
+    github_syncing: 'SINCRONIZANDO REPOSITORIOS...',
+
+    module_tech: 'SISTEMA // STACK',
+    stack_subtitle: 'TECNOLOGÍAS & HERRAMIENTAS',
+    stack_title: 'STACK TECNOLÓGICO',
 
     skills_subtitle: 'REGISTRO DE CAPACIDADES',
     skills_title: 'REGISTRO DE HABILIDADES',
 
     cert_subtitle: 'CERTIFICACIONES VERIFICADAS',
     cert_title: 'CERTIFICADOS & BADGES',
+    cert_verified: 'VERIFICADO',
+    cert_issued: 'EMITIDO',
+    cert_institution: 'INSTITUCIÓN',
+    cert_skills: 'COMPETENCIAS',
 
     contact_connection_title: 'CENTRAL DE CONTACTO OFICIAL',
+    contact_terminal_prompt: 'NICK_OS@TERMINAL:~$',
+    contact_connect: 'CONECTAR',
+
+    pose_idle: 'IDLE',
+    pose_coding: 'CODIFICANDO',
+    'pose_with-cat': 'CON GATO',
+    pose_gaming: 'JUGANDO',
+    pose_achievement: 'LOGRO',
+
+    ach_title: 'LOGRO DESBLOQUEADO',
+    ach_dev_desc: '¡Modo Desarrollador Activado!',
+    ach_quest_desc: '¡Misión Completada: Exploraste todo el portafolio!',
   },
 }
