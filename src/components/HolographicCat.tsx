@@ -60,8 +60,8 @@ export function HolographicCat() {
             height="7"
             fill="none"
             stroke="#00f0ff"
-            stroke-width="0.8"
-            stroke-dasharray="1.5 1"
+            strokeWidth="0.8"
+            strokeDasharray="1.5 1"
           />
           <rect
             x="3"
@@ -70,24 +70,25 @@ export function HolographicCat() {
             height="7"
             fill="none"
             stroke="#00f0ff"
-            stroke-width="0.8"
-            stroke-dasharray="1.5 1"
+            strokeWidth="0.8"
+            strokeDasharray="1.5 1"
           />
           <polygon
             points="3,4 5,1 6,4"
             fill="none"
             stroke="#00f0ff"
-            stroke-width="0.8"
-            stroke-dasharray="1.5 1"
+            strokeWidth="0.8"
+            strokeDasharray="1.5 1"
           />
           <polygon
             points="11,4 13,1 14,4"
             fill="none"
             stroke="#00f0ff"
-            stroke-width="0.8"
-            stroke-dasharray="1.5 1"
+            strokeWidth="0.8"
+            strokeDasharray="1.5 1"
           />
           <rect x="5" y="6" width="2" height="2" fill="#00f0ff" opacity="0.7">
+            {' '}
             <animate
               attributeName="opacity"
               values="0.7;0.2;0.7"
@@ -117,8 +118,8 @@ export function HolographicCat() {
             height="3"
             fill="none"
             stroke="#00f0ff"
-            stroke-width="0.5"
-            stroke-dasharray="1 1"
+            strokeWidth="0.5"
+            strokeDasharray="1 1"
           />
           <rect
             x="17"
@@ -127,8 +128,8 @@ export function HolographicCat() {
             height="3"
             fill="none"
             stroke="#00f0ff"
-            stroke-width="0.5"
-            stroke-dasharray="1 1"
+            strokeWidth="0.5"
+            strokeDasharray="1 1"
           />
           {mood === 'walk' && (
             <rect x="9" y="15" width="4" height="1" fill="#00f0ff" opacity="0.3">
