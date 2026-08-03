@@ -8,7 +8,7 @@ export default function ResumePage() {
   const [lang, setLang] = useState<'pt' | 'en' | 'es'>('pt')
 
   return (
-    <div className="pt-28 pb-20 px-6 max-w-4xl mx-auto font-mono">
+    <div className="pt-28 pb-20 px-6 max-w-4xl mx-auto font-mono bg-[#080808]">
       <HudFrame label="CURRICULUM_VITAE" className="p-8 sm:p-10">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
@@ -35,7 +35,8 @@ export default function ResumePage() {
           </div>
         </div>
 
-        <div className="bg-[#181818] border border-[#2A2A2A] p-6 space-y-6 text-xs text-gray-300">
+        <div className="bg-[#101014] border border-[#1a1a22] p-6 space-y-6 text-xs text-gray-300">
+          {' '}
           <div>
             <div className="text-purple-400 font-bold mb-2 uppercase">// APRESENTAÇÃO</div>
             <p className="leading-relaxed">
@@ -44,7 +45,6 @@ export default function ResumePage() {
               sistemas para jogos digitais.
             </p>
           </div>
-
           <div>
             <div className="text-purple-400 font-bold mb-2 uppercase">
               // EXPERIÊNCIA PROFISSIONAL
@@ -69,7 +69,6 @@ export default function ResumePage() {
               </div>
             </div>
           </div>
-
           <div>
             <div className="text-purple-400 font-bold mb-2 uppercase">
               // HABILIDADES PRINCIPAIS

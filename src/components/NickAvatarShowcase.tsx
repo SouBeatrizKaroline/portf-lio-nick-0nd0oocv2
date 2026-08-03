@@ -42,14 +42,12 @@ export function NickAvatarShowcase() {
   ]
 
   return (
-    <HudFrame label="AVATAR_SYSTEM.NICK_V2" className="p-6 bg-[#101010]/90">
+    <HudFrame label="AVATAR_SYSTEM.NICK_V2" className="p-6 bg-[#0B0B0F]/90">
       <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-        {/* Left Side: Avatar Display */}
-        <div className="flex flex-col items-center justify-center p-6 bg-[#181818] border border-purple-500/40 rounded-lg relative min-w-[220px] w-full lg:w-auto">
-          <div className="absolute top-2 left-2 text-[10px] font-mono text-purple-400">
+        <div className="flex flex-col items-center justify-center p-6 bg-[#101014] border border-purple-500/30 rounded relative min-w-[220px] w-full lg:w-auto">
+          <div className="absolute top-2 left-2 text-[10px] font-mono text-purple-400/60">
             NICK_PIXEL_32BIT
           </div>
-
           <PixelNick
             pose={pose}
             hasGlasses={hasGlasses}
@@ -57,7 +55,6 @@ export function NickAvatarShowcase() {
             scale={1.5}
             showSpeechBubble
           />
-
           <div className="mt-4 text-center">
             <span className="text-xs font-mono font-bold text-cyan-400 block uppercase tracking-wider">
               {poses.find((p) => p.id === pose)?.label}
@@ -68,7 +65,6 @@ export function NickAvatarShowcase() {
           </div>
         </div>
 
-        {/* Right Side: Interactive Controls & Customization */}
         <div className="flex-1 w-full space-y-4">
           <div>
             <h4 className="text-xs font-mono text-purple-400 uppercase tracking-widest mb-2">
@@ -81,8 +77,8 @@ export function NickAvatarShowcase() {
                   onClick={() => setPose(p.id)}
                   className={`flex items-center gap-2 px-3 py-2 text-xs font-mono border transition-all text-left ${
                     pose === p.id
-                      ? 'border-purple-500 bg-purple-950/60 text-white shadow-[0_0_10px_rgba(168,85,247,0.3)]'
-                      : 'border-[#2A2A2A] bg-[#141414] text-gray-400 hover:border-purple-500/50 hover:text-white'
+                      ? 'border-purple-500 bg-purple-950/50 text-[#EDEDED] shadow-[0_0_10px_rgba(168,85,247,0.2)]'
+                      : 'border-[#1a1a22] bg-[#101014] text-gray-400 hover:border-purple-500/40 hover:text-[#EDEDED]'
                   }`}
                 >
                   {p.icon}
@@ -92,8 +88,7 @@ export function NickAvatarShowcase() {
             </div>
           </div>
 
-          {/* Toggle Accessories */}
-          <div className="border-t border-[#2A2A2A] pt-3">
+          <div className="border-t border-[#1a1a22] pt-3">
             <h4 className="text-xs font-mono text-purple-400 uppercase tracking-widest mb-2">
               EQUIPMENT & ACCESSORIES:
             </h4>
@@ -102,20 +97,19 @@ export function NickAvatarShowcase() {
                 onClick={() => setHasGlasses(!hasGlasses)}
                 className={`flex items-center gap-2 px-3 py-1.5 text-xs font-mono border transition-all ${
                   hasGlasses
-                    ? 'border-cyan-500 bg-cyan-950/40 text-cyan-300'
-                    : 'border-[#2A2A2A] bg-[#141414] text-gray-500'
+                    ? 'border-cyan-500 bg-cyan-950/30 text-cyan-300'
+                    : 'border-[#1a1a22] bg-[#101014] text-gray-500'
                 }`}
               >
                 <Eye className="w-3.5 h-3.5" />
                 Dev Glasses: {hasGlasses ? 'ON' : 'OFF'}
               </button>
-
               <button
                 onClick={() => setHasHeadset(!hasHeadset)}
                 className={`flex items-center gap-2 px-3 py-1.5 text-xs font-mono border transition-all ${
                   hasHeadset
-                    ? 'border-purple-500 bg-purple-950/40 text-purple-300'
-                    : 'border-[#2A2A2A] bg-[#141414] text-gray-500'
+                    ? 'border-purple-500 bg-purple-950/30 text-purple-300'
+                    : 'border-[#1a1a22] bg-[#101014] text-gray-500'
                 }`}
               >
                 <Headphones className="w-3.5 h-3.5" />

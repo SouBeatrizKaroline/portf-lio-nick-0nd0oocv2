@@ -27,8 +27,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter var', 'SF Pro Display', 'system-ui', 'sans-serif'],
-        display: ['SF Pro Display', 'Inter var', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'SF Pro Display', 'system-ui', 'sans-serif'],
+        display: ['Rajdhani', 'SF Pro Display', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+        pixel: ['Press Start 2P', 'monospace'],
       },
       colors: {
         border: 'hsl(var(--border))',
@@ -81,6 +83,11 @@ export default {
           4: 'hsl(var(--chart-4))',
           5: 'hsl(var(--chart-5))',
         },
+        'bg-900': '#080808',
+        'bg-800': '#0B0B0F',
+        'bg-700': '#101014',
+        'bg-600': '#141418',
+        white: '#EDEDED',
       },
       borderRadius: {
         lg: 'var(--radius)',

@@ -43,7 +43,7 @@ export default function ProjectDetail() {
   const content = project[`content_${locale}` as keyof ProjectRecord] || project.content_pt
 
   return (
-    <div className="pt-28 pb-20 px-6 max-w-4xl mx-auto">
+    <div className="pt-28 pb-20 px-6 max-w-4xl mx-auto bg-[#080808] min-h-screen">
       <Link
         to="/"
         className="inline-flex items-center gap-2 text-xs font-mono text-purple-400 hover:underline mb-6"
@@ -52,7 +52,7 @@ export default function ProjectDetail() {
       </Link>
 
       <HudFrame label={`PROJECT.${project.slug.toUpperCase()}`} className="p-8 sm:p-10 mb-8">
-        <div className="aspect-video bg-[#181818] border border-[#2A2A2A] mb-6 overflow-hidden">
+        <div className="aspect-video bg-[#141418] border border-[#1a1a22] mb-6 overflow-hidden">
           <img
             src={
               project.gallery?.[0] ||
@@ -67,10 +67,10 @@ export default function ProjectDetail() {
         <div className="text-sm font-mono text-cyan-400 mb-6">{subtitle}</div>
 
         <div className="flex flex-wrap gap-2 mb-8">
-          {project.tech?.map((t) => (
+          {project.tech?.map((tech) => (
             <span
-              key={t}
-              className="text-xs font-mono bg-[#181818] border border-purple-900/50 text-purple-300 px-2.5 py-1"
+              key={tech}
+              className="text-xs font-mono bg-[#141418] border border-purple-900/40 text-purple-300 px-2.5 py-1"
             >
               {t}
             </span>
@@ -87,7 +87,7 @@ export default function ProjectDetail() {
               href={project.github_url}
               target="_blank"
               rel="noreferrer"
-              className="bg-[#181818] border border-[#2A2A2A] hover:border-purple-500 text-white px-4 py-2 flex items-center gap-2"
+              className="bg-[#101014] border border-[#1a1a22] hover:border-purple-500/50 text-[#EDEDED] px-4 py-2 flex items-center gap-2 transition-colors"
             >
               <Github className="w-4 h-4" /> Repositório GitHub
             </a>
@@ -98,7 +98,7 @@ export default function ProjectDetail() {
               href={project.itch_url}
               target="_blank"
               rel="noreferrer"
-              className="bg-purple-600 hover:bg-purple-500 text-white font-bold px-4 py-2 flex items-center gap-2"
+              className="bg-purple-600 hover:bg-purple-500 text-[#EDEDED] font-bold px-4 py-2 flex items-center gap-2"
             >
               <ExternalLink className="w-4 h-4" /> Jogar no Itch.io
             </a>

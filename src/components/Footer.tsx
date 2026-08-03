@@ -16,7 +16,7 @@ export function Footer({ scanlines, onToggleScanlines, onPressStart }: FooterPro
   }
 
   return (
-    <footer className="border-t border-[#2A2A2A] bg-[#090909] py-12 px-6 font-mono text-xs text-gray-400 relative">
+    <footer className="border-t border-[#1a1a22] bg-[#080808] py-12 px-6 font-mono text-xs text-gray-400 relative">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-3">
           <PixelCat state="sleep" />
@@ -28,7 +28,6 @@ export function Footer({ scanlines, onToggleScanlines, onPressStart }: FooterPro
           </div>
         </div>
 
-        {/* Social Links */}
         <div className="flex items-center gap-4 text-gray-300">
           <a
             href="https://github.com/nicolemaira"
@@ -63,26 +62,23 @@ export function Footer({ scanlines, onToggleScanlines, onPressStart }: FooterPro
           </a>
         </div>
 
-        {/* Actions */}
         <div className="flex items-center gap-4">
           <button
             onClick={onPressStart}
-            className="bg-purple-600/30 hover:bg-purple-600 text-purple-300 hover:text-white border border-purple-500/50 px-3 py-1 font-mono transition-all animate-pulse"
+            className="bg-purple-600/30 hover:bg-purple-600 text-purple-300 hover:text-[#EDEDED] border border-purple-500/50 px-3 py-1 font-mono transition-all animate-pulse"
           >
             🕹️ {t('footer_press_start')}
           </button>
-
           <button
             onClick={onToggleScanlines}
             className={`px-2 py-1 border text-[10px] ${
               scanlines
-                ? 'border-cyan-500 text-cyan-400 bg-cyan-950/30'
-                : 'border-[#2A2A2A] text-gray-500'
+                ? 'border-cyan-500 text-cyan-400 bg-cyan-950/20'
+                : 'border-[#1a1a22] text-gray-500'
             }`}
           >
             {t('footer_scanlines')}: {scanlines ? 'ON' : 'OFF'}
           </button>
-
           <button onClick={scrollToTop} className="hover:text-purple-400 transition-colors">
             {t('footer_back_top')}
           </button>

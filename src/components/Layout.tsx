@@ -4,6 +4,7 @@ import { Navbar } from './Navbar'
 import { Footer } from './Footer'
 import { BootScreen } from './BootScreen'
 import { CustomCursor } from './CustomCursor'
+import { CursorParticles } from './CursorParticles'
 import { ScanlinesOverlay } from './ScanlinesOverlay'
 import { DevConsoleModal } from './DevConsoleModal'
 import { useKonami } from '@/hooks/use-konami'
@@ -40,9 +41,10 @@ export default function Layout() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-[#090909] text-[#EDEDED] font-sans antialiased selection:bg-purple-500 selection:text-white relative">
+    <div className="min-h-screen bg-[#080808] text-[#EDEDED] font-sans antialiased selection:bg-purple-500 selection:text-[#080808] relative">
       {booting && <BootScreen onComplete={handleBootComplete} />}
       <CustomCursor />
+      <CursorParticles />
       <ScanlinesOverlay visible={scanlines} />
 
       <Navbar />
