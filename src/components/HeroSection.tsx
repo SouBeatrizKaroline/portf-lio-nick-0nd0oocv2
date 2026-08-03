@@ -28,7 +28,9 @@ export function HeroSection() {
       <div className="max-w-5xl mx-auto w-full text-center space-y-8 relative z-10">
         <div className="flex justify-center mb-2 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 to-transparent rounded-full blur-2xl" />
-          <PixelNick pose="idle" scale={1.25} showSpeechBubble={true} />
+          <div className="scale-90 sm:scale-100 lg:scale-110 xl:scale-125 transition-transform duration-500">
+            <PixelNick pose="idle" showSpeechBubble={true} />
+          </div>
         </div>
 
         <div className="inline-flex items-center gap-2 bg-[#121218]/80 border border-cyan-500/40 px-4 py-1.5 text-xs font-mono text-cyan-400 shadow-[0_0_20px_rgba(0,240,255,0.15)] backdrop-blur-sm">
@@ -116,7 +118,7 @@ export function HeroSection() {
           </a>
         </div>
 
-        <CyberMicroDetails className="justify-center pt-4" count={5} offset={6} />
+        <CyberMicroDetails className="justify-center pt-6" count={3} offset={6} />
       </div>
     </section>
   )

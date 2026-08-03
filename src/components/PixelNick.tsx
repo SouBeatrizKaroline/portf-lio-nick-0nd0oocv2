@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export type NickPose = 'idle' | 'coding' | 'with-cat' | 'gaming' | 'achievement'
 
@@ -24,211 +24,194 @@ export function PixelNick({
   speechText,
 }: PixelNickProps) {
   const [hovered, setHovered] = useState(false)
+  const [blinking, setBlinking] = useState(false)
+
+  useEffect(() => {
+    if (!animated) return
+    const blink = () => {
+      setBlinking(true)
+      setTimeout(() => setBlinking(false), 120)
+    }
+    const interval = setInterval(blink, 3500 + Math.random() * 2500)
+    return () => clearInterval(interval)
+  }, [animated])
+
+  const speechMap: Record<NickPose, string> = {
+    idle: 'Unity & C# Systems Ready ⚡',
+    coding: 'Compiling State Machine... 🎮',
+    'with-cat': 'Cat Companion Online! 🐈',
+    gaming: 'Playtesting WebGL Build! 🕹️',
+    achievement: 'Level Up! ⭐',
+  }
 
   return (
     <div
-      className={`relative inline-flex flex-col items-center justify-center select-none ${className}`}
+      className={`relative inline-flex flex-col items-center select-none ${className}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{ transform: `scale(${scale})` }}
     >
-      {/* Speech / System Scanner Bubble */}
       {(showSpeechBubble || speechText || hovered) && (
-        <div className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 bg-[#12121A] border border-cyan-400 text-cyan-300 font-mono text-[10px] px-3 py-1 rounded-none shadow-[0_0_15px_rgba(0,240,255,0.4)] whitespace-nowrap max-w-[90vw] overflow-hidden animate-bounce pointer-events-none">
-          <span className="text-purple-400 font-bold mr-1">[NICK_SCAN]:</span>
-          {speechText ||
-            (pose === 'idle'
-              ? 'Unity & C# Gameplay Systems Ready ⚡'
-              : pose === 'coding'
-                ? 'Compiling C# State Machine & Physics... 🎮'
-                : pose === 'with-cat'
-                  ? 'Pixel Cat Companion Online! 🐈‍⬛'
-                  : pose === 'gaming'
-                    ? 'Playtesting latest WebGL build! 🕹️'
-                    : 'System Level Up! ⭐')}
-          <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 border-4 border-transparent border-t-cyan-400" />
+        <div className="absolute -top-9 left-1/2 -translate-x-1/2 z-30 bg-[#12121A] border border-cyan-400/70 text-cyan-300 font-mono text-[10px] px-3 py-1 whitespace-nowrap max-w-[90vw] overflow-hidden animate-fade-in pointer-events-none">
+          <span className="text-purple-400 font-bold mr-1">[NICK]:</span>
+          {speechText || speechMap[pose]}
+          <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 border-4 border-transparent border-t-cyan-400/70" />
         </div>
       )}
 
-      {/* Cyberpunk Rim Lighting Halo */}
-      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-magenta-500/20 blur-xl opacity-75 pointer-events-none" />
-
       <div
-        className={`relative ${animated ? (pose === 'achievement' ? 'animate-bounce' : 'animate-pulse') : ''}`}
-        style={{ animationDuration: pose === 'achievement' ? '1.5s' : '3s' }}
+        className={animated ? 'character-breathe' : ''}
+        style={{ transformOrigin: 'center bottom' }}
       >
-        {/* Holographic Scanning Line */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/20 to-transparent h-1 w-full animate-[scan-line_3s_linear_infinite] pointer-events-none" />
-
         <svg
           width="160"
           height="160"
           viewBox="0 0 40 40"
           fill="none"
-          className="image-rendering-pixelated drop-shadow-[0_0_18px_rgba(0,240,255,0.5)]"
+          className="image-rendering-pixelated drop-shadow-[0_0_12px_rgba(0,240,255,0.3)]"
         >
           <defs>
-            <linearGradient id="hoodieGrad" x1="0" y1="0" x2="0" y2="1">
+            <linearGradient id="nickHoodie" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="#7C3AED" />
               <stop offset="100%" stopColor="#4C1D95" />
             </linearGradient>
-            <linearGradient id="hairGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#3D1E58" />
-              <stop offset="50%" stopColor="#251238" />
+            <linearGradient id="nickHair" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#2D1B4E" />
               <stop offset="100%" stopColor="#150A21" />
             </linearGradient>
-            <linearGradient id="skinGrad" x1="0" y1="0" x2="0" y2="1">
+            <linearGradient id="nickSkin" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="#F5C6A5" />
               <stop offset="100%" stopColor="#E2B292" />
             </linearGradient>
-            <filter id="cyanGlow">
-              <feDropShadow
-                dx="-1"
-                dy="0"
-                stdDeviation="0.5"
-                floodColor="#00F0FF"
-                floodOpacity="0.8"
-              />
-            </filter>
-            <filter id="magentaGlow">
-              <feDropShadow
-                dx="1"
-                dy="0"
-                stdDeviation="0.5"
-                floodColor="#F43F5E"
-                floodOpacity="0.8"
-              />
-            </filter>
           </defs>
 
-          {/* Sparkles / Background for Achievement Pose */}
           {pose === 'achievement' && (
             <g className="animate-pulse">
-              <circle cx="28" cy="6" r="1.5" fill="#FBBF24" />
-              <circle cx="34" cy="12" r="1" fill="#00F0FF" />
-              <circle cx="22" cy="10" r="1" fill="#A855F7" />
-              <circle cx="32" cy="4" r="1" fill="#F43F5E" />
+              <circle cx="31" cy="5" r="1" fill="#FBBF24" />
+              <circle cx="35" cy="11" r="0.8" fill="#00F0FF" />
+              <circle cx="24" cy="8" r="0.8" fill="#A855F7" />
             </g>
           )}
 
-          {/* Hair Back (Volume & Wavy Curly Texture) */}
-          <g filter="url(#cyanGlow)">
-            <rect x="11" y="7" width="18" height="18" fill="url(#hairGrad)" rx="4" />
-            <rect x="9" y="14" width="22" height="12" fill="url(#hairGrad)" rx="3" />
-            <rect x="8" y="19" width="5" height="10" fill="#251238" rx="2" />
-            <rect x="27" y="19" width="5" height="10" fill="#251238" rx="2" />
-            <rect x="10" y="18" width="2" height="10" fill="#A855F7" opacity="0.8" />
-            <rect x="28" y="20" width="2" height="9" fill="#00F0FF" opacity="0.9" />
-          </g>
+          <rect x="11" y="7" width="18" height="17" fill="url(#nickHair)" rx="4" />
+          <rect x="9" y="14" width="22" height="11" fill="url(#nickHair)" rx="3" />
+          <rect x="8" y="19" width="4" height="9" fill="#150A21" rx="2" />
+          <rect x="28" y="19" width="4" height="9" fill="#150A21" rx="2" />
 
-          {/* Face Base */}
-          <g>
-            <rect x="14" y="9" width="12" height="11" fill="url(#skinGrad)" rx="3" />
-            <rect x="15" y="18" width="10" height="3" fill="#E2B292" rx="1" />
-            {/* Blushing */}
-            <rect x="14" y="15" width="2" height="1" fill="#F43F5E" opacity="0.5" />
-            <rect x="24" y="15" width="2" height="1" fill="#F43F5E" opacity="0.5" />
+          <rect x="14" y="9" width="12" height="11" fill="url(#nickSkin)" rx="3" />
+          <rect x="15" y="18" width="10" height="2" fill="#E2B292" rx="1" />
+          <rect x="15" y="15" width="1.5" height="1" fill="#F43F5E" opacity="0.35" />
+          <rect x="23.5" y="15" width="1.5" height="1" fill="#F43F5E" opacity="0.35" />
 
-            {/* Eyes */}
-            <rect x="16" y="13" width="2" height="3" fill="#1E1B4B" rx="0.5" />
-            <rect x="22" y="13" width="2" height="3" fill="#1E1B4B" rx="0.5" />
-            <rect x="16" y="13" width="1" height="1" fill="#00F0FF" />
-            <rect x="22" y="13" width="1" height="1" fill="#00F0FF" />
+          {blinking ? (
+            <g>
+              <rect x="16" y="14.5" width="2.5" height="0.5" fill="#1E1B4B" />
+              <rect x="21.5" y="14.5" width="2.5" height="0.5" fill="#1E1B4B" />
+            </g>
+          ) : (
+            <g>
+              <rect x="16" y="13" width="2.5" height="3" fill="#1E1B4B" rx="0.5" />
+              <rect x="21.5" y="13" width="2.5" height="3" fill="#1E1B4B" rx="0.5" />
+              <rect x="16.5" y="13" width="0.8" height="0.8" fill="#00F0FF" />
+              <rect x="22" y="13" width="0.8" height="0.8" fill="#00F0FF" />
+            </g>
+          )}
 
-            {/* Smile / Mouth */}
-            <rect x="18" y="17" width="4" height="1" fill="#E11D48" rx="0.5" />
-          </g>
+          <path
+            d="M18 17.5 Q20 18.3 22 17.5"
+            stroke="#E11D48"
+            strokeWidth="0.5"
+            fill="none"
+            strokeLinecap="round"
+          />
 
-          {/* Front Bangs & Curly Highlights */}
-          <g>
-            <rect x="12" y="6" width="16" height="5" fill="url(#hairGrad)" rx="2" />
-            <rect x="11" y="9" width="3" height="8" fill="url(#hairGrad)" rx="1" />
-            <rect x="26" y="9" width="3" height="8" fill="url(#hairGrad)" rx="1" />
-            <rect x="12" y="8" width="2" height="3" fill="#A855F7" opacity="0.8" />
-            <rect x="25" y="8" width="2" height="3" fill="#00F0FF" opacity="0.9" />
-          </g>
+          <rect x="12" y="6" width="16" height="5" fill="url(#nickHair)" rx="2" />
+          <rect x="11" y="9" width="3" height="6" fill="url(#nickHair)" rx="1" />
+          <rect x="26" y="9" width="3" height="6" fill="url(#nickHair)" rx="1" />
+          <rect x="14" y="7" width="1.5" height="2" fill="#6B21A8" opacity="0.6" />
+          <rect x="25" y="7" width="1.5" height="2" fill="#00F0FF" opacity="0.4" />
 
-          {/* Glasses Frame with Holographic Reflection */}
           {hasGlasses && (
             <g>
-              <rect x="14" y="12" width="5" height="5" fill="#A855F7" rx="1" />
-              <rect x="21" y="12" width="5" height="5" fill="#A855F7" rx="1" />
-              <rect x="19" y="13" width="2" height="1" fill="#A855F7" />
-              <rect x="15" y="13" width="1" height="1" fill="#00F0FF" opacity="0.9" />
-              <rect x="22" y="13" width="1" height="1" fill="#00F0FF" opacity="0.9" />
+              <rect
+                x="14.5"
+                y="12"
+                width="5"
+                height="4"
+                fill="none"
+                stroke="#A855F7"
+                strokeWidth="0.5"
+                rx="1"
+              />
+              <rect
+                x="20.5"
+                y="12"
+                width="5"
+                height="4"
+                fill="none"
+                stroke="#A855F7"
+                strokeWidth="0.5"
+                rx="1"
+              />
+              <rect x="19.5" y="13" width="1" height="0.5" fill="#A855F7" />
             </g>
           )}
 
-          {/* Gaming Headset */}
           {hasHeadset && (
             <g>
-              <rect x="13" y="4" width="14" height="3" fill="#1E1B4B" rx="1" />
-              <rect x="15" y="3" width="10" height="1" fill="#00F0FF" />
-              <rect x="10" y="11" width="4" height="6" fill="#1E1B4B" rx="1" />
-              <rect x="26" y="11" width="4" height="6" fill="#1E1B4B" rx="1" />
-              <rect x="10" y="12" width="1" height="4" fill="#00F0FF" />
-              <rect x="29" y="12" width="1" height="4" fill="#F43F5E" />
+              <rect x="13" y="4" width="14" height="2" fill="#1E1B4B" rx="1" />
+              <rect x="15" y="3" width="10" height="0.5" fill="#00F0FF" opacity="0.7" />
+              <rect x="10" y="11" width="3" height="5" fill="#1E1B4B" rx="1" />
+              <rect x="27" y="11" width="3" height="5" fill="#1E1B4B" rx="1" />
             </g>
           )}
 
-          {/* Pose 1: Idle / Waving */}
           {pose === 'idle' && (
             <g>
-              <rect x="14" y="21" width="12" height="11" fill="url(#hoodieGrad)" rx="2" />
-              <rect x="19" y="21" width="2" height="11" fill="#3730A3" />
-              <rect x="17" y="23" width="6" height="3" fill="#1E1B4B" rx="0.5" />
-              <rect x="18" y="24" width="1" height="1" fill="#00F0FF" />
-              <rect x="21" y="24" width="1" height="1" fill="#F43F5E" />
-
-              <rect x="11" y="21" width="3" height="9" fill="url(#hoodieGrad)" rx="1" />
-              <rect x="11" y="30" width="3" height="3" fill="url(#skinGrad)" rx="1" />
-
-              <rect x="26" y="17" width="3" height="8" fill="url(#hoodieGrad)" rx="1" />
-              <rect x="26" y="14" width="3" height="3" fill="url(#skinGrad)" rx="1" />
-
-              <rect x="15" y="32" width="4" height="5" fill="#1F2937" rx="1" />
-              <rect x="21" y="32" width="4" height="5" fill="#1F2937" rx="1" />
-              <rect x="14" y="37" width="5" height="3" fill="#7C3AED" rx="1" />
-              <rect x="21" y="37" width="5" height="3" fill="#00F0FF" rx="1" />
+              <rect x="14" y="20" width="12" height="11" fill="url(#nickHoodie)" rx="2" />
+              <rect x="19" y="20" width="2" height="11" fill="#3730A3" opacity="0.6" />
+              <rect x="17" y="22" width="6" height="2.5" fill="#1E1B4B" rx="0.5" />
+              <rect x="18" y="23" width="1" height="0.5" fill="#00F0FF" />
+              <rect x="21" y="23" width="1" height="0.5" fill="#F43F5E" />
+              <rect x="11" y="21" width="3" height="8" fill="url(#nickHoodie)" rx="1" />
+              <rect x="11" y="29" width="3" height="2.5" fill="url(#nickSkin)" rx="1" />
+              <rect x="26" y="17" width="3" height="7" fill="url(#nickHoodie)" rx="1" />
+              <rect x="26" y="14" width="3" height="3" fill="url(#nickSkin)" rx="1" />
+              <rect x="15" y="31" width="4" height="6" fill="#1F2937" rx="1" />
+              <rect x="21" y="31" width="4" height="6" fill="#1F2937" rx="1" />
+              <rect x="14" y="37" width="5" height="2.5" fill="#7C3AED" rx="1" />
+              <rect x="21" y="37" width="5" height="2.5" fill="#00F0FF" rx="1" />
             </g>
           )}
 
-          {/* Pose 2: Coding */}
           {pose === 'coding' && (
             <g>
-              <rect x="14" y="21" width="12" height="9" fill="url(#hoodieGrad)" rx="2" />
-              <rect x="11" y="23" width="4" height="5" fill="url(#hoodieGrad)" rx="1" />
-              <rect x="25" y="23" width="4" height="5" fill="url(#hoodieGrad)" rx="1" />
-              <rect x="13" y="28" width="3" height="3" fill="url(#skinGrad)" rx="1" />
-              <rect x="24" y="28" width="3" height="3" fill="url(#skinGrad)" rx="1" />
-
-              <rect x="10" y="29" width="20" height="9" fill="#181820" rx="1.5" />
-              <rect x="12" y="30" width="16" height="6" fill="#0D0D14" rx="0.5" />
-              <rect x="14" y="31" width="6" height="1" fill="#00F0FF" />
-              <rect x="14" y="33" width="10" height="1" fill="#A855F7" />
-              <rect x="14" y="34" width="8" height="1" fill="#10B981" />
-              <rect x="8" y="37" width="24" height="2" fill="#2A2A35" rx="0.5" />
-
-              <rect x="15" y="30" width="10" height="5" fill="#1F2937" rx="1" />
+              <rect x="14" y="20" width="12" height="9" fill="url(#nickHoodie)" rx="2" />
+              <rect x="11" y="22" width="4" height="5" fill="url(#nickHoodie)" rx="1" />
+              <rect x="25" y="22" width="4" height="5" fill="url(#nickHoodie)" rx="1" />
+              <rect x="13" y="27" width="3" height="2.5" fill="url(#nickSkin)" rx="1" />
+              <rect x="24" y="27" width="3" height="2.5" fill="url(#nickSkin)" rx="1" />
+              <rect x="9" y="29" width="22" height="8" fill="#12121C" rx="1.5" />
+              <rect x="11" y="30" width="18" height="5" fill="#0D0D14" rx="0.5" />
+              <rect x="13" y="31" width="5" height="0.5" fill="#00F0FF" />
+              <rect x="13" y="32.5" width="9" height="0.5" fill="#A855F7" />
+              <rect x="13" y="33.5" width="7" height="0.5" fill="#10B981" />
+              <rect x="7" y="36.5" width="26" height="1.5" fill="#2A2A35" rx="0.5" />
             </g>
           )}
 
-          {/* Pose 3: With Cat */}
           {pose === 'with-cat' && (
             <g>
-              <rect x="11" y="21" width="12" height="11" fill="url(#hoodieGrad)" rx="2" />
-              <rect x="16" y="21" width="2" height="11" fill="#3730A3" />
-              <rect x="8" y="21" width="3" height="9" fill="url(#hoodieGrad)" rx="1" />
-              <rect x="8" y="30" width="3" height="3" fill="url(#skinGrad)" rx="1" />
-              <rect x="23" y="21" width="3" height="8" fill="url(#hoodieGrad)" rx="1" />
-              <rect x="23" y="29" width="3" height="3" fill="url(#skinGrad)" rx="1" />
-
-              <rect x="12" y="32" width="4" height="5" fill="#1F2937" rx="1" />
-              <rect x="18" y="32" width="4" height="5" fill="#1F2937" rx="1" />
-              <rect x="11" y="37" width="5" height="3" fill="#7C3AED" rx="1" />
-              <rect x="18" y="37" width="5" height="3" fill="#00F0FF" rx="1" />
-
-              {/* Pixel Cat Mascot with Cyan Eyes */}
+              <rect x="11" y="20" width="12" height="11" fill="url(#nickHoodie)" rx="2" />
+              <rect x="16" y="20" width="2" height="11" fill="#3730A3" opacity="0.6" />
+              <rect x="8" y="21" width="3" height="8" fill="url(#nickHoodie)" rx="1" />
+              <rect x="8" y="29" width="3" height="2.5" fill="url(#nickSkin)" rx="1" />
+              <rect x="23" y="21" width="3" height="7" fill="url(#nickHoodie)" rx="1" />
+              <rect x="23" y="28" width="3" height="2.5" fill="url(#nickSkin)" rx="1" />
+              <rect x="12" y="31" width="4" height="6" fill="#1F2937" rx="1" />
+              <rect x="18" y="31" width="4" height="6" fill="#1F2937" rx="1" />
+              <rect x="11" y="37" width="5" height="2.5" fill="#7C3AED" rx="1" />
+              <rect x="18" y="37" width="5" height="2.5" fill="#00F0FF" rx="1" />
               <g className="animate-pulse" style={{ animationDuration: '4s' }}>
                 <rect x="27" y="28" width="9" height="8" fill="#12121A" rx="2" />
                 <rect x="26" y="23" width="8" height="7" fill="#12121A" rx="2" />
@@ -236,53 +219,44 @@ export function PixelNick({
                 <polygon points="31,23 33,19 34,23" fill="#12121A" />
                 <rect x="27" y="25" width="2" height="2" fill="#00F0FF" />
                 <rect x="31" y="25" width="2" height="2" fill="#00F0FF" />
-                <path d="M36 30 Q39 28 38 23" stroke="#12121A" strokeWidth="2" fill="none" />
                 <rect x="30" y="17" width="3" height="3" fill="#F43F5E" rx="0.5" />
               </g>
             </g>
           )}
 
-          {/* Pose 4: Gaming */}
           {pose === 'gaming' && (
             <g>
-              <rect x="14" y="21" width="12" height="10" fill="url(#hoodieGrad)" rx="2" />
-              <rect x="10" y="22" width="4" height="6" fill="url(#hoodieGrad)" rx="1" />
-              <rect x="26" y="22" width="4" height="6" fill="url(#hoodieGrad)" rx="1" />
-              <rect x="12" y="27" width="3" height="3" fill="url(#skinGrad)" rx="1" />
-              <rect x="25" y="27" width="3" height="3" fill="url(#skinGrad)" rx="1" />
-
-              <rect x="13" y="27" width="14" height="5" fill="#12121C" rx="1.5" />
-              <rect x="15" y="28" width="2" height="2" fill="#00F0FF" />
-              <rect x="23" y="28" width="2" height="2" fill="#F43F5E" />
-              <rect x="21" y="29" width="1.5" height="1.5" fill="#FBBF24" />
-
-              <rect x="14" y="31" width="5" height="6" fill="#1F2937" rx="1" />
-              <rect x="21" y="31" width="5" height="6" fill="#1F2937" rx="1" />
-              <rect x="13" y="37" width="6" height="3" fill="#7C3AED" rx="1" />
-              <rect x="21" y="37" width="6" height="3" fill="#00F0FF" rx="1" />
+              <rect x="14" y="20" width="12" height="10" fill="url(#nickHoodie)" rx="2" />
+              <rect x="10" y="21" width="4" height="6" fill="url(#nickHoodie)" rx="1" />
+              <rect x="26" y="21" width="4" height="6" fill="url(#nickHoodie)" rx="1" />
+              <rect x="12" y="26" width="3" height="2.5" fill="url(#nickSkin)" rx="1" />
+              <rect x="25" y="26" width="3" height="2.5" fill="url(#nickSkin)" rx="1" />
+              <rect x="12" y="28" width="16" height="4" fill="#12121C" rx="1.5" />
+              <rect x="14" y="29" width="2" height="1.5" fill="#00F0FF" />
+              <rect x="22" y="29" width="2" height="1.5" fill="#F43F5E" />
+              <rect x="14" y="30" width="4" height="6" fill="#1F2937" rx="1" />
+              <rect x="22" y="30" width="4" height="6" fill="#1F2937" rx="1" />
+              <rect x="13" y="36" width="5" height="2.5" fill="#7C3AED" rx="1" />
+              <rect x="22" y="36" width="5" height="2.5" fill="#00F0FF" rx="1" />
             </g>
           )}
 
-          {/* Pose 5: Achievement */}
           {pose === 'achievement' && (
             <g>
-              <rect x="14" y="21" width="12" height="11" fill="url(#hoodieGrad)" rx="2" />
-              <rect x="10" y="21" width="3" height="9" fill="url(#hoodieGrad)" rx="1" />
-              <rect x="10" y="30" width="3" height="3" fill="url(#skinGrad)" rx="1" />
-
-              <rect x="26" y="12" width="3" height="12" fill="url(#hoodieGrad)" rx="1" />
-              <rect x="26" y="9" width="3" height="3" fill="url(#skinGrad)" rx="1" />
-
-              <rect x="27" y="2" width="1.5" height="9" fill="#F59E0B" />
+              <rect x="14" y="20" width="12" height="11" fill="url(#nickHoodie)" rx="2" />
+              <rect x="10" y="20" width="3" height="8" fill="url(#nickHoodie)" rx="1" />
+              <rect x="10" y="28" width="3" height="2.5" fill="url(#nickSkin)" rx="1" />
+              <rect x="26" y="12" width="3" height="11" fill="url(#nickHoodie)" rx="1" />
+              <rect x="26" y="9" width="3" height="3" fill="url(#nickSkin)" rx="1" />
+              <rect x="27.5" y="2" width="1" height="8" fill="#F59E0B" />
               <polygon
-                points="27.75,0 30,3 33,3.5 30.5,6 31.5,9 27.75,7.5 24,9 25,6 22.5,3.5 25.5,3"
+                points="28,0 30,3 33,3.5 30.5,6 31.5,9 28,7.5 24.5,9 25.5,6 23,3.5 26,3"
                 fill="#FBBF24"
               />
-
-              <rect x="15" y="32" width="4" height="5" fill="#1F2937" rx="1" />
-              <rect x="21" y="32" width="4" height="5" fill="#1F2937" rx="1" />
-              <rect x="14" y="37" width="5" height="3" fill="#7C3AED" rx="1" />
-              <rect x="21" y="37" width="5" height="3" fill="#00F0FF" rx="1" />
+              <rect x="15" y="31" width="4" height="6" fill="#1F2937" rx="1" />
+              <rect x="21" y="31" width="4" height="6" fill="#1F2937" rx="1" />
+              <rect x="14" y="37" width="5" height="2.5" fill="#7C3AED" rx="1" />
+              <rect x="21" y="37" width="5" height="2.5" fill="#00F0FF" rx="1" />
             </g>
           )}
         </svg>

@@ -329,10 +329,10 @@
     opacity: 0;
   }
   10% {
-    opacity: 0.3;
+    opacity: 0.15;
   }
   90% {
-    opacity: 0.3;
+    opacity: 0.15;
   }
   100% {
     left: calc(100% + 60px);
@@ -355,7 +355,34 @@
   }
 }
 
+@keyframes character-breathe {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.02);
+  }
+}
+
+@keyframes safe-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
 @layer utilities {
+  .character-breathe {
+    animation: character-breathe 3.5s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+  .safe-float {
+    animation: safe-float 6s ease-in-out infinite;
+  }
   .touch-min {
     min-height: 44px;
     min-width: 44px;

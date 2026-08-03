@@ -8,6 +8,7 @@ import { CursorParticles } from './CursorParticles'
 import { ScanlinesOverlay } from './ScanlinesOverlay'
 import { DevConsoleModal } from './DevConsoleModal'
 import { HolographicCat } from './HolographicCat'
+import { FloatingHudTexts } from './FloatingHudTexts'
 import { DigitalFootprints } from './DigitalFootprints'
 import { useKonami } from '@/hooks/use-konami'
 import { useAchievements } from '@/hooks/use-achievements'
@@ -49,6 +50,7 @@ export default function Layout() {
       <CursorParticles />
       <DigitalFootprints />
       <HolographicCat />
+      <FloatingHudTexts />
       <ScanlinesOverlay visible={scanlines} />
 
       <Navbar />

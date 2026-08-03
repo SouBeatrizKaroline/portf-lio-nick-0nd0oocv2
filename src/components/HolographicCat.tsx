@@ -12,7 +12,7 @@ export function HolographicCat() {
     if (reduced) return
 
     const scheduleNext = () => {
-      const delay = 30000 + Math.random() * 60000
+      const delay = 45000 + Math.random() * 90000
       timeoutRef.current = setTimeout(() => {
         setVisible(true)
         setPosition({
@@ -21,7 +21,7 @@ export function HolographicCat() {
         })
         setMood(Math.random() > 0.5 ? 'walk' : 'peek')
 
-        setTimeout(() => setVisible(false), 9000)
+        setTimeout(() => setVisible(false), 7000)
         scheduleNext()
       }, delay)
     }
@@ -49,7 +49,7 @@ export function HolographicCat() {
         height="36"
         viewBox="0 0 24 18"
         fill="none"
-        className="opacity-30"
+        className="opacity-20"
         style={{ filter: 'drop-shadow(0 0 6px rgba(0,240,255,0.5))' }}
       >
         <g>
@@ -143,7 +143,7 @@ export function HolographicCat() {
         </g>
       </svg>
       <div
-        className="text-[7px] font-mono text-cyan-400/40 mt-1 whitespace-nowrap"
+        className="text-[7px] font-mono text-cyan-400/20 mt-1 whitespace-nowrap"
         style={{ animation: 'cat-cross 0s linear forwards' }}
       >
         {mood === 'walk' ? 'CAT_CORE: PATROL' : 'CAT_CORE: SCAN'}

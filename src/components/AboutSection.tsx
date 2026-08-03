@@ -38,7 +38,7 @@ export function AboutSection() {
       </div>
 
       <div className="max-w-5xl mx-auto">
-        <CyberMicroDetails className="justify-center pt-4" count={4} offset={2} />
+        <CyberMicroDetails className="justify-center pt-4" count={2} offset={2} />
       </div>
     </section>
   )
