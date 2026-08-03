@@ -10,7 +10,7 @@ export function AboutSection() {
     <section id="about" className="py-20 px-6 bg-[#080808] space-y-12">
       <div className="max-w-5xl mx-auto">
         <SectionReveal>
-          <HudFrame label="SYSTEM_OVERVIEW" status="OPTIMAL">
+          <HudFrame label="DEVELOPER_PROFILE" status="OPTIMAL">
             <div className="text-xs font-mono text-purple-400 mb-1 tracking-widest uppercase">
               [{t('about_subtitle')}]
             </div>

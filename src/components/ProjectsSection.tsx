@@ -26,7 +26,7 @@ export function ProjectsSection() {
     <section id="projects" className="py-20 px-6 bg-[#080808]">
       <div className="max-w-5xl mx-auto space-y-10">
         <SectionReveal>
-          <HudFrame label="MISSION_ARCHIVE" status="ACTIVE">
+          <HudFrame label="PROJECT_DATABASE" status="ACTIVE">
             <div className="text-xs font-mono text-purple-400 mb-1 tracking-widest uppercase">
               [{t('projects_subtitle')}]
             </div>
@@ -50,7 +50,7 @@ export function ProjectsSection() {
                   <TechPanel key={proj.id} className="p-6 flex flex-col justify-between space-y-4">
                     <div className="space-y-2">
                       <div className="flex items-center justify-between text-[10px] font-mono text-cyan-400">
-                        <span>[CATEGORY: {proj.category.toUpperCase()}]</span>
+                        <span>[MODULE: {proj.category.toUpperCase()}]</span>
                         <span>ORDER #{proj.order || 1}</span>
                       </div>
                       <h3 className="text-lg font-bold font-display text-[#EDEDED]">{title}</h3>

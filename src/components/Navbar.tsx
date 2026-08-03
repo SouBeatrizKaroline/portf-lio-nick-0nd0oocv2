@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { useLanguage } from '@/hooks/use-language'
 import { useScrollSpy } from '@/hooks/use-scroll-spy'
 import { PixelCat } from './PixelCat'
-import { Menu, X, Github, FileText, Activity, Shield, Terminal, MessageSquare } from 'lucide-react'
+import { Menu, X, Github, Gamepad2, Linkedin, Mail, MessageSquare } from 'lucide-react'
 
 export function Navbar() {
   const { locale, setLocale, t } = useLanguage()
@@ -24,8 +24,10 @@ export function Navbar() {
 
   const navItems = [
     { label: t('nav_home'), path: '/' },
+    { label: t('nav_projects'), path: isHome ? '#projects' : '/#projects' },
+    { label: t('nav_systems'), path: isHome ? '#systems' : '/#systems' },
     { label: t('nav_games'), path: '/games' },
-    { label: t('nav_resume'), path: '/resume' },
+    { label: t('nav_contact'), path: isHome ? '#contact' : '/#contact' },
   ]
 
   return (
@@ -52,19 +54,15 @@ export function Navbar() {
         </Link>
 
         {/* Center Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-5">
           {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`text-xs font-mono tracking-wider uppercase transition-all px-2 py-1 relative ${
-                location.pathname === item.path
-                  ? 'text-cyan-400 font-bold border-b-2 border-cyan-400 bg-cyan-950/20'
-                  : 'text-gray-300 hover:text-cyan-300 hover:bg-[#1A1A20]'
-              }`}
+            <a
+              key={item.label}
+              href={item.path}
+              className="text-xs font-mono tracking-wider uppercase transition-all px-2 py-1 relative text-gray-300 hover:text-cyan-300 hover:bg-[#1A1A20]"
             >
               {item.label}
-            </Link>
+            </a>
           ))}
 
           {/* Radar Active Section Sweep */}
@@ -86,10 +84,47 @@ export function Navbar() {
             </div>
           )}
 
-          {/* Hardware Telemetry Metric */}
-          <div className="hidden xl:flex items-center gap-3 text-[10px] font-mono text-gray-400 border-l border-[#2a2a35] pl-4">
-            <span>FPS: 60</span>
-            <span>SYNC: READY</span>
+          {/* External Quick Links */}
+          <div className="flex items-center gap-1.5 border-l border-[#2a2a35] pl-3">
+            <a
+              href="https://github.com/NicolePLSilva"
+              target="_blank"
+              rel="noreferrer"
+              className="p-1.5 text-gray-400 hover:text-cyan-400 transition-colors"
+              title="GitHub Profile"
+            >
+              <Github className="w-4 h-4" />
+            </a>
+
+            <a
+              href="https://pls-nick.itch.io/"
+              target="_blank"
+              rel="noreferrer"
+              className="p-1.5 text-gray-400 hover:text-purple-400 transition-colors"
+              title="Itch.io Games"
+            >
+              <Gamepad2 className="w-4 h-4" />
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/nicole-maira/"
+              target="_blank"
+              rel="noreferrer"
+              className="p-1.5 text-gray-400 hover:text-blue-400 transition-colors"
+              title="LinkedIn"
+            >
+              <Linkedin className="w-4 h-4" />
+            </a>
+
+            <a
+              href="https://wa.me/5571985304202"
+              target="_blank"
+              rel="noreferrer"
+              className="p-1.5 text-gray-400 hover:text-emerald-400 transition-colors"
+              title="WhatsApp"
+            >
+              <MessageSquare className="w-4 h-4" />
+            </a>
           </div>
 
           {/* Language Switcher */}
@@ -108,35 +143,6 @@ export function Navbar() {
               </button>
             ))}
           </div>
-
-          {/* External Social Links */}
-          <a
-            href="https://github.com/NicolePLSilva"
-            target="_blank"
-            rel="noreferrer"
-            className="p-1.5 text-gray-400 hover:text-cyan-400 transition-colors"
-            title="GitHub Profile"
-          >
-            <Github className="w-4 h-4" />
-          </a>
-
-          <a
-            href="https://wa.me/5511999999999"
-            target="_blank"
-            rel="noreferrer"
-            className="p-1.5 text-gray-400 hover:text-emerald-400 transition-colors"
-            title="WhatsApp Contact"
-          >
-            <MessageSquare className="w-4 h-4" />
-          </a>
-
-          <Link
-            to="/resume"
-            className="flex items-center gap-1.5 bg-cyan-950/40 hover:bg-cyan-900/60 text-cyan-300 border border-cyan-500/50 px-3 py-1 text-xs font-mono transition-all shadow-[0_0_10px_rgba(0,240,255,0.1)]"
-          >
-            <FileText className="w-3.5 h-3.5 text-cyan-400" />
-            {t('nav_resume')}
-          </Link>
         </nav>
 
         {/* Mobile Menu Toggle */}
@@ -152,15 +158,50 @@ export function Navbar() {
       {mobileOpen && (
         <div className="md:hidden bg-[#080808] border-b border-[#2a2a35] px-6 py-6 space-y-4 font-mono text-sm">
           {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
+            <a
+              key={item.label}
+              href={item.path}
               onClick={() => setMobileOpen(false)}
               className="block text-gray-200 hover:text-cyan-400 uppercase tracking-wider"
             >
               {item.label}
-            </Link>
+            </a>
           ))}
+
+          <div className="flex items-center gap-3 pt-3 border-t border-[#2a2a35]">
+            <a
+              href="https://github.com/NicolePLSilva"
+              target="_blank"
+              rel="noreferrer"
+              className="p-2 text-cyan-400 border border-[#2a2a35]"
+            >
+              <Github className="w-4 h-4" />
+            </a>
+            <a
+              href="https://pls-nick.itch.io/"
+              target="_blank"
+              rel="noreferrer"
+              className="p-2 text-purple-400 border border-[#2a2a35]"
+            >
+              <Gamepad2 className="w-4 h-4" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/nicole-maira/"
+              target="_blank"
+              rel="noreferrer"
+              className="p-2 text-blue-400 border border-[#2a2a35]"
+            >
+              <Linkedin className="w-4 h-4" />
+            </a>
+            <a
+              href="https://wa.me/5571985304202"
+              target="_blank"
+              rel="noreferrer"
+              className="p-2 text-emerald-400 border border-[#2a2a35]"
+            >
+              <MessageSquare className="w-4 h-4" />
+            </a>
+          </div>
 
           <div className="flex items-center gap-3 pt-3 border-t border-[#2a2a35]">
             <span className="text-xs text-gray-400">LANG:</span>

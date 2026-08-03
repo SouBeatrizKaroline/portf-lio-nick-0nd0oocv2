@@ -1,11 +1,20 @@
 import { useState } from 'react'
 import { useLanguage } from '@/hooks/use-language'
-import { PixelCat } from './PixelCat'
-import { Cpu, Shield, Sparkles, Terminal, Code2, Zap } from 'lucide-react'
+import { PixelNick, NickPose } from './PixelNick'
+import { Terminal, Zap, Sparkles, Gamepad2, Code2, ShieldCheck } from 'lucide-react'
 
 export function NickAvatarShowcase() {
   const { t } = useLanguage()
+  const [currentPose, setCurrentPose] = useState<NickPose>('idle')
   const [activeTab, setActiveTab] = useState<'stats' | 'specs'>('stats')
+
+  const poses: { id: NickPose; labelKey: string; icon: any }[] = [
+    { id: 'idle', labelKey: 'pose_idle', icon: Sparkles },
+    { id: 'coding', labelKey: 'pose_coding', icon: Code2 },
+    { id: 'with-cat', labelKey: 'pose_with-cat', icon: Sparkles },
+    { id: 'gaming', labelKey: 'pose_gaming', icon: Gamepad2 },
+    { id: 'achievement', labelKey: 'pose_achievement', icon: ShieldCheck },
+  ]
 
   const characterStats = [
     { label: 'C# / Unity Architecture', level: 95 },
@@ -23,39 +32,53 @@ export function NickAvatarShowcase() {
           <Terminal className="w-4 h-4" />
           <span>DEVELOPER SPECIFICATIONS // NICK</span>
         </div>
-        <div className="text-gray-500 text-[10px]">CLASS: GAME DEVELOPER</div>
+        <div className="text-gray-400 text-[10px] font-mono">CLASS: GAME DEVELOPER</div>
       </div>
 
       <div className="grid lg:grid-cols-12 gap-8 items-center">
-        {/* Concept Art Avatar Frame */}
-        <div className="lg:col-span-5 relative group flex flex-col items-center">
-          <div className="relative w-full max-w-sm aspect-square bg-[#111114] border-2 border-purple-500/50 p-3 overflow-hidden shadow-[0_0_25px_rgba(168,85,247,0.2)]">
-            {/* High-fidelity concept art style avatar illustration */}
-            <div className="relative w-full h-full bg-[#1A1A20] flex flex-col items-center justify-center p-4 border border-[#2a2a35]">
-              <div className="w-32 h-32 rounded-full bg-gradient-to-tr from-purple-600 via-cyan-500 to-indigo-600 p-1 mb-3 relative shadow-[0_0_20px_rgba(0,240,255,0.3)]">
-                <img
-                  src="https://img.usecurling.com/ppl/large?gender=female&seed=88"
-                  alt="Nicole (Nick) Concept Art Avatar"
-                  className="w-full h-full object-cover rounded-full filter contrast-105 brightness-105"
-                />
-                <PixelCat state="sleep" className="absolute -bottom-2 -right-2 scale-90" />
-              </div>
+        {/* Pixel Avatar Persona Frame with Pose Switcher */}
+        <div className="lg:col-span-5 relative flex flex-col items-center space-y-4">
+          <div className="relative w-full max-w-xs aspect-square bg-[#0D0D14] border-2 border-purple-500/50 p-4 flex flex-col items-center justify-center shadow-[0_0_25px_rgba(168,85,247,0.25)] rounded-none">
+            {/* Pixel Character Persona */}
+            <PixelNick pose={currentPose} scale={1.25} animated={true} showSpeechBubble={true} />
 
-              <div className="text-center space-y-1">
-                <div className="text-base font-bold font-display text-[#EDEDED] tracking-wider">
-                  NICOLE (NICK) SILVA
-                </div>
-                <div className="text-xs font-mono text-cyan-400 font-semibold">
-                  [LEVEL 99 SENIOR GAME DEV]
-                </div>
+            <div className="mt-4 text-center space-y-1">
+              <div className="text-sm font-bold font-display text-[#EDEDED] tracking-wider">
+                NICOLE (NICK) SILVA
               </div>
-
-              {/* Status Overlay Badge */}
-              <div className="mt-3 flex items-center gap-2 bg-emerald-950/60 border border-emerald-500/40 px-3 py-1 text-[10px] font-mono text-emerald-400">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                <span>READY FOR MISSION</span>
+              <div className="text-[11px] font-mono text-cyan-400 font-semibold uppercase">
+                [{t(`pose_${currentPose}` as any)}]
               </div>
             </div>
+
+            {/* Status Overlay Badge */}
+            <div className="mt-2 flex items-center gap-2 bg-emerald-950/60 border border-emerald-500/40 px-3 py-0.5 text-[10px] font-mono text-emerald-400">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+              <span>READY FOR MISSION</span>
+            </div>
+          </div>
+
+          {/* Pose Selector Buttons */}
+          <div className="w-full max-w-xs flex flex-wrap justify-center gap-1.5 pt-1">
+            {poses.map((p) => {
+              const Icon = p.icon
+              const isActive = currentPose === p.id
+              return (
+                <button
+                  key={p.id}
+                  onClick={() => setCurrentPose(p.id)}
+                  className={`flex items-center gap-1 px-2.5 py-1 text-[10px] font-mono transition-all border ${
+                    isActive
+                      ? 'bg-purple-600 border-purple-400 text-[#EDEDED] shadow-[0_0_10px_rgba(168,85,247,0.5)] font-bold'
+                      : 'bg-[#111114] border-[#2a2a35] text-gray-400 hover:text-cyan-300 hover:border-cyan-500/50'
+                  }`}
+                  title={t(p.labelKey as any)}
+                >
+                  <Icon className="w-3 h-3" />
+                  <span>{p.id.toUpperCase()}</span>
+                </button>
+              )
+            })}
           </div>
         </div>
 
