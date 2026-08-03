@@ -256,8 +256,12 @@ migrate(
 
     for (const col of collections) {
       if (app.hasTable(col.name)) continue
-      const collection = new Collection(col)
-      app.save(collection)
+      try {
+        const collection = new Collection(col)
+        app.save(collection)
+      } catch (err) {
+        console.log('Failed to create collection ' + col.name + ': ' + String(err))
+      }
     }
   },
   (app) => {

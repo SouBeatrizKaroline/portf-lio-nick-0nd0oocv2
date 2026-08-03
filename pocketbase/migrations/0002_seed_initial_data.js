@@ -12,15 +12,35 @@ migrate((app) => {
       app.save(record)
     }
   } catch (err) {
-    console.log('User seed error: ', err)
+    console.log('User seed error: ' + String(err))
   }
 
-  if (!app.hasTable('projects') || !app.hasTable('certificates')) {
-    console.log('Skipping seed: collections not yet created')
-    return
+  function seedCollection(name, keyField, seeds) {
+    if (!app.hasTable(name)) {
+      console.log('Skipping seed for ' + name + ': collection not found')
+      return
+    }
+    try {
+      var col = app.findCollectionByNameOrId(name)
+      for (var i = 0; i < seeds.length; i++) {
+        var item = seeds[i]
+        try {
+          app.findFirstRecordByData(name, keyField, item[keyField])
+        } catch (_) {
+          var r = new Record(col)
+          var keys = Object.keys(item)
+          for (var j = 0; j < keys.length; j++) {
+            r.set(keys[j], item[keys[j]])
+          }
+          app.save(r)
+        }
+      }
+    } catch (err) {
+      console.log('Seed error for ' + name + ': ' + String(err))
+    }
   }
-  const projCol = app.findCollectionByNameOrId('projects')
-  const projectSeeds = [
+
+  seedCollection('projects', 'slug', [
     {
       slug: 'metroidvania',
       title_pt: 'Projeto Metroidvania 2D',
@@ -131,20 +151,9 @@ migrate((app) => {
       featured: true,
       order: 3,
     },
-  ]
+  ])
 
-  for (const item of projectSeeds) {
-    try {
-      app.findFirstRecordByData('projects', 'slug', item.slug)
-    } catch (_) {
-      const r = new Record(projCol)
-      for (const k in item) r.set(k, item[k])
-      app.save(r)
-    }
-  }
-
-  const expCol = app.findCollectionByNameOrId('experience')
-  const expSeeds = [
+  seedCollection('experience', 'role_pt', [
     {
       role_pt: 'Unity Developer (Freelancer)',
       role_en: 'Unity Developer (Freelance)',
@@ -185,20 +194,9 @@ migrate((app) => {
       tags: ['Java', 'Banco de Dados', 'SQL', 'ABAP', 'OOP'],
       order: 2,
     },
-  ]
+  ])
 
-  for (const item of expSeeds) {
-    try {
-      app.findFirstRecordByData('experience', 'role_pt', item.role_pt)
-    } catch (_) {
-      const r = new Record(expCol)
-      for (const k in item) r.set(k, item[k])
-      app.save(r)
-    }
-  }
-
-  const timeCol = app.findCollectionByNameOrId('timeline')
-  const timeSeeds = [
+  seedCollection('timeline', 'year', [
     {
       year: '2018',
       title_pt: 'Início na Capgemini',
@@ -269,20 +267,9 @@ migrate((app) => {
       description_es: '¡Lista para crear grandes experiencias en estudios de videojuegos!',
       order: 7,
     },
-  ]
+  ])
 
-  for (const item of timeSeeds) {
-    try {
-      app.findFirstRecordByData('timeline', 'year', item.year)
-    } catch (_) {
-      const r = new Record(timeCol)
-      for (const k in item) r.set(k, item[k])
-      app.save(r)
-    }
-  }
-
-  const skillCol = app.findCollectionByNameOrId('skills')
-  const skillSeeds = [
+  seedCollection('skills', 'name_pt', [
     {
       category: 'gameplay',
       name_pt: 'Player Controller 2D/3D',
@@ -364,20 +351,9 @@ migrate((app) => {
       level: 90,
       order: 11,
     },
-  ]
+  ])
 
-  for (const item of skillSeeds) {
-    try {
-      app.findFirstRecordByData('skills', 'name_pt', item.name_pt)
-    } catch (_) {
-      const r = new Record(skillCol)
-      for (const k in item) r.set(k, item[k])
-      app.save(r)
-    }
-  }
-
-  const stackCol = app.findCollectionByNameOrId('stack')
-  const stackSeeds = [
+  seedCollection('stack', 'category', [
     {
       category: 'Game Development',
       items: [
@@ -419,20 +395,9 @@ migrate((app) => {
       items: ['Git', 'GitHub', 'Git LFS', 'Conventional Commits'],
       order: 5,
     },
-  ]
+  ])
 
-  for (const item of stackSeeds) {
-    try {
-      app.findFirstRecordByData('stack', 'category', item.category)
-    } catch (_) {
-      const r = new Record(stackCol)
-      for (const k in item) r.set(k, item[k])
-      app.save(r)
-    }
-  }
-
-  const certCol = app.findCollectionByNameOrId('certificates')
-  const certSeeds = [
+  seedCollection('certificates', 'title', [
     {
       title: 'Unity 2D Game Development Masterclass',
       issuer: 'GameDev.tv',
@@ -465,20 +430,9 @@ migrate((app) => {
       link: 'https://udemy.com',
       order: 4,
     },
-  ]
+  ])
 
-  for (const item of certSeeds) {
-    try {
-      app.findFirstRecordByData('certificates', 'title', item.title)
-    } catch (_) {
-      const r = new Record(certCol)
-      for (const k in item) r.set(k, item[k])
-      app.save(r)
-    }
-  }
-
-  const sysCol = app.findCollectionByNameOrId('game_systems')
-  const sysSeeds = [
+  seedCollection('game_systems', 'title_pt', [
     {
       title_pt: 'Gameplay Programming',
       title_en: 'Gameplay Programming',
@@ -542,24 +496,13 @@ migrate((app) => {
       description_pt:
         'Interfaces responsivas com UI Toolkit / UGUI e sistemas de inventário por slots.',
       description_en: 'Responsive UI with UI Toolkit / UGUI and slot/grid inventory systems.',
-      description_es: 'UI responsiva con UI Toolkit / UGUI y sistemas de inventario por slots.',
+      description_es: 'UI responsiva con UI Toolkit / UGU y sistemas de inventario por slots.',
       icon: 'LayoutGrid',
       order: 6,
     },
-  ]
+  ])
 
-  for (const item of sysSeeds) {
-    try {
-      app.findFirstRecordByData('game_systems', 'title_pt', item.title_pt)
-    } catch (_) {
-      const r = new Record(sysCol)
-      for (const k in item) r.set(k, item[k])
-      app.save(r)
-    }
-  }
-
-  const jamCol = app.findCollectionByNameOrId('game_jam')
-  const jamSeeds = [
+  seedCollection('game_jam', 'title', [
     {
       title: 'Shadow Dash - Global Game Jam 2024',
       year: '2024',
@@ -586,15 +529,5 @@ migrate((app) => {
       links: [{ label: 'Itch.io Page', url: 'https://nicolemaira.itch.io' }],
       order: 2,
     },
-  ]
-
-  for (const item of jamSeeds) {
-    try {
-      app.findFirstRecordByData('game_jam', 'title', item.title)
-    } catch (_) {
-      const r = new Record(jamCol)
-      for (const k in item) r.set(k, item[k])
-      app.save(r)
-    }
-  }
+  ])
 })

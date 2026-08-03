@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-03T18:33:25.166Z",
+  "generatedAt": "2026-08-03T18:51:02.936Z",
   "collections": [
     {
       "name": "users",
@@ -43,6 +43,742 @@
         "CREATE UNIQUE INDEX `idx_tokenKey__pb_users_auth_` ON `users` (`tokenKey`)",
         "CREATE UNIQUE INDEX `idx_email__pb_users_auth_` ON `users` (`email`) WHERE `email` != ''"
       ]
+    },
+    {
+      "name": "projects",
+      "type": "base",
+      "apiRules": {
+        "list": "",
+        "view": "",
+        "create": null,
+        "update": null,
+        "delete": null
+      },
+      "fields": [
+        {
+          "name": "slug",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "title_pt",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "title_en",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "title_es",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "subtitle_pt",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "subtitle_en",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "subtitle_es",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "description_pt",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "description_en",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "description_es",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "content_pt",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "content_en",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "content_es",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "category",
+          "type": "select",
+          "required": true,
+          "system": false,
+          "selectValues": ["game", "backend", "tool", "experiment"]
+        },
+        {
+          "name": "tech",
+          "type": "json",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "cover_image",
+          "type": "file",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "gallery",
+          "type": "json",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "video_url",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "github_url",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "itch_url",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "demo_url",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "featured",
+          "type": "bool",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "order",
+          "type": "number",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate"]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate", "onUpdate"]
+        }
+      ],
+      "indexes": [
+        "CREATE UNIQUE INDEX idx_projects_slug ON projects (slug)",
+        "CREATE INDEX idx_projects_cat_order ON projects (category, \"order\")"
+      ]
+    },
+    {
+      "name": "experience",
+      "type": "base",
+      "apiRules": {
+        "list": "",
+        "view": "",
+        "create": null,
+        "update": null,
+        "delete": null
+      },
+      "fields": [
+        {
+          "name": "role_pt",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "role_en",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "role_es",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "company",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "period",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "description_pt",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "description_en",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "description_es",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "tags",
+          "type": "json",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "order",
+          "type": "number",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate"]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate", "onUpdate"]
+        }
+      ],
+      "indexes": ["CREATE INDEX idx_exp_order ON experience (\"order\")"]
+    },
+    {
+      "name": "timeline",
+      "type": "base",
+      "apiRules": {
+        "list": "",
+        "view": "",
+        "create": null,
+        "update": null,
+        "delete": null
+      },
+      "fields": [
+        {
+          "name": "year",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "title_pt",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "title_en",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "title_es",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "description_pt",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "description_en",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "description_es",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "order",
+          "type": "number",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate"]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate", "onUpdate"]
+        }
+      ],
+      "indexes": ["CREATE INDEX idx_timeline_order ON timeline (\"order\")"]
+    },
+    {
+      "name": "skills",
+      "type": "base",
+      "apiRules": {
+        "list": "",
+        "view": "",
+        "create": null,
+        "update": null,
+        "delete": null
+      },
+      "fields": [
+        {
+          "name": "category",
+          "type": "select",
+          "required": true,
+          "system": false,
+          "selectValues": [
+            "gameplay",
+            "backend",
+            "languages",
+            "engines",
+            "frameworks",
+            "tools",
+            "versioning"
+          ]
+        },
+        {
+          "name": "name_pt",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "name_en",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "name_es",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "level",
+          "type": "number",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "order",
+          "type": "number",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate"]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate", "onUpdate"]
+        }
+      ],
+      "indexes": ["CREATE INDEX idx_skills_cat ON skills (category)"]
+    },
+    {
+      "name": "stack",
+      "type": "base",
+      "apiRules": {
+        "list": "",
+        "view": "",
+        "create": null,
+        "update": null,
+        "delete": null
+      },
+      "fields": [
+        {
+          "name": "category",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "items",
+          "type": "json",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "order",
+          "type": "number",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate"]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate", "onUpdate"]
+        }
+      ],
+      "indexes": ["CREATE INDEX idx_stack_cat ON stack (category)"]
+    },
+    {
+      "name": "certificates",
+      "type": "base",
+      "apiRules": {
+        "list": "",
+        "view": "",
+        "create": null,
+        "update": null,
+        "delete": null
+      },
+      "fields": [
+        {
+          "name": "title",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "issuer",
+          "type": "select",
+          "required": true,
+          "system": false,
+          "selectValues": ["Unity", "GameDev.tv", "Udemy", "Unity Technologies"]
+        },
+        {
+          "name": "year",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "category",
+          "type": "select",
+          "required": true,
+          "system": false,
+          "selectValues": ["unity", "gamedev", "udemy", "unitytech"]
+        },
+        {
+          "name": "link",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "image",
+          "type": "file",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "order",
+          "type": "number",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate"]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate", "onUpdate"]
+        }
+      ],
+      "indexes": ["CREATE INDEX idx_cert_cat_year ON certificates (category, year)"]
+    },
+    {
+      "name": "game_systems",
+      "type": "base",
+      "apiRules": {
+        "list": "",
+        "view": "",
+        "create": null,
+        "update": null,
+        "delete": null
+      },
+      "fields": [
+        {
+          "name": "title_pt",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "title_en",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "title_es",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "description_pt",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "description_en",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "description_es",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "icon",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "order",
+          "type": "number",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate"]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate", "onUpdate"]
+        }
+      ],
+      "indexes": ["CREATE INDEX idx_systems_order ON game_systems (\"order\")"]
+    },
+    {
+      "name": "game_jam",
+      "type": "base",
+      "apiRules": {
+        "list": "",
+        "view": "",
+        "create": null,
+        "update": null,
+        "delete": null
+      },
+      "fields": [
+        {
+          "name": "title",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "year",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "description_pt",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "description_en",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "description_es",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "images",
+          "type": "json",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "links",
+          "type": "json",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "order",
+          "type": "number",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate"]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate", "onUpdate"]
+        }
+      ],
+      "indexes": ["CREATE INDEX idx_jam_order ON game_jam (\"order\")"]
+    },
+    {
+      "name": "contact_messages",
+      "type": "base",
+      "apiRules": {
+        "list": null,
+        "view": null,
+        "create": "",
+        "update": null,
+        "delete": null
+      },
+      "fields": [
+        {
+          "name": "name",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "email",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "subject",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "message",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "status",
+          "type": "select",
+          "required": true,
+          "system": false,
+          "selectValues": ["new", "read", "archived"]
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate"]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate", "onUpdate"]
+        }
+      ],
+      "indexes": ["CREATE INDEX idx_msg_status ON contact_messages (status)"]
     }
   ]
 }
