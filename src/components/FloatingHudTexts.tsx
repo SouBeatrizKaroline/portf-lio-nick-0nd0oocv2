@@ -12,7 +12,7 @@ export function FloatingHudTexts() {
 
   useEffect(() => {
     if (reduced) return
-    const checkScreen = () => setVisible(window.innerWidth >= 1280)
+    const checkScreen = () => setVisible(window.innerWidth >= 1536)
     checkScreen()
     window.addEventListener('resize', checkScreen)
     return () => window.removeEventListener('resize', checkScreen)
@@ -23,7 +23,7 @@ export function FloatingHudTexts() {
   return (
     <div
       className="fixed inset-0 z-[1] pointer-events-none"
-      style={{ opacity: 0.06, transition: 'opacity 0.5s ease' }}
+      style={{ opacity: 0.04, transition: 'opacity 0.5s ease' }}
     >
       {SAFE_ZONE_TEXTS.map((zone, i) => (
         <div

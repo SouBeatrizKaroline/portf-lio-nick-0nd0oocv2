@@ -22,7 +22,7 @@ export default function Layout() {
   const [booting, setBooting] = useState(() => {
     return !sessionStorage.getItem('portfolio_booted')
   })
-  const [scanlines, setScanlines] = useState(true)
+  const [scanlines] = useState(true)
   const [devConsoleOpen, setDevConsoleOpen] = useState(false)
 
   const handleBootComplete = () => {
@@ -61,13 +61,7 @@ export default function Layout() {
         <Outlet />
       </main>
 
-      <Footer
-        scanlines={scanlines}
-        onToggleScanlines={() => setScanlines(!scanlines)}
-        onPressStart={() =>
-          unlockAchievement('press_start', 'PRESS START', 'Retro Arcade Mode Activated!')
-        }
-      />
+      <Footer />
 
       <DevConsoleModal isOpen={devConsoleOpen} onClose={() => setDevConsoleOpen(false)} />
     </div>

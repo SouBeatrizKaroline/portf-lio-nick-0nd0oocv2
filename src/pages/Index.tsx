@@ -11,6 +11,7 @@ import { SkillRegistrySection } from '@/components/SkillRegistrySection'
 import { GithubSection } from '@/components/GithubSection'
 import { ItchSection } from '@/components/ItchSection'
 import { ContactSection } from '@/components/ContactSection'
+import { EndScreen } from '@/components/EndScreen'
 
 export default function Index() {
   return (
@@ -25,11 +26,12 @@ export default function Index() {
         <ProjectsSection />
         <GameSystemsSection />
         <GameJamsSection />
-        <SkillRegistrySection />
         <CertificatesSection />
         <GithubSection />
         <ItchSection />
+        <SkillRegistrySection />
         <ContactSection />
+        <EndScreen />
       </div>
     </div>
   )

@@ -2,6 +2,39 @@ import { useLanguage } from '@/hooks/use-language'
 import type { ProjectRecord } from '@/services/projects'
 import { Target, Lightbulb, User, TrendingUp, Trophy, Clock, Users, Building2 } from 'lucide-react'
 
+const CASE_LABELS = {
+  pt: {
+    problem: 'Problema',
+    solution: 'Solução',
+    role: 'Papel',
+    impact: 'Impacto & Resultados',
+    awards: 'Prêmios & Reconhecimentos',
+    client: 'Cliente',
+    duration: 'Duração',
+    team: 'Equipe',
+  },
+  en: {
+    problem: 'Problem',
+    solution: 'Solution',
+    role: 'Role',
+    impact: 'Impact & Results',
+    awards: 'Awards & Recognition',
+    client: 'Client',
+    duration: 'Duration',
+    team: 'Team',
+  },
+  es: {
+    problem: 'Problema',
+    solution: 'Solución',
+    role: 'Rol',
+    impact: 'Impacto & Resultados',
+    awards: 'Premios & Reconocimientos',
+    client: 'Cliente',
+    duration: 'Duración',
+    team: 'Equipo',
+  },
+} as const
+
 interface CaseStudySectionProps {
   project: ProjectRecord
 }
@@ -18,10 +51,11 @@ export function CaseStudySection({ project }: CaseStudySectionProps) {
   const impact = getField('impact')
   const awards = project.awards
 
+  const labels = CASE_LABELS[locale]
   const metaItems = [
-    { icon: Building2, label: 'Client', value: project.client },
-    { icon: Clock, label: 'Duration', value: project.duration },
-    { icon: Users, label: 'Team', value: project.team_size },
+    { icon: Building2, label: labels.client, value: project.client },
+    { icon: Clock, label: labels.duration, value: project.duration },
+    { icon: Users, label: labels.team, value: project.team_size },
   ].filter((item) => item.value)
 
   const hasCaseContent = problem || solution || role || impact
@@ -29,10 +63,10 @@ export function CaseStudySection({ project }: CaseStudySectionProps) {
   if (!hasCaseContent && metaItems.length === 0) return null
 
   const sections = [
-    { icon: Target, title: 'Problem', content: problem, color: 'text-rose-400' },
-    { icon: Lightbulb, title: 'Solution', content: solution, color: 'text-cyan-400' },
-    { icon: User, title: 'Role', content: role, color: 'text-purple-400' },
-    { icon: TrendingUp, title: 'Impact & Results', content: impact, color: 'text-emerald-400' },
+    { icon: Target, title: labels.problem, content: problem, color: 'text-rose-400' },
+    { icon: Lightbulb, title: labels.solution, content: solution, color: 'text-cyan-400' },
+    { icon: User, title: labels.role, content: role, color: 'text-purple-400' },
+    { icon: TrendingUp, title: labels.impact, content: impact, color: 'text-emerald-400' },
   ].filter((s) => s.content)
 
   return (
@@ -84,7 +118,7 @@ export function CaseStudySection({ project }: CaseStudySectionProps) {
           <div className="flex items-center gap-2">
             <Trophy className="w-4 h-4 text-yellow-400" />
             <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-yellow-400">
-              Awards & Recognition
+              {labels.awards}
             </h3>
           </div>
           <ul className="space-y-2">
