@@ -10,21 +10,19 @@ export function GithubSection() {
 
   useEffect(() => {
     fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=pushed&per_page=6`)
-      ? fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=pushed&per_page=6`)
-          .then((res) => {
-            if (!res.ok) throw new Error('API Rate Limit')
-            return res.json()
-          })
-          .then((data) => {
-            if (Array.isArray(data) && data.length > 0) {
-              setRepos(data)
-            } else {
-              setRepos(FALLBACK_REPOS)
-            }
-          })
-          .catch(() => setRepos(FALLBACK_REPOS))
-          .finally(() => setLoading(false))
-      : setLoading(false)
+      .then((res) => {
+        if (!res.ok) throw new Error('API Rate Limit')
+        return res.json()
+      })
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setRepos(data)
+        } else {
+          setRepos(FALLBACK_REPOS)
+        }
+      })
+      .catch(() => setRepos(FALLBACK_REPOS))
+      .finally(() => setLoading(false))
   }, [])
 
   return (

@@ -44,7 +44,7 @@ migrate(
         ],
         indexes: [
           'CREATE UNIQUE INDEX idx_projects_slug ON projects (slug)',
-          'CREATE INDEX idx_projects_cat_order ON projects (category, order)',
+          'CREATE INDEX idx_projects_cat_order ON projects (category, "order")',
         ],
       },
       {
@@ -69,7 +69,7 @@ migrate(
           { name: 'created', type: 'autodate', onCreate: true, onUpdate: false },
           { name: 'updated', type: 'autodate', onCreate: true, onUpdate: true },
         ],
-        indexes: ['CREATE INDEX idx_exp_order ON experience (order)'],
+        indexes: ['CREATE INDEX idx_exp_order ON experience ("order")'],
       },
       {
         name: 'timeline',
@@ -91,7 +91,7 @@ migrate(
           { name: 'created', type: 'autodate', onCreate: true, onUpdate: false },
           { name: 'updated', type: 'autodate', onCreate: true, onUpdate: true },
         ],
-        indexes: ['CREATE INDEX idx_timeline_order ON timeline (order)'],
+        indexes: ['CREATE INDEX idx_timeline_order ON timeline ("order")'],
       },
       {
         name: 'skills',
@@ -197,7 +197,7 @@ migrate(
           { name: 'created', type: 'autodate', onCreate: true, onUpdate: false },
           { name: 'updated', type: 'autodate', onCreate: true, onUpdate: true },
         ],
-        indexes: ['CREATE INDEX idx_systems_order ON game_systems (order)'],
+        indexes: ['CREATE INDEX idx_systems_order ON game_systems ("order")'],
       },
       {
         name: 'game_jam',
@@ -219,7 +219,7 @@ migrate(
           { name: 'created', type: 'autodate', onCreate: true, onUpdate: false },
           { name: 'updated', type: 'autodate', onCreate: true, onUpdate: true },
         ],
-        indexes: ['CREATE INDEX idx_jam_order ON game_jam (order)'],
+        indexes: ['CREATE INDEX idx_jam_order ON game_jam ("order")'],
       },
       {
         name: 'contact_messages',
