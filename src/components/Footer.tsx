@@ -1,99 +1,66 @@
+import { Link } from 'react-router-dom'
 import { useLanguage } from '@/hooks/use-language'
 import { PixelCat } from './PixelCat'
-import { Github, Linkedin, Mail, ExternalLink, MessageCircle } from 'lucide-react'
+import { CyberDecal } from './CyberDecals'
+import { Github, Gamepad2, Linkedin, Mail, MessageSquare } from 'lucide-react'
 
-interface FooterProps {
-  scanlines: boolean
-  onToggleScanlines: () => void
-  onPressStart: () => void
-}
-
-export function Footer({ scanlines, onToggleScanlines, onPressStart }: FooterProps) {
+export function Footer() {
   const { t } = useLanguage()
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
   return (
-    <footer className="border-t border-[#1a1a22] bg-[#080808] py-12 px-6 font-mono text-xs text-gray-400 relative">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+    <footer className="relative bg-[#060608] border-t border-[#232330] py-12 px-6 font-mono text-xs text-gray-400">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="flex items-center gap-3">
-          <PixelCat state="sleep" />
-          <div>
-            <div className="text-gray-200 font-bold">NICOLE MAIRA (NICK)</div>
-            <div className="text-gray-500">
-              Game Developer & Software Engineer © {new Date().getFullYear()}
-            </div>
+          <div className="border border-cyan-500/40 bg-[#121218] px-3 py-1 font-bold text-cyan-400">
+            NICK_OS // V2.0
           </div>
+          <CyberDecal variant="barcode" />
         </div>
 
-        <div className="flex items-center gap-4 text-gray-300">
-          <a
-            href="https://github.com/NicolePLSilva"
-            target="_blank"
-            rel="noreferrer"
-            className="hover:text-purple-400 transition-colors"
-            title="GitHub"
-          >
-            <Github className="w-4 h-4" />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/nicole-maira/"
-            target="_blank"
-            rel="noreferrer"
-            className="hover:text-purple-400 transition-colors"
-            title="LinkedIn"
-          >
-            <Linkedin className="w-4 h-4" />
-          </a>
+        <div className="flex flex-wrap items-center justify-center gap-4">
           <a
             href="https://pls-nick.itch.io/"
             target="_blank"
             rel="noreferrer"
             className="hover:text-purple-400 transition-colors flex items-center gap-1"
-            title="Itch.io"
           >
-            <ExternalLink className="w-4 h-4" />
+            <Gamepad2 className="w-3.5 h-3.5 text-purple-400" /> Itch.io
+          </a>
+          <a
+            href="https://github.com/NicolePLSilva"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-cyan-400 transition-colors flex items-center gap-1"
+          >
+            <Github className="w-3.5 h-3.5 text-cyan-400" /> GitHub
+          </a>
+          <a
+            href="https://www.linkedin.com/in/nicole-maira/"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-blue-400 transition-colors flex items-center gap-1"
+          >
+            <Linkedin className="w-3.5 h-3.5 text-blue-400" /> LinkedIn
           </a>
           <a
             href="https://wa.me/5571985304202"
             target="_blank"
             rel="noreferrer"
-            className="hover:text-purple-400 transition-colors"
-            title="WhatsApp"
+            className="hover:text-emerald-400 transition-colors flex items-center gap-1"
           >
-            <MessageCircle className="w-4 h-4" />
+            <MessageSquare className="w-3.5 h-3.5 text-emerald-400" /> WhatsApp
           </a>
           <a
             href="mailto:nicolemairaplsilva@gmail.com"
-            className="hover:text-purple-400 transition-colors"
-            title="Email"
+            className="hover:text-rose-400 transition-colors flex items-center gap-1"
           >
-            <Mail className="w-4 h-4" />
+            <Mail className="w-3.5 h-3.5 text-rose-400" /> Email
           </a>
         </div>
 
-        <div className="flex items-center gap-4">
-          <button
-            onClick={onPressStart}
-            className="bg-purple-600/30 hover:bg-purple-600 text-purple-300 hover:text-[#EDEDED] border border-purple-500/50 px-3 py-1 font-mono transition-all animate-pulse"
-          >
-            🕹️ {t('footer_press_start')}
-          </button>
-          <button
-            onClick={onToggleScanlines}
-            className={`px-2 py-1 border text-[10px] ${
-              scanlines
-                ? 'border-cyan-500 text-cyan-400 bg-cyan-950/20'
-                : 'border-[#1a1a22] text-gray-500'
-            }`}
-          >
-            {t('footer_scanlines')}: {scanlines ? 'ON' : 'OFF'}
-          </button>
-          <button onClick={scrollToTop} className="hover:text-purple-400 transition-colors">
-            {t('footer_back_top')}
-          </button>
+        <div className="text-gray-500 text-[10px] text-center md:text-right">
+          <div>© {new Date().getFullYear()} Nicole (Nick) Lopes. All rights reserved.</div>
+          <div className="text-cyan-500/60 mt-0.5">SYSTEM_STATUS: ALL_MODULES_OPTIMAL</div>
         </div>
       </div>
     </footer>

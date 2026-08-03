@@ -8,7 +8,6 @@ import { AchievementProvider } from '@/hooks/use-achievements'
 import Index from './pages/Index'
 import ProjectDetail from './pages/ProjectDetail'
 import GamesPage from './pages/GamesPage'
-import ResumePage from './pages/ResumePage'
 import NotFound from './pages/NotFound'
 import Layout from './components/Layout'
 
@@ -24,7 +23,6 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/project/:slug" element={<ProjectDetail />} />
               <Route path="/games" element={<GamesPage />} />
-              <Route path="/resume" element={<ResumePage />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

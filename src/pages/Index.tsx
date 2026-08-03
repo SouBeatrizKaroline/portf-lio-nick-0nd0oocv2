@@ -10,7 +10,7 @@ import { ProjectsSection } from '@/components/ProjectsSection'
 import { GameSystemsSection } from '@/components/GameSystemsSection'
 import { GameJamsSection } from '@/components/GameJamsSection'
 import { CertificatesSection } from '@/components/CertificatesSection'
-import { TechTreeSection } from '@/components/TechTreeSection'
+import { SkillRegistrySection } from '@/components/SkillRegistrySection'
 import { GithubSection } from '@/components/GithubSection'
 import { ItchSection } from '@/components/ItchSection'
 import { ContactSection } from '@/components/ContactSection'
@@ -33,8 +33,8 @@ export default function Index() {
         <ProjectsSection />
         <GameSystemsSection />
         <GameJamsSection />
+        <SkillRegistrySection />
         <CertificatesSection />
-        <TechTreeSection />
         <GithubSection />
         <ItchSection />
         <ContactSection />
