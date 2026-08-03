@@ -1,124 +1,131 @@
 import { useState } from 'react'
-import { PixelNick, NickPose } from './PixelNick'
-import { HudFrame } from './HudFrame'
-import { Sparkles, Code, Cat, Gamepad2, Trophy, Eye, Headphones } from 'lucide-react'
+import { useLanguage } from '@/hooks/use-language'
+import { PixelCat } from './PixelCat'
+import { Cpu, Shield, Sparkles, Terminal, Code2, Zap } from 'lucide-react'
 
 export function NickAvatarShowcase() {
-  const [pose, setPose] = useState<NickPose>('idle')
-  const [hasGlasses, setHasGlasses] = useState(true)
-  const [hasHeadset, setHasHeadset] = useState(true)
+  const { t } = useLanguage()
+  const [activeTab, setActiveTab] = useState<'stats' | 'specs'>('stats')
 
-  const poses: { id: NickPose; label: string; icon: React.ReactNode; desc: string }[] = [
-    {
-      id: 'idle',
-      label: 'Idle / Gamer Dev',
-      icon: <Sparkles className="w-4 h-4 text-purple-400" />,
-      desc: 'Hero Section & General Pose',
-    },
-    {
-      id: 'coding',
-      label: 'Programming',
-      icon: <Code className="w-4 h-4 text-cyan-400" />,
-      desc: 'Focused at Laptop with Stickers',
-    },
-    {
-      id: 'with-cat',
-      label: 'With Cat Mascot',
-      icon: <Cat className="w-4 h-4 text-pink-400" />,
-      desc: 'Nick & Her Pixel Cat Companion',
-    },
-    {
-      id: 'gaming',
-      label: 'Playing Game',
-      icon: <Gamepad2 className="w-4 h-4 text-green-400" />,
-      desc: 'Holding Retro Controller',
-    },
-    {
-      id: 'achievement',
-      label: 'Achievement',
-      icon: <Trophy className="w-4 h-4 text-yellow-400" />,
-      desc: 'Victory Star & Konami Mode',
-    },
+  const characterStats = [
+    { label: 'C# / Unity Architecture', level: 95 },
+    { label: 'Gameplay Systems & Mechanics', level: 92 },
+    { label: 'Backend (ASP.NET & Java)', level: 88 },
+    { label: 'Physics & Character Controllers', level: 90 },
+    { label: 'Shaders & VFX Optimization', level: 82 },
   ]
 
   return (
-    <HudFrame label="AVATAR_SYSTEM.NICK_V2" className="p-6 bg-[#0B0B0F]/90">
-      <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-        <div className="flex flex-col items-center justify-center p-6 bg-[#101014] border border-purple-500/30 rounded relative min-w-[220px] w-full lg:w-auto">
-          <div className="absolute top-2 left-2 text-[10px] font-mono text-purple-400/60">
-            NICK_PIXEL_32BIT
-          </div>
-          <PixelNick
-            pose={pose}
-            hasGlasses={hasGlasses}
-            hasHeadset={hasHeadset}
-            scale={1.5}
-            showSpeechBubble
-          />
-          <div className="mt-4 text-center">
-            <span className="text-xs font-mono font-bold text-cyan-400 block uppercase tracking-wider">
-              {poses.find((p) => p.id === pose)?.label}
-            </span>
-            <span className="text-[11px] font-mono text-gray-400">
-              {poses.find((p) => p.id === pose)?.desc}
-            </span>
+    <div className="relative border border-[#2a2a35] bg-[#1A1A20]/90 backdrop-blur-md p-6 sm:p-8 hud-corners shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
+      {/* Sci-Fi Decal Tag */}
+      <div className="flex items-center justify-between border-b border-[#2a2a35] pb-3 mb-6 font-mono text-xs">
+        <div className="flex items-center gap-2 text-cyan-400 font-bold">
+          <Terminal className="w-4 h-4" />
+          <span>DEVELOPER SPECIFICATIONS // NICK</span>
+        </div>
+        <div className="text-gray-500 text-[10px]">CLASS: GAME DEVELOPER</div>
+      </div>
+
+      <div className="grid lg:grid-cols-12 gap-8 items-center">
+        {/* Concept Art Avatar Frame */}
+        <div className="lg:col-span-5 relative group flex flex-col items-center">
+          <div className="relative w-full max-w-sm aspect-square bg-[#111114] border-2 border-purple-500/50 p-3 overflow-hidden shadow-[0_0_25px_rgba(168,85,247,0.2)]">
+            {/* High-fidelity concept art style avatar illustration */}
+            <div className="relative w-full h-full bg-[#1A1A20] flex flex-col items-center justify-center p-4 border border-[#2a2a35]">
+              <div className="w-32 h-32 rounded-full bg-gradient-to-tr from-purple-600 via-cyan-500 to-indigo-600 p-1 mb-3 relative shadow-[0_0_20px_rgba(0,240,255,0.3)]">
+                <img
+                  src="https://img.usecurling.com/ppl/large?gender=female&seed=88"
+                  alt="Nicole (Nick) Concept Art Avatar"
+                  className="w-full h-full object-cover rounded-full filter contrast-105 brightness-105"
+                />
+                <PixelCat state="sleep" className="absolute -bottom-2 -right-2 scale-90" />
+              </div>
+
+              <div className="text-center space-y-1">
+                <div className="text-base font-bold font-display text-[#EDEDED] tracking-wider">
+                  NICOLE (NICK) SILVA
+                </div>
+                <div className="text-xs font-mono text-cyan-400 font-semibold">
+                  [LEVEL 99 SENIOR GAME DEV]
+                </div>
+              </div>
+
+              {/* Status Overlay Badge */}
+              <div className="mt-3 flex items-center gap-2 bg-emerald-950/60 border border-emerald-500/40 px-3 py-1 text-[10px] font-mono text-emerald-400">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                <span>READY FOR MISSION</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="flex-1 w-full space-y-4">
-          <div>
-            <h4 className="text-xs font-mono text-purple-400 uppercase tracking-widest mb-2">
-              SELECT CHARACTER POSE:
-            </h4>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              {poses.map((p) => (
-                <button
-                  key={p.id}
-                  onClick={() => setPose(p.id)}
-                  className={`flex items-center gap-2 px-3 py-2 text-xs font-mono border transition-all text-left ${
-                    pose === p.id
-                      ? 'border-purple-500 bg-purple-950/50 text-[#EDEDED] shadow-[0_0_10px_rgba(168,85,247,0.2)]'
-                      : 'border-[#1a1a22] bg-[#101014] text-gray-400 hover:border-purple-500/40 hover:text-[#EDEDED]'
-                  }`}
-                >
-                  {p.icon}
-                  <span className="truncate">{p.label}</span>
-                </button>
+        {/* Character Attributes & Stats Bars */}
+        <div className="lg:col-span-7 space-y-6 font-mono">
+          <div className="flex border-b border-[#2a2a35] text-xs">
+            <button
+              onClick={() => setActiveTab('stats')}
+              className={`px-4 py-2 uppercase tracking-wider font-bold transition-colors ${
+                activeTab === 'stats'
+                  ? 'border-b-2 border-cyan-400 text-cyan-400 bg-cyan-950/20'
+                  : 'text-gray-400 hover:text-gray-200'
+              }`}
+            >
+              System Skills
+            </button>
+            <button
+              onClick={() => setActiveTab('specs')}
+              className={`px-4 py-2 uppercase tracking-wider font-bold transition-colors ${
+                activeTab === 'specs'
+                  ? 'border-b-2 border-purple-400 text-purple-400 bg-purple-950/20'
+                  : 'text-gray-400 hover:text-gray-200'
+              }`}
+            >
+              Hardware & Engine Specs
+            </button>
+          </div>
+
+          {activeTab === 'stats' ? (
+            <div className="space-y-4">
+              {characterStats.map((stat, idx) => (
+                <div key={idx} className="space-y-1.5">
+                  <div className="flex justify-between text-xs text-gray-300">
+                    <span className="flex items-center gap-2">
+                      <Zap className="w-3.5 h-3.5 text-cyan-400" />
+                      {stat.label}
+                    </span>
+                    <span className="text-cyan-400 font-bold">{stat.level}%</span>
+                  </div>
+                  <div className="h-2 w-full bg-[#111114] border border-[#2a2a35] p-0.5">
+                    <div
+                      className="h-full bg-gradient-to-r from-purple-600 via-cyan-400 to-emerald-400 transition-all duration-500"
+                      style={{ width: `${stat.level}%` }}
+                    />
+                  </div>
+                </div>
               ))}
             </div>
-          </div>
-
-          <div className="border-t border-[#1a1a22] pt-3">
-            <h4 className="text-xs font-mono text-purple-400 uppercase tracking-widest mb-2">
-              EQUIPMENT & ACCESSORIES:
-            </h4>
-            <div className="flex flex-wrap gap-3">
-              <button
-                onClick={() => setHasGlasses(!hasGlasses)}
-                className={`flex items-center gap-2 px-3 py-1.5 text-xs font-mono border transition-all ${
-                  hasGlasses
-                    ? 'border-cyan-500 bg-cyan-950/30 text-cyan-300'
-                    : 'border-[#1a1a22] bg-[#101014] text-gray-500'
-                }`}
-              >
-                <Eye className="w-3.5 h-3.5" />
-                Dev Glasses: {hasGlasses ? 'ON' : 'OFF'}
-              </button>
-              <button
-                onClick={() => setHasHeadset(!hasHeadset)}
-                className={`flex items-center gap-2 px-3 py-1.5 text-xs font-mono border transition-all ${
-                  hasHeadset
-                    ? 'border-purple-500 bg-purple-950/30 text-purple-300'
-                    : 'border-[#1a1a22] bg-[#101014] text-gray-500'
-                }`}
-              >
-                <Headphones className="w-3.5 h-3.5" />
-                Gamer Headset: {hasHeadset ? 'ON' : 'OFF'}
-              </button>
+          ) : (
+            <div className="grid grid-cols-2 gap-4 text-xs">
+              <div className="bg-[#111114] p-3 border border-[#2a2a35] space-y-1">
+                <div className="text-cyan-400 font-bold">PRIMARY ENGINE</div>
+                <div className="text-gray-300">Unity 6 / 2022 LTS</div>
+              </div>
+              <div className="bg-[#111114] p-3 border border-[#2a2a35] space-y-1">
+                <div className="text-purple-400 font-bold">CORE LANGUAGE</div>
+                <div className="text-gray-300">C# (.NET Core)</div>
+              </div>
+              <div className="bg-[#111114] p-3 border border-[#2a2a35] space-y-1">
+                <div className="text-emerald-400 font-bold">BACKEND STACK</div>
+                <div className="text-gray-300">ASP.NET / Java / PB</div>
+              </div>
+              <div className="bg-[#111114] p-3 border border-[#2a2a35] space-y-1">
+                <div className="text-yellow-400 font-bold">SPECIALTY</div>
+                <div className="text-gray-300">Gameplay Architecture</div>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
-    </HudFrame>
+    </div>
   )
 }

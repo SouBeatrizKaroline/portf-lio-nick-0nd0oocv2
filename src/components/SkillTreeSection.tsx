@@ -1,83 +1,61 @@
 import { useEffect, useState } from 'react'
 import { useLanguage } from '@/hooks/use-language'
 import { getSkills, SkillRecord } from '@/services/skills'
+import { getStack, StackRecord } from '@/services/stack'
+import { HudFrame } from './HudFrame'
 import { SectionReveal } from './SectionReveal'
-import { ModuleHeader } from './ModuleHeader'
-import { TechPanel } from './TechPanel'
+import { Cpu, Code, Layers, Wrench, Terminal, Database } from 'lucide-react'
 
 export function SkillTreeSection() {
-  const { locale, t } = useLanguage()
+  const { t } = useLanguage()
   const [skills, setSkills] = useState<SkillRecord[]>([])
+  const [stack, setStack] = useState<StackRecord[]>([])
 
   useEffect(() => {
     getSkills()
       .then(setSkills)
       .catch(() => {})
+    getStack()
+      .then(setStack)
+      .catch(() => {})
   }, [])
 
-  const categoryOrder: Array<SkillRecord['category']> = [
-    'game_development',
-    'languages',
-    'backend',
-    'engines',
-    'tools',
-  ]
-
-  const categoryLabels: Record<string, string> = {
-    game_development: t('skills_cat_game_dev'),
-    languages: t('skills_cat_languages'),
-    backend: t('skills_cat_backend'),
-    engines: t('skills_cat_engines'),
-    tools: t('skills_cat_tools'),
-  }
-
   return (
-    <section id="skills" className="py-20 px-6 bg-[#0B0B0F]">
-      <div className="max-w-4xl mx-auto">
+    <section id="skills" className="py-20 px-6 bg-[#0D0D10]">
+      <div className="max-w-5xl mx-auto space-y-10">
         <SectionReveal>
-          <ModuleHeader
-            moduleLabel={t('module_skills')}
-            subtitle={t('skills_subtitle')}
-            title={t('skills_title')}
-          />
-        </SectionReveal>
+          <HudFrame label="SKILL_MATRIX" status="SYNCED">
+            <div className="text-xs font-mono text-cyan-400 mb-1 tracking-widest uppercase">
+              [{t('skills_subtitle')}]
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold font-display text-[#EDEDED] mb-8">
+              {t('skills_title')}
+            </h2>
 
-        <div className="space-y-8">
-          {categoryOrder.map((cat, catIdx) => {
-            const catSkills = skills.filter((s) => s.category === cat)
-            if (catSkills.length === 0) return null
-            return (
-              <SectionReveal key={cat} delay={catIdx * 80}>
-                <div>
-                  <h3 className="text-sm font-bold font-mono text-purple-400 mb-4 uppercase tracking-wider">
-                    // {categoryLabels[cat] || cat}
-                  </h3>
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    {catSkills.map((skill) => {
-                      const name =
-                        skill[`name_${locale}` as keyof SkillRecord] || skill.name_pt || ''
-                      const level = skill.level || 80
-                      return (
-                        <TechPanel key={skill.id} className="p-4 font-mono">
-                          <div className="flex justify-between items-center text-xs mb-2">
-                            <span className="text-gray-200 font-bold">{name}</span>
-                            <span className="text-purple-400">{level}%</span>
-                          </div>
-                          <div className="h-2 bg-[#080808] border border-[#1a1a22] p-0.5 overflow-hidden">
-                            <div
-                              className="h-full bg-gradient-to-r from-purple-600 to-cyan-400 transition-all duration-1000"
-                              style={{ width: `${level}%` }}
-                            />
-                          </div>
-                        </TechPanel>
-                      )
-                    })}
+            {/* Skills grid display */}
+            <div className="grid md:grid-cols-2 gap-6">
+              {skills.map((skill) => (
+                <div
+                  key={skill.id}
+                  className="bg-[#111114] border border-[#2a2a35] p-4 space-y-2 hover:border-cyan-500/40 transition-colors"
+                >
+                  <div className="flex justify-between items-center text-xs font-mono">
+                    <span className="text-gray-200 font-bold">
+                      {skill.name_pt || skill.name_en}
+                    </span>
+                    <span className="text-cyan-400 font-semibold">{skill.level}%</span>
+                  </div>
+                  <div className="h-2 w-full bg-[#080808] border border-[#2a2a35] p-0.5">
+                    <div
+                      className="h-full bg-gradient-to-r from-purple-600 to-cyan-400 transition-all duration-500"
+                      style={{ width: `${skill.level}%` }}
+                    />
                   </div>
                 </div>
-              </SectionReveal>
-            )
-          })}
-        </div>
+              ))}
+            </div>
+          </HudFrame>
+        </SectionReveal>
       </div>
     </section>
   )

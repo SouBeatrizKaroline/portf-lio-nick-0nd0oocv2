@@ -1,27 +1,44 @@
 import { ReactNode } from 'react'
+import { cn } from '@/lib/utils'
 
 interface HudFrameProps {
   children: ReactNode
-  label?: string
   className?: string
+  label?: string
+  status?: string
 }
 
-export function HudFrame({ children, label, className = '' }: HudFrameProps) {
+export function HudFrame({
+  children,
+  className,
+  label = 'SYS_MODULE',
+  status = 'ACTIVE',
+}: HudFrameProps) {
   return (
     <div
-      className={`relative border border-[#1a1a22] bg-[#0B0B0F]/80 p-6 backdrop-blur-sm ${className}`}
-    >
-      <div className="absolute -top-px -left-px w-3 h-3 border-t border-l border-purple-500/60" />
-      <div className="absolute -top-px -right-px w-3 h-3 border-t border-r border-purple-500/60" />
-      <div className="absolute -bottom-px -left-px w-3 h-3 border-b border-l border-purple-500/60" />
-      <div className="absolute -bottom-px -right-px w-3 h-3 border-b border-r border-purple-500/60" />
-
-      {label && (
-        <div className="absolute -top-2.5 left-4 bg-[#080808] px-2 text-[10px] font-mono text-purple-400/80 tracking-widest border border-purple-900/40 uppercase">
-          [{label}]
-        </div>
+      className={cn(
+        'relative border border-[#2a2a35] bg-[#1A1A20]/90 backdrop-blur-md p-6 sm:p-8 hud-corners traveling-border shadow-[0_10px_30px_rgba(0,0,0,0.6)] transition-all duration-300 hover:border-cyan-500/40',
+        className,
       )}
+    >
+      {/* Sci-Fi Header Strip */}
+      <div className="flex items-center justify-between border-b border-[#2a2a35] pb-3 mb-6 text-[10px] font-mono text-gray-400">
+        <div className="flex items-center gap-2">
+          <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-ping" />
+          <span className="text-cyan-400 font-bold uppercase tracking-wider">[{label}]</span>
+        </div>
+        <div className="flex items-center gap-3 text-gray-500">
+          <span className="hidden sm:inline">LOC: 0x8F40</span>
+          <span className="text-emerald-400 font-semibold uppercase">[{status}]</span>
+        </div>
+      </div>
+
       {children}
+
+      {/* Sci-Fi Corner Decals & Coordinates */}
+      <div className="absolute bottom-1 right-2 text-[8px] font-mono text-gray-600 tracking-widest pointer-events-none">
+        COORD: 23.5505° S, 46.6333° W
+      </div>
     </div>
   )
 }

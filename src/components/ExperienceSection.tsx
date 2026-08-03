@@ -1,69 +1,65 @@
 import { useEffect, useState } from 'react'
 import { useLanguage } from '@/hooks/use-language'
 import { getExperience, ExperienceRecord } from '@/services/experience'
-import { PixelNick } from './PixelNick'
+import { HudFrame } from './HudFrame'
 import { SectionReveal } from './SectionReveal'
-import { ModuleHeader } from './ModuleHeader'
-import { TechPanel } from './TechPanel'
+import { Briefcase, Calendar } from 'lucide-react'
 
 export function ExperienceSection() {
-  const { locale, t } = useLanguage()
-  const [list, setList] = useState<ExperienceRecord[]>([])
+  const { t, locale } = useLanguage()
+  const [experiences, setExperience] = useState<ExperienceRecord[]>([])
 
   useEffect(() => {
     getExperience()
-      .then(setList)
+      .then(setExperience)
       .catch(() => {})
   }, [])
 
   return (
     <section id="experience" className="py-20 px-6 bg-[#080808]">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-5xl mx-auto space-y-10">
         <SectionReveal>
-          <div className="text-center mb-12 flex flex-col items-center justify-center">
-            <div className="mb-3">
-              <PixelNick pose="coding" scale={0.9} />
+          <HudFrame label="EXPERIENCE_LOG" status="ONLINE">
+            <div className="text-xs font-mono text-purple-400 mb-1 tracking-widest uppercase">
+              [{t('exp_subtitle')}]
             </div>
-            <ModuleHeader
-              moduleLabel={t('module_experience')}
-              subtitle={t('exp_subtitle')}
-              title={t('exp_title')}
-            />
-          </div>
-        </SectionReveal>
+            <h2 className="text-2xl sm:text-3xl font-bold font-display text-[#EDEDED] mb-8">
+              {t('exp_title')}
+            </h2>
 
-        <SectionReveal delay={100}>
-          <div className="grid gap-6">
-            {list.map((item) => {
-              const role = item[`role_${locale}` as keyof ExperienceRecord] || item.role_pt
-              const desc =
-                item[`description_${locale}` as keyof ExperienceRecord] || item.description_pt
-              return (
-                <TechPanel key={item.id} className="p-6">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-                    <div>
-                      <h3 className="text-lg font-bold font-display text-[#EDEDED]">{role}</h3>
-                      <div className="text-xs font-mono text-purple-400">{item.company}</div>
-                    </div>
-                    <span className="text-xs font-mono bg-[#141418] border border-[#1a1a22] px-2.5 py-1 text-cyan-400 self-start sm:self-auto">
-                      {item.period}
-                    </span>
-                  </div>
-                  <p className="text-sm text-gray-300 mb-4 leading-relaxed">{desc}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {item.tags?.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[11px] font-mono bg-[#141418] border border-purple-900/40 text-purple-300 px-2 py-0.5"
-                      >
-                        #{tag}
+            <div className="space-y-6">
+              {experiences.map((exp) => {
+                const role =
+                  locale === 'pt' ? exp.role_pt : locale === 'es' ? exp.role_es : exp.role_en
+                const desc =
+                  locale === 'pt'
+                    ? exp.description_pt
+                    : locale === 'es'
+                      ? exp.description_es
+                      : exp.description_en
+
+                return (
+                  <div
+                    key={exp.id}
+                    className="bg-[#111114] border border-[#2a2a35] p-6 space-y-3 hover:border-cyan-500/40 transition-colors"
+                  >
+                    <div className="flex flex-wrap justify-between items-center text-xs font-mono text-cyan-400">
+                      <span className="font-bold text-sm text-[#EDEDED]">{role}</span>
+                      <span className="text-gray-400 flex items-center gap-1">
+                        <Calendar className="w-3.5 h-3.5 text-purple-400" />
+                        {exp.period}
                       </span>
-                    ))}
+                    </div>
+
+                    <div className="text-xs font-mono text-purple-300 font-semibold">
+                      {exp.company}
+                    </div>
+                    <p className="text-xs text-gray-300 font-sans leading-relaxed">{desc}</p>
                   </div>
-                </TechPanel>
-              )
-            })}
-          </div>
+                )
+              })}
+            </div>
+          </HudFrame>
         </SectionReveal>
       </div>
     </section>

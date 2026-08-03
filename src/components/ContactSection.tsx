@@ -1,119 +1,121 @@
 import { useState } from 'react'
 import { useLanguage } from '@/hooks/use-language'
-import { useAchievements } from '@/hooks/use-achievements'
 import { sendContactMessage } from '@/services/contact'
 import { HudFrame } from './HudFrame'
 import { SectionReveal } from './SectionReveal'
-import { Mail, Send, MessageCircle } from 'lucide-react'
+import { Terminal, Send, CheckCircle2, AlertCircle } from 'lucide-react'
 
 export function ContactSection() {
   const { t } = useLanguage()
-  const { unlockAchievement } = useAchievements()
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
   const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
+  const [sent, setSent] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!formData.name || !formData.email || !formData.message) return
     setLoading(true)
+    setError(null)
+
     try {
-      await sendContactMessage(formData)
-      setSuccess(true)
-      setFormData({ name: '', email: '', subject: '', message: '' })
-      unlockAchievement('contact_sent', t('ach_title'), t('ach_msg_desc'))
-    } catch {
-      alert('Error sending message. Please try again.')
+      await sendContactMessage(form)
+      setSent(true)
+      setForm({ name: '', email: '', subject: '', message: '' })
+    } catch (err) {
+      setError('Transmission failed. Please try again.')
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <section id="contact" className="py-20 px-6 bg-[#0B0B0F]">
+    <section id="contact" className="py-20 px-6 bg-[#080808]">
       <div className="max-w-4xl mx-auto">
         <SectionReveal>
-          <HudFrame label="COMMUNICATION_LINK" className="p-8 sm:p-10">
-            <div className="text-[10px] font-mono text-cyan-400/50 tracking-[0.3em] uppercase mb-1">
-              {t('module_contact')}
-            </div>
-            <div className="text-xs font-mono text-purple-400 tracking-widest uppercase mb-1">
+          <HudFrame label="COMMUNICATION_TERMINAL" status="ONLINE">
+            <div className="text-xs font-mono text-cyan-400 mb-1 tracking-widest uppercase">
               [{t('contact_subtitle')}]
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold font-display text-[#EDEDED] mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold font-display text-[#EDEDED] mb-4">
               {t('contact_title')}
             </h2>
+            <p className="text-xs text-gray-300 font-mono mb-8">{t('contact_intro')}</p>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="space-y-4 font-mono text-xs text-gray-300">
-                <p className="text-sm leading-relaxed">{t('contact_intro')}</p>
-                <div className="p-4 bg-[#101014] border border-[#1a1a22] space-y-3">
-                  <a
-                    href="mailto:nicolemairaplsilva@gmail.com"
-                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors"
-                  >
-                    <Mail className="w-4 h-4" />
-                    <span>nicolemairaplsilva@gmail.com</span>
-                  </a>
-                  <a
-                    href="https://wa.me/5571985304202"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-2 text-green-400 hover:text-green-300 transition-colors"
-                  >
-                    <MessageCircle className="w-4 h-4" />
-                    <span>{t('contact_whatsapp')}: +55 71 98530-4202</span>
-                  </a>
-                  <div className="text-gray-500">{t('contact_location')}</div>
-                </div>
+            {sent ? (
+              <div className="bg-emerald-950/40 border border-emerald-500/50 p-6 text-center space-y-3 font-mono">
+                <CheckCircle2 className="w-8 h-8 text-emerald-400 mx-auto" />
+                <div className="text-emerald-400 font-bold text-sm">{t('contact_success')}</div>
+                <button
+                  onClick={() => setSent(false)}
+                  className="text-xs text-cyan-400 underline pt-2"
+                >
+                  Send another transmission
+                </button>
               </div>
-
-              <form onSubmit={handleSubmit} className="space-y-4 font-mono text-xs">
-                {success && (
-                  <div className="p-3 bg-green-950/40 border border-green-500/50 text-green-400 font-bold">
-                    {t('contact_success')}
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4 font-mono">
+                {error && (
+                  <div className="flex items-center gap-2 bg-rose-950/40 border border-rose-500/50 p-3 text-xs text-rose-300">
+                    <AlertCircle className="w-4 h-4" />
+                    <span>{error}</span>
                   </div>
                 )}
-                <div>
-                  <label className="block text-gray-400 mb-1">{t('contact_name')} *</label>
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-xs text-gray-400">{t('contact_name')} *</label>
+                    <input
+                      type="text"
+                      required
+                      value={form.name}
+                      onChange={(e) => setForm({ ...form, name: e.target.value })}
+                      className="w-full bg-[#111114] border border-[#2a2a35] px-3 py-2 text-xs text-[#EDEDED] focus:border-cyan-400 focus:outline-none"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-xs text-gray-400">{t('contact_email')} *</label>
+                    <input
+                      type="email"
+                      required
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      className="w-full bg-[#111114] border border-[#2a2a35] px-3 py-2 text-xs text-[#EDEDED] focus:border-cyan-400 focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs text-gray-400">{t('contact_subject')}</label>
                   <input
                     type="text"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-[#101014] border border-[#1a1a22] p-2 text-[#EDEDED] focus:outline-none focus:border-purple-500 transition-colors"
+                    value={form.subject}
+                    onChange={(e) => setForm({ ...form, subject: e.target.value })}
+                    className="w-full bg-[#111114] border border-[#2a2a35] px-3 py-2 text-xs text-[#EDEDED] focus:border-cyan-400 focus:outline-none"
                   />
                 </div>
-                <div>
-                  <label className="block text-gray-400 mb-1">{t('contact_email')} *</label>
-                  <input
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-[#101014] border border-[#1a1a22] p-2 text-[#EDEDED] focus:outline-none focus:border-purple-500 transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-400 mb-1">{t('contact_msg')} *</label>
+
+                <div className="space-y-1">
+                  <label className="text-xs text-gray-400">{t('contact_msg')} *</label>
                   <textarea
                     required
                     rows={4}
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full bg-[#101014] border border-[#1a1a22] p-2 text-[#EDEDED] focus:outline-none focus:border-purple-500 resize-none transition-colors"
+                    value={form.message}
+                    onChange={(e) => setForm({ ...form, message: e.target.value })}
+                    className="w-full bg-[#111114] border border-[#2a2a35] px-3 py-2 text-xs text-[#EDEDED] focus:border-cyan-400 focus:outline-none"
                   />
                 </div>
+
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-purple-600 hover:bg-purple-500 text-[#EDEDED] font-bold p-2.5 transition-all flex items-center justify-center gap-2"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-[#EDEDED] font-bold py-3 text-xs uppercase tracking-wider border border-purple-400/40 transition-all shadow-[0_0_15px_rgba(168,85,247,0.3)] disabled:opacity-50"
                 >
-                  <Send className="w-4 h-4" />
-                  {loading ? 'SENDING...' : t('contact_send')}
+                  <Send className="w-3.5 h-3.5" />
+                  {loading ? 'TRANSMITTING...' : t('contact_send')}
                 </button>
               </form>
-            </div>
+            )}
           </HudFrame>
         </SectionReveal>
       </div>

@@ -2,121 +2,87 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useLanguage } from '@/hooks/use-language'
 import { getProjects, ProjectRecord } from '@/services/projects'
-import { useRealtime } from '@/hooks/use-realtime'
-import { SectionReveal } from './SectionReveal'
-import { ModuleHeader } from './ModuleHeader'
+import { getItchGames, ItchGameRecord } from '@/services/itch-games'
+import { HudFrame } from './HudFrame'
 import { TechPanel } from './TechPanel'
+import { SectionReveal } from './SectionReveal'
+import { Gamepad2, ExternalLink, Code2, ArrowRight } from 'lucide-react'
 
 export function ProjectsSection() {
-  const { locale, t } = useLanguage()
+  const { t, locale } = useLanguage()
   const [projects, setProjects] = useState<ProjectRecord[]>([])
-  const [filter, setFilter] = useState<string>('all')
+  const [itchGames, setItchGames] = useState<ItchGameRecord[]>([])
 
-  const loadData = () => {
+  useEffect(() => {
     getProjects()
       .then(setProjects)
       .catch(() => {})
-  }
-
-  useEffect(() => {
-    loadData()
+    getItchGames()
+      .then(setItchGames)
+      .catch(() => {})
   }, [])
 
-  useRealtime('projects', () => {
-    loadData()
-  })
-
-  const filtered = filter === 'all' ? projects : projects.filter((p) => p.category === filter)
-
   return (
-    <section id="projects" className="py-20 px-6 bg-[#0B0B0F]">
-      <div className="max-w-5xl mx-auto">
+    <section id="projects" className="py-20 px-6 bg-[#080808]">
+      <div className="max-w-5xl mx-auto space-y-10">
         <SectionReveal>
-          <ModuleHeader
-            moduleLabel={t('module_archive')}
-            subtitle={t('projects_subtitle')}
-            title={t('projects_title')}
-          />
-        </SectionReveal>
+          <HudFrame label="MISSION_ARCHIVE" status="ACTIVE">
+            <div className="text-xs font-mono text-purple-400 mb-1 tracking-widest uppercase">
+              [{t('projects_subtitle')}]
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold font-display text-[#EDEDED] mb-8">
+              {t('projects_title')}
+            </h2>
 
-        <SectionReveal delay={100}>
-          <div className="flex justify-center gap-2 font-mono text-xs mb-8">
-            {[
-              { id: 'all', label: t('projects_all') },
-              { id: 'game', label: t('projects_games') },
-              { id: 'backend', label: t('projects_backend') },
-              { id: 'tool', label: t('projects_tools') },
-            ].map((btn) => (
-              <button
-                key={btn.id}
-                onClick={() => setFilter(btn.id)}
-                className={`px-3 py-1.5 border transition-all uppercase ${
-                  filter === btn.id
-                    ? 'border-purple-500 bg-purple-950/40 text-purple-300 font-bold'
-                    : 'border-[#1a1a22] bg-[#101014] text-gray-400 hover:text-[#EDEDED]'
-                }`}
-              >
-                {btn.label}
-              </button>
-            ))}
-          </div>
-        </SectionReveal>
+            {/* Projects List Grid */}
+            <div className="grid md:grid-cols-2 gap-6">
+              {projects.map((proj) => {
+                const title =
+                  locale === 'pt' ? proj.title_pt : locale === 'es' ? proj.title_es : proj.title_en
+                const sub =
+                  locale === 'pt'
+                    ? proj.subtitle_pt
+                    : locale === 'es'
+                      ? proj.subtitle_es
+                      : proj.subtitle_en
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {filtered.map((proj, idx) => {
-            const title = proj[`title_${locale}` as keyof ProjectRecord] || proj.title_pt
-            const subtitle = proj[`subtitle_${locale}` as keyof ProjectRecord] || proj.subtitle_pt
-            const desc = proj[`description_${locale}` as keyof ProjectRecord] || proj.description_pt
-            return (
-              <SectionReveal key={proj.id} delay={idx * 80}>
-                <TechPanel className="flex flex-col justify-between h-full">
-                  <div>
-                    <div className="aspect-video bg-[#141418] border-b border-[#1a1a22] overflow-hidden relative">
-                      <img
-                        src={
-                          proj.gallery?.[0] ||
-                          'https://img.usecurling.com/p/800/450?q=game%20development&color=purple'
-                        }
-                        alt={title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <span className="absolute top-3 left-3 bg-[#080808]/80 border border-purple-500/40 text-purple-300 text-[10px] font-mono px-2 py-0.5 uppercase">
-                        [{proj.category}]
-                      </span>
-                    </div>
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold font-display text-[#EDEDED] mb-1">
-                        {title}
-                      </h3>
-                      <div className="text-xs font-mono text-cyan-400 mb-3">{subtitle}</div>
-                      <p className="text-sm text-gray-300 mb-4 line-clamp-3 leading-relaxed">
-                        {desc}
-                      </p>
-                      <div className="flex flex-wrap gap-1.5 mb-4">
-                        {proj.tech?.map((tech) => (
-                          <span
-                            key={tech}
-                            className="text-[10px] font-mono bg-[#141418] border border-[#1a1a22] text-gray-400 px-2 py-0.5"
-                          >
-                            {tech}
-                          </span>
-                        ))}
+                return (
+                  <TechPanel key={proj.id} className="p-6 flex flex-col justify-between space-y-4">
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between text-[10px] font-mono text-cyan-400">
+                        <span>[CATEGORY: {proj.category.toUpperCase()}]</span>
+                        <span>ORDER #{proj.order || 1}</span>
                       </div>
+                      <h3 className="text-lg font-bold font-display text-[#EDEDED]">{title}</h3>
+                      <p className="text-xs text-gray-400 font-sans line-clamp-2">{sub}</p>
                     </div>
-                  </div>
-                  <div className="p-6 pt-0">
-                    <Link
-                      to={`/project/${proj.slug}`}
-                      className="inline-block text-xs font-mono text-purple-400 font-bold hover:text-purple-300 transition-colors"
-                    >
-                      {t('projects_view')}
-                    </Link>
-                  </div>
-                </TechPanel>
-              </SectionReveal>
-            )
-          })}
-        </div>
+
+                    <div className="pt-2 flex items-center justify-between">
+                      <Link
+                        to={`/project/${proj.slug}`}
+                        className="inline-flex items-center gap-1.5 text-xs font-mono text-cyan-400 hover:text-cyan-300 font-bold"
+                      >
+                        {t('projects_view')}
+                      </Link>
+
+                      {proj.itch_url && (
+                        <a
+                          href={proj.itch_url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="p-1.5 text-gray-400 hover:text-purple-400 transition-colors"
+                          title="Play on Itch.io"
+                        >
+                          <Gamepad2 className="w-4 h-4" />
+                        </a>
+                      )}
+                    </div>
+                  </TechPanel>
+                )
+              })}
+            </div>
+          </HudFrame>
+        </SectionReveal>
       </div>
     </section>
   )
