@@ -1,12 +1,33 @@
-/* Home Page - Replace this page layout, components, content, behavior with what you want and translate to the language of the user */
-const Index = () => {
+import { HeroSection } from '@/components/HeroSection'
+import { AboutSection } from '@/components/AboutSection'
+import { TimelineSection } from '@/components/TimelineSection'
+import { ExperienceSection } from '@/components/ExperienceSection'
+import { SkillTreeSection } from '@/components/SkillTreeSection'
+import { ProjectsSection } from '@/components/ProjectsSection'
+import { GameSystemsSection } from '@/components/GameSystemsSection'
+import { GameJamsSection } from '@/components/GameJamsSection'
+import { CertificatesSection } from '@/components/CertificatesSection'
+import { TechTreeSection } from '@/components/TechTreeSection'
+import { GithubSection } from '@/components/GithubSection'
+import { ItchSection } from '@/components/ItchSection'
+import { ContactSection } from '@/components/ContactSection'
+
+export default function Index() {
   return (
-    <div className="container mx-auto py-8 px-4">
-      <h1 className="text-3xl font-bold mb-6">
-        This is a example page ready to be rewritten with your own content
-      </h1>
+    <div>
+      <HeroSection />
+      <AboutSection />
+      <TimelineSection />
+      <ExperienceSection />
+      <SkillTreeSection />
+      <ProjectsSection />
+      <GameSystemsSection />
+      <GameJamsSection />
+      <CertificatesSection />
+      <TechTreeSection />
+      <GithubSection />
+      <ItchSection />
+      <ContactSection />
     </div>
   )
 }
-
-export default Index
