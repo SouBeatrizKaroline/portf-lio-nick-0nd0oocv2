@@ -26,6 +26,30 @@
     --input: 240 5% 15%;
     --ring: 263.4 70% 50.4%;
     --radius: 0.25rem;
+
+    --ds-surface: #080808;
+    --ds-surface-elevated: #111114;
+    --ds-surface-card: #1a1a20;
+    --ds-border: #2a2a35;
+    --ds-border-subtle: #1a1a22;
+    --ds-text-primary: #ededed;
+    --ds-text-secondary: #9ca3af;
+    --ds-text-muted: #6b7280;
+    --ds-cyan: #00f0ff;
+    --ds-purple: #a855f7;
+    --ds-emerald: #10b981;
+    --ds-rose: #f43f5e;
+    --ds-yellow: #ccff00;
+    --ds-spacing-xs: 0.25rem;
+    --ds-spacing-sm: 0.5rem;
+    --ds-spacing-md: 1rem;
+    --ds-spacing-lg: 1.5rem;
+    --ds-spacing-xl: 2.5rem;
+    --ds-shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4);
+    --ds-shadow-elevated: 0 10px 40px rgba(0, 0, 0, 0.6);
+    --ds-transition-fast: 150ms ease;
+    --ds-transition-base: 300ms ease;
+    --ds-transition-slow: 500ms ease;
   }
 
   html {

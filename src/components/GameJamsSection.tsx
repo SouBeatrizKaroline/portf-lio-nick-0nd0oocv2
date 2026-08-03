@@ -4,6 +4,7 @@ import { getGameJams, GameJamRecord } from '@/services/game-jams'
 import { SectionReveal } from './SectionReveal'
 import { ModuleHeader } from './ModuleHeader'
 import { TechPanel } from './TechPanel'
+import { LazyImage } from './LazyImage'
 import { PixelCoin } from './PixelDetails'
 
 export function GameJamsSection() {
@@ -36,14 +37,14 @@ export function GameJamsSection() {
               const desc = jam[`description_${locale}` as keyof GameJamRecord] || jam.description_pt
               return (
                 <TechPanel key={jam.id} className="p-5">
-                  <img
+                  <LazyImage
                     src={
                       jam.images?.[0] ||
                       'https://img.usecurling.com/p/600/350?q=pixel%20game%20jam&color=purple'
                     }
-                    alt={jam.title}
-                    loading="lazy"
-                    className="w-full h-40 object-cover border border-[#1a1a22] mb-4"
+                    alt={jam.title || 'Game jam project'}
+                    className="border border-[#1a1a22] mb-4"
+                    aspectRatio="3/2"
                   />
                   <div className="text-xs font-mono text-cyan-400 font-bold mb-1 flex items-center gap-1">
                     [{jam.year}] <PixelCoin className="opacity-60" />

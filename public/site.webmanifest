@@ -1,0 +1,16 @@
+{
+  "name": "Nick (Nicole Maira) — Game Developer Portfolio",
+  "short_name": "Nick Portfolio",
+  "description": "Game Developer & Gameplay Programmer specializing in Unity, C#, and gameplay systems.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#080808",
+  "icons": [
+    {
+      "src": "/og-image.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

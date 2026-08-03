@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-03T23:13:38.987Z",
+  "generatedAt": "2026-08-03T23:24:18.065Z",
   "collections": [
     {
       "name": "users",
@@ -207,6 +207,102 @@
           "required": false,
           "system": false,
           "autodateTriggers": ["onCreate", "onUpdate"]
+        },
+        {
+          "name": "problem_pt",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "problem_en",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "problem_es",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "solution_pt",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "solution_en",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "solution_es",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "project_role_pt",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "project_role_en",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "project_role_es",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "impact_pt",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "impact_en",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "impact_es",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "awards",
+          "type": "json",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "client",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "duration",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "team_size",
+          "type": "text",
+          "required": false,
+          "system": false
         }
       ],
       "indexes": [

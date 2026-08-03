@@ -1,73 +1,90 @@
+import { useState } from 'react'
 import { useLanguage } from '@/hooks/use-language'
+import { sendContactMessage } from '@/services/contact'
+import { extractFieldErrors, type FieldErrors } from '@/lib/pocketbase/errors'
 import { HudFrame } from './HudFrame'
 import { SectionReveal } from './SectionReveal'
 import { CyberMicroDetails } from './CyberMicroDetails'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Button } from '@/components/ui/button'
 import {
-  ExternalLink,
   Github,
   Gamepad2,
   Linkedin,
   Mail,
   MessageSquare,
+  Send,
   Terminal,
-  Wifi,
+  CheckCircle2,
+  AlertCircle,
 } from 'lucide-react'
 
 export function ContactSection() {
-  const { t } = useLanguage()
+  const { t, locale } = useLanguage()
+  const [submitting, setSubmitting] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({})
+  const [formError, setFormError] = useState('')
 
-  const connectionLinks = [
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setSubmitting(true)
+    setFieldErrors({})
+    setFormError('')
+
+    const formData = new FormData(e.currentTarget)
+    const data = {
+      name: (formData.get('name') as string)?.trim() || '',
+      email: (formData.get('email') as string)?.trim() || '',
+      subject: (formData.get('subject') as string)?.trim() || '',
+      message: (formData.get('message') as string)?.trim() || '',
+    }
+
+    try {
+      await sendContactMessage(data)
+      setSuccess(true)
+      e.currentTarget.reset()
+      setTimeout(() => setSuccess(false), 5000)
+    } catch (err) {
+      setFieldErrors(extractFieldErrors(err))
+      setFormError('Failed to send message. Please try again.')
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  const quickLinks = [
     {
       platform: 'Itch.io',
-      desc: 'Playable Games',
-      cmd: 'open itch.io/nick',
-      status: 'EXPLORE_GAMES',
-      statusColor:
-        'text-rose-300 border-rose-500/60 bg-rose-950/40 shadow-[0_0_12px_rgba(244,63,94,0.3)]',
-      hoverGlow: 'hover:border-rose-400 hover:shadow-[0_0_20px_rgba(244,63,94,0.3)]',
       url: 'https://pls-nick.itch.io/',
       icon: Gamepad2,
-      featured: true,
+      color: 'text-rose-400 hover:border-rose-400 hover:shadow-[0_0_15px_rgba(244,63,94,0.2)]',
     },
     {
       platform: 'GitHub',
-      desc: 'Source Repositories',
-      cmd: 'connect github.com/NicolePLSilva',
-      status: 'ACTIVE_CODE',
-      statusColor: 'text-cyan-400 border-cyan-500/40 bg-cyan-950/30',
-      hoverGlow: 'hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(0,240,255,0.3)]',
       url: 'https://github.com/NicolePLSilva',
       icon: Github,
+      color: 'text-cyan-400 hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]',
     },
     {
       platform: 'LinkedIn',
-      desc: 'Professional Profile',
-      cmd: 'connect linkedin.com/nicole-maira',
-      status: 'AVAILABLE',
-      statusColor: 'text-blue-400 border-blue-500/40 bg-blue-950/30',
-      hoverGlow: 'hover:border-blue-400 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)]',
       url: 'https://www.linkedin.com/in/nicole-maira/',
       icon: Linkedin,
+      color: 'text-blue-400 hover:border-blue-400 hover:shadow-[0_0_15px_rgba(59,130,246,0.2)]',
     },
     {
       platform: 'WhatsApp',
-      desc: 'Direct Message',
-      cmd: 'dial +55 71 98530-4202',
-      status: '+55 71 98530-4202',
-      statusColor: 'text-emerald-400 border-emerald-500/40 bg-emerald-950/30',
-      hoverGlow: 'hover:border-emerald-400 hover:shadow-[0_0_15px_rgba(16,185,129,0.3)]',
       url: 'https://wa.me/5571985304202',
       icon: MessageSquare,
+      color:
+        'text-emerald-400 hover:border-emerald-400 hover:shadow-[0_0_15px_rgba(16,185,129,0.2)]',
     },
     {
       platform: 'Email',
-      desc: 'Direct Contact',
-      cmd: 'send nicolemairaplsilva@gmail.com',
-      status: 'nicolemairaplsilva@gmail.com',
-      statusColor: 'text-purple-400 border-purple-500/40 bg-purple-950/30',
-      hoverGlow: 'hover:border-purple-400 hover:shadow-[0_0_15px_rgba(168,85,247,0.3)]',
       url: 'mailto:nicolemairaplsilva@gmail.com',
       icon: Mail,
+      color: 'text-purple-400 hover:border-purple-400 hover:shadow-[0_0_15px_rgba(168,85,247,0.2)]',
     },
   ]
 
@@ -76,40 +93,24 @@ export function ContactSection() {
       <div className="max-w-4xl mx-auto">
         <SectionReveal>
           <HudFrame label="SYSTEM_CONNECTION // TERMINAL_NODE" status="ONLINE">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-              <div>
-                <div className="text-xs font-mono text-cyan-400 mb-1 tracking-widest uppercase">
-                  [DIRECT PLATFORM LINK PROTOCOL]
-                </div>
-                <h2 className="text-2xl sm:text-3xl font-bold font-display text-[#EDEDED]">
-                  {t('contact_connection_title')}
-                </h2>
+            <div className="text-center mb-8">
+              <div className="text-xs font-mono text-cyan-400 mb-2 tracking-widest uppercase">
+                [DIRECT PLATFORM LINK PROTOCOL]
               </div>
-
-              <div className="flex items-center gap-2 font-mono text-[10px] text-emerald-400 bg-emerald-950/40 border border-emerald-500/30 px-3 py-1">
-                <Terminal className="w-3.5 h-3.5" />
-                <span>TERMINAL_STATUS: READY</span>
-              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold font-display text-[#EDEDED] mb-3 title-glow">
+                {t('contact_connection_title')}
+              </h2>
+              <p className="text-sm text-gray-400 font-sans max-w-xl mx-auto">
+                {locale === 'pt'
+                  ? 'Vamos construir algo juntos? Estou disponível para oportunidades, colaborações e projetos.'
+                  : locale === 'es'
+                    ? '¿Construimos algo juntos? Disponible para oportunidades, colaboraciones y proyectos.'
+                    : "Let's build something together? Available for opportunities, collaborations, and projects."}
+              </p>
             </div>
 
-            <div className="bg-[#0C0C10] border border-[#1a1a22] p-4 mb-6 font-mono text-xs space-y-1">
-              <div className="text-gray-500">
-                <span className="text-emerald-400">●</span> CONNECTION_TERMINAL v3.0
-              </div>
-              <div className="text-gray-600">
-                <span className="text-cyan-400">{t('contact_terminal_prompt')}</span>{' '}
-                <span className="text-gray-300">initialize --channels</span>
-              </div>
-              <div className="text-purple-400/70">
-                {'> '} Scanning available communication nodes...
-              </div>
-              <div className="text-emerald-400/70 flex items-center gap-1">
-                {'> '} <Wifi className="w-3 h-3" /> 5 nodes detected. CAT_CORE monitoring.
-              </div>
-            </div>
-
-            <div className="space-y-2.5 font-mono text-xs">
-              {connectionLinks.map((item) => {
+            <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
+              {quickLinks.map((item) => {
                 const Icon = item.icon
                 return (
                   <a
@@ -117,47 +118,171 @@ export function ContactSection() {
                     href={item.url}
                     target={item.url.startsWith('mailto:') ? '_self' : '_blank'}
                     rel="noreferrer"
-                    aria-label={`${item.platform} - ${item.desc}`}
-                    className={`flex items-center justify-between p-3.5 bg-[#101015] border border-[#262635] transition-all group touch-min ${
-                      item.featured ? 'bg-[#14121d] border-rose-500/40' : ''
-                    } ${item.hoverGlow}`}
+                    aria-label={item.platform}
+                    className={`flex items-center gap-2 px-4 py-2.5 bg-[#101015] border border-[#262635] transition-all group touch-min ${item.color}`}
                   >
-                    <div className="flex items-center gap-3 min-w-0 flex-1">
-                      <Icon
-                        className={`w-4 h-4 shrink-0 ${item.featured ? 'text-rose-400' : 'text-cyan-400'}`}
-                      />
-                      <div className="min-w-0 flex-1">
-                        <div className="text-[#EDEDED] group-hover:text-cyan-300 font-bold flex items-baseline gap-2">
-                          <span>{item.platform}</span>
-                          <span className="text-gray-600 font-normal text-[10px]">
-                            // {item.desc}
-                          </span>
-                        </div>
-                        <div className="text-gray-600 text-[10px] truncate">
-                          <span className="text-purple-500/50">$</span> {item.cmd}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2 shrink-0 ml-2">
-                      <span
-                        className={`hidden sm:inline-block px-2.5 py-1 border text-[9px] font-bold uppercase ${item.statusColor}`}
-                      >
-                        {item.status}
-                      </span>
-                      <ExternalLink className="w-3.5 h-3.5 text-gray-500 group-hover:text-cyan-400 transition-colors" />
-                    </div>
+                    <Icon className="w-4 h-4" />
+                    <span className="font-mono text-xs font-bold">{item.platform}</span>
                   </a>
                 )
               })}
             </div>
 
-            <div className="mt-6 bg-[#0C0C10] border border-[#1a1a22] p-3 font-mono text-[10px] text-gray-500 flex items-center justify-between">
-              <span>
-                <span className="text-emerald-400">●</span> All channels operational.{' '}
-                <span className="text-purple-400/60">CAT_CORE: PURRFORMANCE OPTIMAL</span>
-              </span>
-              <span className="text-cyan-400/40">ENC: AES-256 // SECURE</span>
+            <div className="grid md:grid-cols-5 gap-6">
+              <div className="md:col-span-2 flex flex-col justify-between space-y-4">
+                <div className="bg-[#0C0C10] border border-[#1a1a22] p-4 font-mono text-xs space-y-1">
+                  <div className="text-gray-500">
+                    <span className="text-emerald-400">●</span> CONNECTION_TERMINAL v3.0
+                  </div>
+                  <div className="text-gray-600">
+                    <span className="text-cyan-400">{t('contact_terminal_prompt')}</span>{' '}
+                    <span className="text-gray-300">initialize --channels</span>
+                  </div>
+                  <div className="text-purple-400/70">{'> '} Scanning communication nodes...</div>
+                  <div className="text-emerald-400/70">
+                    {'> '} 5 channels detected. CAT_CORE monitoring.
+                  </div>
+                </div>
+
+                <div className="bg-[#0C0C10] border border-[#1a1a22] p-4 font-mono text-[10px] text-gray-500">
+                  <div className="flex items-center justify-between mb-2">
+                    <span>RESPONSE_TIME</span>
+                    <span className="text-emerald-400">&lt; 24h</span>
+                  </div>
+                  <div className="h-1 bg-[#1a1a22] rounded-full overflow-hidden">
+                    <div className="h-full w-[95%] bg-gradient-to-r from-emerald-500/50 to-emerald-300/50 rounded-full" />
+                  </div>
+                  <div className="flex items-center justify-between mt-3 mb-2">
+                    <span>AVAILABILITY</span>
+                    <span className="text-cyan-400">OPEN</span>
+                  </div>
+                  <div className="h-1 bg-[#1a1a22] rounded-full overflow-hidden">
+                    <div className="h-full w-[100%] bg-gradient-to-r from-cyan-500/50 to-cyan-300/50 rounded-full" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="md:col-span-3">
+                <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label
+                        htmlFor="contact-name"
+                        className="block text-[10px] font-mono text-gray-400 uppercase tracking-wider mb-1.5"
+                      >
+                        Name *
+                      </label>
+                      <Input
+                        id="contact-name"
+                        name="name"
+                        required
+                        placeholder="Your name"
+                        className="bg-[#0C0C10] border-[#1a1a22] text-[#EDEDED] font-mono text-sm focus:border-cyan-500/50"
+                      />
+                      {fieldErrors.name && (
+                        <p className="text-[10px] text-red-400 mt-1 font-mono">
+                          {fieldErrors.name}
+                        </p>
+                      )}
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="contact-email"
+                        className="block text-[10px] font-mono text-gray-400 uppercase tracking-wider mb-1.5"
+                      >
+                        Email *
+                      </label>
+                      <Input
+                        id="contact-email"
+                        name="email"
+                        type="email"
+                        required
+                        placeholder="your@email.com"
+                        className="bg-[#0C0C10] border-[#1a1a22] text-[#EDEDED] font-mono text-sm focus:border-cyan-500/50"
+                      />
+                      {fieldErrors.email && (
+                        <p className="text-[10px] text-red-400 mt-1 font-mono">
+                          {fieldErrors.email}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="contact-subject"
+                      className="block text-[10px] font-mono text-gray-400 uppercase tracking-wider mb-1.5"
+                    >
+                      Subject
+                    </label>
+                    <Input
+                      id="contact-subject"
+                      name="subject"
+                      placeholder="What's this about?"
+                      className="bg-[#0C0C10] border-[#1a1a22] text-[#EDEDED] font-mono text-sm focus:border-cyan-500/50"
+                    />
+                    {fieldErrors.subject && (
+                      <p className="text-[10px] text-red-400 mt-1 font-mono">
+                        {fieldErrors.subject}
+                      </p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="contact-message"
+                      className="block text-[10px] font-mono text-gray-400 uppercase tracking-wider mb-1.5"
+                    >
+                      Message *
+                    </label>
+                    <Textarea
+                      id="contact-message"
+                      name="message"
+                      required
+                      rows={4}
+                      placeholder="Tell me about your project, role, or collaboration..."
+                      className="bg-[#0C0C10] border-[#1a1a22] text-[#EDEDED] font-mono text-sm focus:border-cyan-500/50 resize-none"
+                    />
+                    {fieldErrors.message && (
+                      <p className="text-[10px] text-red-400 mt-1 font-mono">
+                        {fieldErrors.message}
+                      </p>
+                    )}
+                  </div>
+
+                  {formError && (
+                    <div className="flex items-center gap-2 text-xs font-mono text-red-400 bg-red-950/30 border border-red-500/30 px-3 py-2">
+                      <AlertCircle className="w-3.5 h-3.5" />
+                      {formError}
+                    </div>
+                  )}
+
+                  {success && (
+                    <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 bg-emerald-950/30 border border-emerald-500/30 px-3 py-2 animate-fade-in">
+                      <CheckCircle2 className="w-3.5 h-3.5" />
+                      Message sent successfully! I'll get back to you soon.
+                    </div>
+                  )}
+
+                  <Button
+                    type="submit"
+                    disabled={submitting}
+                    className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-[#EDEDED] font-bold font-mono text-xs border border-purple-400/60 shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all hover:scale-[1.02] disabled:opacity-50 disabled:hover:scale-100"
+                  >
+                    {submitting ? (
+                      <span className="flex items-center gap-2">
+                        <Terminal className="w-4 h-4 animate-pulse" />
+                        SENDING...
+                      </span>
+                    ) : (
+                      <span className="flex items-center gap-2">
+                        <Send className="w-4 h-4" />
+                        {t('contact_connect')}
+                      </span>
+                    )}
+                  </Button>
+                </form>
+              </div>
             </div>
           </HudFrame>
         </SectionReveal>
@@ -167,3 +292,7 @@ export function ContactSection() {
     </section>
   )
 }
+
+import { useLanguage as useLang } from '@/hooks/use-language'
+const { locale } = { locale: 'pt' as const }
+void useLang

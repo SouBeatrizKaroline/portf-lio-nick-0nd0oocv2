@@ -1,5 +1,4 @@
 import { AtmosphericBackground } from '@/components/AtmosphericBackground'
-import { CustomCursor } from '@/components/CustomCursor'
 import { HeroSection } from '@/components/HeroSection'
 import { AboutSection } from '@/components/AboutSection'
 import { TimelineSection } from '@/components/TimelineSection'
@@ -17,7 +16,6 @@ export default function Index() {
   return (
     <div className="relative min-h-screen bg-[#080808] text-[#EDEDED]">
       <AtmosphericBackground />
-      <CustomCursor />
 
       <div className="relative z-10 space-y-4">
         <HeroSection />

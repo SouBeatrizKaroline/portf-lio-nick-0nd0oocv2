@@ -6,6 +6,7 @@ import { getItchGames, getCoverUrl, ItchGameRecord } from '@/services/itch-games
 import { SectionReveal } from './SectionReveal'
 import { ModuleHeader } from './ModuleHeader'
 import { TechPanel } from './TechPanel'
+import { LazyImage } from './LazyImage'
 import { Play, ExternalLink, Gamepad2 } from 'lucide-react'
 
 export function ItchSection() {
@@ -45,12 +46,12 @@ export function ItchSection() {
             return (
               <SectionReveal key={game.id} delay={idx * 80}>
                 <TechPanel className="flex flex-col h-full group">
-                  <div className="aspect-video bg-[#141418] border-b border-[#1a1a22] overflow-hidden relative">
-                    <img
+                  <div className="aspect-video border-b border-[#1a1a22] overflow-hidden relative">
+                    <LazyImage
                       src={getCoverUrl(game, game.title || 'game')}
-                      alt={game.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      alt={game.title || 'Game cover'}
+                      aspectRatio="16/9"
+                      className="group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0F] via-transparent to-transparent opacity-60" />
                     <span className="absolute top-3 left-3 bg-[#080808]/80 border border-purple-500/40 text-purple-300 text-[10px] font-mono px-2 py-0.5 uppercase backdrop-blur-sm">

@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useLanguage } from '@/hooks/use-language'
-import { getProjects, ProjectRecord } from '@/services/projects'
+import { getProjects, getProjectCoverUrl, ProjectRecord } from '@/services/projects'
 import { HudFrame } from './HudFrame'
 import { TechPanel } from './TechPanel'
 import { SectionReveal } from './SectionReveal'
 import { CyberDecal } from './CyberDecals'
+import { LazyImage } from './LazyImage'
 import { Gamepad2, ExternalLink, Code2, ArrowRight, Sparkles } from 'lucide-react'
 
 export function ProjectsSection() {
@@ -49,77 +50,83 @@ export function ProjectsSection() {
                       : proj.subtitle_en
 
                 return (
-                  <TechPanel
-                    key={proj.id}
-                    className="p-6 flex flex-col justify-between space-y-4 group"
-                  >
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between text-[10px] font-mono text-cyan-400">
-                        <span className="px-2 py-0.5 bg-[#12121A] border border-cyan-500/30 uppercase font-bold">
-                          [FILE_TYPE: {proj.category.toUpperCase()}]
-                        </span>
-                        <span className="text-gray-500">SYS_ID: 0x0{proj.order || 1}</span>
+                  <TechPanel key={proj.id} className="flex flex-col group">
+                    <LazyImage
+                      src={getProjectCoverUrl(proj, title)}
+                      alt={title}
+                      aspectRatio="16/9"
+                      className="border-b border-[#1a1a22]"
+                      fallbackSrc={`https://img.usecurling.com/p/600/350?q=game%20development&color=purple`}
+                    />
+                    <div className="p-5 flex flex-col flex-1 justify-between space-y-4">
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between text-[10px] font-mono text-cyan-400">
+                          <span className="px-2 py-0.5 bg-[#12121A] border border-cyan-500/30 uppercase font-bold">
+                            [FILE_TYPE: {proj.category.toUpperCase()}]
+                          </span>
+                          <span className="text-gray-500">SYS_ID: 0x0{proj.order || 1}</span>
+                        </div>
+
+                        <h3 className="text-lg font-bold font-display text-[#EDEDED] group-hover:text-cyan-300 transition-colors flex items-center gap-2">
+                          <span>{title}</span>
+                          {proj.featured && (
+                            <Sparkles className="w-4 h-4 text-yellow-400 animate-pulse" />
+                          )}
+                        </h3>
+
+                        <p className="text-xs text-gray-300 font-sans leading-relaxed line-clamp-3">
+                          {sub}
+                        </p>
+
+                        {/* Tech Chips */}
+                        {proj.tech && Array.isArray(proj.tech) && (
+                          <div className="flex flex-wrap gap-1.5 pt-1">
+                            {proj.tech.map((tag: string) => (
+                              <span
+                                key={tag}
+                                className="text-[10px] font-mono bg-[#111116] border border-[#232330] text-purple-300 px-2 py-0.5"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
                       </div>
 
-                      <h3 className="text-xl font-bold font-display text-[#EDEDED] group-hover:text-cyan-300 transition-colors flex items-center gap-2">
-                        <span>{title}</span>
-                        {proj.featured && (
-                          <Sparkles className="w-4 h-4 text-yellow-400 animate-pulse" />
-                        )}
-                      </h3>
+                      <div className="pt-4 border-t border-[#232330] flex items-center justify-between font-mono text-xs">
+                        <Link
+                          to={`/project/${proj.slug}`}
+                          className="inline-flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 font-bold group/link"
+                        >
+                          <span>INSPECT MODULE</span>
+                          <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
+                        </Link>
 
-                      <p className="text-xs text-gray-300 font-sans leading-relaxed line-clamp-3">
-                        {sub}
-                      </p>
-
-                      {/* Tech Chips */}
-                      {proj.tech && Array.isArray(proj.tech) && (
-                        <div className="flex flex-wrap gap-1.5 pt-1">
-                          {proj.tech.map((tag: string) => (
-                            <span
-                              key={tag}
-                              className="text-[10px] font-mono bg-[#111116] border border-[#232330] text-purple-300 px-2 py-0.5"
+                        <div className="flex items-center gap-2">
+                          {proj.itch_url && (
+                            <a
+                              href={proj.itch_url}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="p-1.5 bg-purple-950/40 border border-purple-500/40 text-purple-300 hover:border-purple-400 hover:text-white transition-all"
+                              title="Play on Itch.io"
                             >
-                              {tag}
-                            </span>
-                          ))}
+                              <Gamepad2 className="w-4 h-4" />
+                            </a>
+                          )}
+
+                          {proj.github_url && (
+                            <a
+                              href={proj.github_url}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="p-1.5 bg-[#121218] border border-[#2a2a38] text-gray-300 hover:text-cyan-400 hover:border-cyan-500/40 transition-all"
+                              title="GitHub Source"
+                            >
+                              <Code2 className="w-4 h-4" />
+                            </a>
+                          )}
                         </div>
-                      )}
-                    </div>
-
-                    <div className="pt-4 border-t border-[#232330] flex items-center justify-between font-mono text-xs">
-                      <Link
-                        to={`/project/${proj.slug}`}
-                        className="inline-flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 font-bold group/link"
-                      >
-                        <span>INSPECT MODULE</span>
-                        <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
-                      </Link>
-
-                      <div className="flex items-center gap-2">
-                        {proj.itch_url && (
-                          <a
-                            href={proj.itch_url}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="p-1.5 bg-purple-950/40 border border-purple-500/40 text-purple-300 hover:border-purple-400 hover:text-white transition-all"
-                            title="Play on Itch.io"
-                          >
-                            <Gamepad2 className="w-4 h-4" />
-                          </a>
-                        )}
-
-                        {proj.github_url && (
-                          <a
-                            href={proj.github_url}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="p-1.5 bg-[#121218] border border-[#2a2a38] text-gray-300 hover:text-cyan-400 hover:border-cyan-500/40 transition-all"
-                            title="GitHub Source"
-                          >
-                            <Code2 className="w-4 h-4" />
-                          </a>
-                        )}
                       </div>
                     </div>
                   </TechPanel>

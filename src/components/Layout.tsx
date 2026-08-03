@@ -13,10 +13,12 @@ import { DigitalFootprints } from './DigitalFootprints'
 import { useKonami } from '@/hooks/use-konami'
 import { useAchievements } from '@/hooks/use-achievements'
 import { useLanguage } from '@/hooks/use-language'
+import { useReducedMotion } from '@/hooks/use-reduced-motion'
 
 export default function Layout() {
   const { t } = useLanguage()
   const { unlockAchievement } = useAchievements()
+  const reducedMotion = useReducedMotion()
   const [booting, setBooting] = useState(() => {
     return !sessionStorage.getItem('portfolio_booted')
   })
@@ -47,10 +49,10 @@ export default function Layout() {
     <div className="min-h-screen bg-[#080808] text-[#EDEDED] font-sans antialiased selection:bg-purple-500 selection:text-[#080808] relative">
       {booting && <BootScreen onComplete={handleBootComplete} />}
       <CustomCursor />
-      <CursorParticles />
-      <DigitalFootprints />
-      <HolographicCat />
-      <FloatingHudTexts />
+      {!reducedMotion && <CursorParticles />}
+      {!reducedMotion && <DigitalFootprints />}
+      {!reducedMotion && <HolographicCat />}
+      {!reducedMotion && <FloatingHudTexts />}
       <ScanlinesOverlay visible={scanlines} />
 
       <Navbar />

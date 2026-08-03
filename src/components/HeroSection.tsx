@@ -6,7 +6,7 @@ import { CyberMicroDetails } from './CyberMicroDetails'
 import { Terminal, Github, Gamepad2, Linkedin, Mail, MessageSquare } from 'lucide-react'
 
 export function HeroSection() {
-  const { t } = useLanguage()
+  const { t, locale } = useLanguage()
 
   return (
     <section
@@ -53,6 +53,26 @@ export function HeroSection() {
             {t('hero_desc') ||
               'Specialized in Unity, C#, State Machines, Physics & Combat Systems. Designing high-performance WebGL and Mobile experiences for gaming studios.'}
           </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-2 text-xs font-mono text-gray-400">
+            <span className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
+              {locale === 'pt'
+                ? 'Disponível para oportunidades'
+                : locale === 'es'
+                  ? 'Disponible para oportunidades'
+                  : 'Available for opportunities'}
+            </span>
+            <span className="text-gray-700 hidden sm:inline">|</span>
+            <span className="hidden sm:flex items-center gap-1.5">
+              <span className="text-cyan-400">⏱</span>
+              {locale === 'pt'
+                ? 'Resposta em até 24h'
+                : locale === 'es'
+                  ? 'Respuesta en 24h'
+                  : 'Response within 24h'}
+            </span>
+          </div>
         </div>
 
         <div className="flex flex-wrap justify-center gap-2 pt-2 text-xs font-mono">
