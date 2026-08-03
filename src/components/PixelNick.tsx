@@ -86,7 +86,7 @@ export function PixelNick({
             </linearGradient>
             <filter id="nickOutline" x="-10%" y="-10%" width="120%" height="120%">
               <feMorphology operator="dilate" radius="0.35" in="SourceAlpha" result="dilated" />
-              <feFlood flood-color="#0a0a0f" result="flood" />
+              <feFlood floodColor="#0a0a0f" result="flood" />
               <feComposite in="flood" in2="dilated" operator="in" result="outline" />
               <feMerge>
                 <feMergeNode in="outline" />
