@@ -170,7 +170,13 @@ migrate(
             maxSelect: 1,
           },
           { name: 'link', type: 'text' },
-          { name: 'image', type: 'file', maxSelect: 1 },
+          {
+            name: 'image',
+            type: 'file',
+            maxSelect: 1,
+            maxSize: 5242880,
+            mimeTypes: ['image/jpeg', 'image/png'],
+          },
           { name: 'order', type: 'number' },
           { name: 'created', type: 'autodate', onCreate: true, onUpdate: false },
           { name: 'updated', type: 'autodate', onCreate: true, onUpdate: true },
@@ -249,6 +255,7 @@ migrate(
     ]
 
     for (const col of collections) {
+      if (app.hasTable(col.name)) continue
       const collection = new Collection(col)
       app.save(collection)
     }

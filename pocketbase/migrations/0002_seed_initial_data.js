@@ -15,6 +15,10 @@ migrate((app) => {
     console.log('User seed error: ', err)
   }
 
+  if (!app.hasTable('projects') || !app.hasTable('certificates')) {
+    console.log('Skipping seed: collections not yet created')
+    return
+  }
   const projCol = app.findCollectionByNameOrId('projects')
   const projectSeeds = [
     {
