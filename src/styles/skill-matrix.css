@@ -1,0 +1,16 @@
+.skill-card-sweep::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 75%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(0, 240, 255, 0.05), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.7s ease;
+  pointer-events: none;
+  z-index: 5;
+}
+.skill-card-sweep:hover::after {
+  left: 150%;
+}

@@ -91,6 +91,10 @@ export const translations = {
     ach_title: 'CONQUISTA DESBLOQUEADA',
     ach_dev_desc: 'Modo Desenvolvedor Ativado!',
     ach_quest_desc: 'Missão Completada: Explorou todo o portfólio!',
+    level_beginner: 'Iniciante',
+    level_intermediate: 'Intermediário',
+    level_advanced: 'Avançado',
+    skills_connection_hint: 'Conexões de ecossistema ativas — habilidades relacionadas destacadas',
   },
   en: {
     nav_home: 'HOME',
@@ -182,6 +186,10 @@ export const translations = {
     ach_title: 'ACHIEVEMENT UNLOCKED',
     ach_dev_desc: 'Developer Mode Activated!',
     ach_quest_desc: 'Quest Completed: Explored the entire portfolio!',
+    level_beginner: 'Beginner',
+    level_intermediate: 'Intermediate',
+    level_advanced: 'Advanced',
+    skills_connection_hint: 'Ecosystem connections active — related skills highlighted',
   },
   es: {
     nav_home: 'INICIO',
@@ -273,5 +281,10 @@ export const translations = {
     ach_title: 'LOGRO DESBLOQUEADO',
     ach_dev_desc: '¡Modo Desarrollador Activado!',
     ach_quest_desc: '¡Misión Completada: Exploraste todo el portafolio!',
+    level_beginner: 'Principiante',
+    level_intermediate: 'Intermedio',
+    level_advanced: 'Avanzado',
+    skills_connection_hint:
+      'Conexiones de ecosistema activas — habilidades relacionadas resaltadas',
   },
 }
