@@ -68,14 +68,16 @@ export function Footer() {
             >
               <Mail className="w-3.5 h-3.5 text-purple-400" /> {t('footer_email_btn')}
             </button>
-            <a
-              href="https://wa.me/5511991467419"
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-1.5 hover:text-emerald-400 transition-colors touch-min px-2"
+            <button
+              onClick={(e) => {
+                e.preventDefault()
+                const p = '5511991467419'
+                window.open(`https://wa.me/${p}`, '_blank', 'noreferrer')
+              }}
+              className="flex items-center gap-1.5 hover:text-emerald-400 transition-colors touch-min px-2 bg-transparent border-0 cursor-pointer font-mono text-xs text-gray-400"
             >
               <MessageSquare className="w-3.5 h-3.5 text-emerald-400" /> WhatsApp
-            </a>
+            </button>
           </div>
         </div>
 

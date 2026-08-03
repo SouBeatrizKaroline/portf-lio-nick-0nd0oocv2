@@ -1,302 +1,207 @@
-import { useState } from 'react'
 import { useLanguage } from '@/hooks/use-language'
-import { sendContactMessage } from '@/services/contact'
-import { extractFieldErrors, type FieldErrors } from '@/lib/pocketbase/errors'
-import { HudFrame } from './HudFrame'
 import { SectionReveal } from './SectionReveal'
 import { CyberMicroDetails } from './CyberMicroDetails'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Button } from '@/components/ui/button'
-import {
-  Github,
-  Gamepad2,
-  Linkedin,
-  Mail,
-  MessageSquare,
-  Send,
-  Terminal,
-  CheckCircle2,
-  AlertCircle,
-} from 'lucide-react'
+import { HudFrame } from './HudFrame'
+import { Linkedin, Github, Mail, MessageSquare, ChevronUp } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { cn } from '@/lib/utils'
 
 export function ContactSection() {
-  const { t, locale } = useLanguage()
-  const [submitting, setSubmitting] = useState(false)
-  const [success, setSuccess] = useState(false)
-  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({})
-  const [formError, setFormError] = useState('')
+  const { t } = useLanguage()
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleEmailClick = (e: React.MouseEvent) => {
     e.preventDefault()
-    setSubmitting(true)
-    setFieldErrors({})
-    setFormError('')
-
-    const formData = new FormData(e.currentTarget)
-    const data = {
-      name: (formData.get('name') as string)?.trim() || '',
-      email: (formData.get('email') as string)?.trim() || '',
-      subject: (formData.get('subject') as string)?.trim() || '',
-      message: (formData.get('message') as string)?.trim() || '',
-    }
-
-    try {
-      await sendContactMessage(data)
-      setSuccess(true)
-      e.currentTarget.reset()
-      setTimeout(() => setSuccess(false), 5000)
-    } catch (err) {
-      setFieldErrors(extractFieldErrors(err))
-      setFormError('Failed to send message. Please try again.')
-    } finally {
-      setSubmitting(false)
-    }
+    const u = 'nicolemairaplsilva'
+    const d = 'gmail.com'
+    window.location.href = `mailto:${u}@${d}`
   }
 
-  const quickLinks = [
+  const handleWhatsAppClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    const p = '5511991467419'
+    window.open(`https://wa.me/${p}`, '_blank', 'noreferrer')
+  }
+
+  const channels = [
     {
-      platform: 'Itch.io',
-      url: 'https://pls-nick.itch.io/',
-      icon: Gamepad2,
-      color: 'text-rose-400 hover:border-rose-400 hover:shadow-[0_0_15px_rgba(244,63,94,0.2)]',
+      name: t('connection_linkedin'),
+      Icon: Linkedin,
+      href: 'https://www.linkedin.com/in/nicole-maira/',
+      onClick: null as ((e: React.MouseEvent) => void) | null,
+      border: 'hover:border-blue-400/60',
+      glow: 'hover:shadow-[0_0_20px_rgba(59,130,246,0.2)]',
+      iconColor: 'text-blue-400',
     },
     {
-      platform: 'GitHub',
-      url: 'https://github.com/NicolePLSilva',
-      icon: Github,
-      color: 'text-cyan-400 hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]',
+      name: t('connection_github'),
+      Icon: Github,
+      href: 'https://github.com/NicolePLSilva',
+      onClick: null as ((e: React.MouseEvent) => void) | null,
+      border: 'hover:border-cyan-400/60',
+      glow: 'hover:shadow-[0_0_20px_rgba(34,211,238,0.2)]',
+      iconColor: 'text-cyan-400',
     },
     {
-      platform: 'LinkedIn',
-      url: 'https://www.linkedin.com/in/nicole-maira/',
-      icon: Linkedin,
-      color: 'text-blue-400 hover:border-blue-400 hover:shadow-[0_0_15px_rgba(59,130,246,0.2)]',
+      name: t('connection_email_label'),
+      Icon: Mail,
+      href: null,
+      onClick: handleEmailClick,
+      border: 'hover:border-purple-400/60',
+      glow: 'hover:shadow-[0_0_20px_rgba(168,85,247,0.2)]',
+      iconColor: 'text-purple-400',
+    },
+    {
+      name: t('connection_whatsapp_label'),
+      Icon: MessageSquare,
+      href: null,
+      onClick: handleWhatsAppClick,
+      border: 'hover:border-emerald-400/60',
+      glow: 'hover:shadow-[0_0_20px_rgba(16,185,129,0.2)]',
+      iconColor: 'text-emerald-400',
     },
   ]
 
+  const sequence = [
+    { text: t('end_system_complete'), done: true, delay: 0 },
+    { text: t('end_profile_loaded'), done: true, delay: 150 },
+    { text: t('end_thank_you'), done: true, delay: 300 },
+    { text: t('end_press_start'), done: false, delay: 450 },
+  ]
+
   return (
-    <section id="contact" className="py-16 sm:py-20 px-4 sm:px-6 bg-[#080808]">
-      <div className="max-w-4xl mx-auto">
+    <section
+      id="contact"
+      className="py-16 sm:py-20 px-4 sm:px-6 bg-[#080808] relative overflow-hidden border-t border-[#1a1a22]"
+    >
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
+
+      <div className="max-w-3xl mx-auto">
         <SectionReveal>
-          <HudFrame label="SYSTEM_CONNECTION // TERMINAL_NODE" status="ONLINE">
-            <div className="text-center mb-8">
-              <div className="text-xs font-mono text-cyan-400 mb-2 tracking-widest uppercase">
-                [DIRECT PLATFORM LINK PROTOCOL]
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-bold font-display text-[#EDEDED] mb-3 title-glow">
-                {t('contact_connection_title')}
+          <HudFrame label="CONNECTION_TERMINAL // NETWORK_ACCESS" status="ONLINE">
+            <div className="space-y-6 text-center">
+              <h2 className="text-xl sm:text-2xl font-bold font-display text-[#EDEDED] title-glow">
+                [ {t('connection_terminal')} ]
               </h2>
-              <p className="text-sm text-gray-400 font-sans max-w-xl mx-auto">
-                {locale === 'pt'
-                  ? 'Vamos construir algo juntos? Estou disponível para oportunidades, colaborações e projetos.'
-                  : locale === 'es'
-                    ? '¿Construimos algo juntos? Disponible para oportunidades, colaboraciones y proyectos.'
-                    : "Let's build something together? Available for opportunities, collaborations, and projects."}
+
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
+                <span className="text-[10px] sm:text-xs font-mono text-gray-500 uppercase tracking-widest">
+                  {t('connection_status')}:
+                </span>
+                <span className="text-[10px] sm:text-xs font-mono text-emerald-400 font-bold uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
+                  {t('connection_available')}
+                </span>
+              </div>
+
+              <p className="text-base sm:text-lg font-display text-[#EDEDED]">
+                {t('connection_invitation')}
               </p>
-            </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
-              {quickLinks.map((item) => {
-                const Icon = item.icon
-                return (
-                  <a
-                    key={item.platform}
-                    href={item.url}
-                    target={item.url.startsWith('mailto:') ? '_self' : '_blank'}
-                    rel="noreferrer"
-                    aria-label={item.platform}
-                    className={`flex items-center gap-2 px-4 py-2.5 bg-[#101015] border border-[#262635] transition-all group touch-min ${item.color}`}
-                  >
-                    <Icon className="w-4 h-4" />
-                    <span className="font-mono text-xs font-bold">{item.platform}</span>
-                  </a>
-                )
-              })}
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8">
-              <a
-                href="https://wa.me/5511991467419"
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-[#EDEDED] font-bold font-mono text-xs border border-emerald-400/60 shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all hover:scale-105 active:scale-95 w-full sm:w-auto justify-center touch-min"
-              >
-                <MessageSquare className="w-4 h-4" />
-                {t('contact_whatsapp')}
-              </a>
-              <a
-                href="mailto:nicolemairaplsilva@gmail.com"
-                className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-[#EDEDED] font-bold font-mono text-xs border border-purple-400/60 shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all hover:scale-105 active:scale-95 w-full sm:w-auto justify-center touch-min"
-              >
-                <Mail className="w-4 h-4" />
-                {t('contact_email')}
-              </a>
-            </div>
-
-            <div className="grid md:grid-cols-5 gap-6">
-              <div className="md:col-span-2 flex flex-col justify-between space-y-4">
-                <div className="bg-[#0C0C10] border border-[#1a1a22] p-4 font-mono text-xs space-y-1">
-                  <div className="text-gray-500">
-                    <span className="text-emerald-400">●</span> CONNECTION_TERMINAL v3.0
-                  </div>
-                  <div className="text-gray-600">
-                    <span className="text-cyan-400">{t('contact_terminal_prompt')}</span>{' '}
-                    <span className="text-gray-300">initialize --channels</span>
-                  </div>
-                  <div className="text-purple-400/70">{'> '} Scanning communication nodes...</div>
-                  <div className="text-emerald-400/70">
-                    {'> '} 5 channels detected. CAT_CORE monitoring.
-                  </div>
-                  <div className="text-cyan-400/60">
-                    {'> '} Direct contact buttons ready. Awaiting input...
-                  </div>
+              <div>
+                <div className="text-[10px] font-mono text-purple-400/80 tracking-widest uppercase mb-4 flex items-center justify-center gap-2">
+                  <span className="w-6 h-px bg-purple-400/30" />[{t('connection_channels')}]
+                  <span className="w-6 h-px bg-purple-400/30" />
                 </div>
 
-                <div className="bg-[#0C0C10] border border-[#1a1a22] p-4 font-mono text-[10px] text-gray-500">
-                  <div className="flex items-center justify-between mb-2">
-                    <span>RESPONSE_TIME</span>
-                    <span className="text-emerald-400">&lt; 24h</span>
-                  </div>
-                  <div className="h-1 bg-[#1a1a22] rounded-full overflow-hidden">
-                    <div className="h-full w-[95%] bg-gradient-to-r from-emerald-500/50 to-emerald-300/50 rounded-full" />
-                  </div>
-                  <div className="flex items-center justify-between mt-3 mb-2">
-                    <span>AVAILABILITY</span>
-                    <span className="text-cyan-400">OPEN</span>
-                  </div>
-                  <div className="h-1 bg-[#1a1a22] rounded-full overflow-hidden">
-                    <div className="h-full w-[100%] bg-gradient-to-r from-cyan-500/50 to-cyan-300/50 rounded-full" />
-                  </div>
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                  {channels.map((ch) => {
+                    const cls = cn(
+                      'group relative flex flex-col items-center justify-center p-4 sm:p-5 border border-[#2a2a35] bg-[#0C0C10]/80 backdrop-blur-sm transition-all duration-300 hover:scale-[1.03] active:scale-95 touch-min',
+                      ch.border,
+                      ch.glow,
+                    )
+                    const inner = (
+                      <>
+                        <span className="absolute top-0 right-0 w-2 h-2 border-t border-r border-cyan-400/40" />
+                        <span className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-purple-400/40" />
+                        <ch.Icon className={cn('w-5 h-5 sm:w-6 sm:h-6 mb-2', ch.iconColor)} />
+                        <span className="font-mono text-[10px] sm:text-xs font-bold text-[#EDEDED] text-center leading-tight">
+                          {ch.name}
+                        </span>
+                        <span
+                          className={cn(
+                            'text-[8px] font-mono uppercase tracking-wider mt-1 opacity-40 group-hover:opacity-100 transition-opacity',
+                            ch.iconColor,
+                          )}
+                        >
+                          {'>'} CONNECT
+                        </span>
+                      </>
+                    )
+                    return ch.href ? (
+                      <a
+                        key={ch.name}
+                        href={ch.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={cls}
+                      >
+                        {inner}
+                      </a>
+                    ) : (
+                      <button key={ch.name} type="button" onClick={ch.onClick!} className={cls}>
+                        {inner}
+                      </button>
+                    )
+                  })}
                 </div>
               </div>
 
-              <div className="md:col-span-3">
-                <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label
-                        htmlFor="contact-name"
-                        className="block text-[10px] font-mono text-gray-400 uppercase tracking-wider mb-1.5"
-                      >
-                        Name *
-                      </label>
-                      <Input
-                        id="contact-name"
-                        name="name"
-                        required
-                        placeholder="Your name"
-                        className="bg-[#0C0C10] border-[#1a1a22] text-[#EDEDED] font-mono text-sm focus:border-cyan-500/50"
-                      />
-                      {fieldErrors.name && (
-                        <p className="text-[10px] text-red-400 mt-1 font-mono">
-                          {fieldErrors.name}
-                        </p>
-                      )}
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="contact-email"
-                        className="block text-[10px] font-mono text-gray-400 uppercase tracking-wider mb-1.5"
-                      >
-                        Email *
-                      </label>
-                      <Input
-                        id="contact-email"
-                        name="email"
-                        type="email"
-                        required
-                        placeholder="your@email.com"
-                        className="bg-[#0C0C10] border-[#1a1a22] text-[#EDEDED] font-mono text-sm focus:border-cyan-500/50"
-                      />
-                      {fieldErrors.email && (
-                        <p className="text-[10px] text-red-400 mt-1 font-mono">
-                          {fieldErrors.email}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="contact-subject"
-                      className="block text-[10px] font-mono text-gray-400 uppercase tracking-wider mb-1.5"
-                    >
-                      Subject
-                    </label>
-                    <Input
-                      id="contact-subject"
-                      name="subject"
-                      placeholder="What's this about?"
-                      className="bg-[#0C0C10] border-[#1a1a22] text-[#EDEDED] font-mono text-sm focus:border-cyan-500/50"
-                    />
-                    {fieldErrors.subject && (
-                      <p className="text-[10px] text-red-400 mt-1 font-mono">
-                        {fieldErrors.subject}
-                      </p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="contact-message"
-                      className="block text-[10px] font-mono text-gray-400 uppercase tracking-wider mb-1.5"
-                    >
-                      Message *
-                    </label>
-                    <Textarea
-                      id="contact-message"
-                      name="message"
-                      required
-                      rows={4}
-                      placeholder="Tell me about your project, role, or collaboration..."
-                      className="bg-[#0C0C10] border-[#1a1a22] text-[#EDEDED] font-mono text-sm focus:border-cyan-500/50 resize-none"
-                    />
-                    {fieldErrors.message && (
-                      <p className="text-[10px] text-red-400 mt-1 font-mono">
-                        {fieldErrors.message}
-                      </p>
-                    )}
-                  </div>
-
-                  {formError && (
-                    <div className="flex items-center gap-2 text-xs font-mono text-red-400 bg-red-950/30 border border-red-500/30 px-3 py-2">
-                      <AlertCircle className="w-3.5 h-3.5" />
-                      {formError}
-                    </div>
-                  )}
-
-                  {success && (
-                    <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 bg-emerald-950/30 border border-emerald-500/30 px-3 py-2 animate-fade-in">
-                      <CheckCircle2 className="w-3.5 h-3.5" />
-                      Message sent successfully! I'll get back to you soon.
-                    </div>
-                  )}
-
-                  <Button
-                    type="submit"
-                    disabled={submitting}
-                    className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-[#EDEDED] font-bold font-mono text-xs border border-purple-400/60 shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all hover:scale-[1.02] disabled:opacity-50 disabled:hover:scale-100"
-                  >
-                    {submitting ? (
-                      <span className="flex items-center gap-2">
-                        <Terminal className="w-4 h-4 animate-pulse" />
-                        SENDING...
-                      </span>
-                    ) : (
-                      <span className="flex items-center gap-2">
-                        <Send className="w-4 h-4" />
-                        {t('contact_connect')}
-                      </span>
-                    )}
-                  </Button>
-                </form>
+              <div className="text-[10px] font-mono text-cyan-400/60 tracking-widest uppercase pt-3 border-t border-[#1a1a22]">
+                {t('connection_ready')}
               </div>
             </div>
           </HudFrame>
+
+          <div className="mt-6 space-y-4">
+            <div className="bg-[#0C0C10] border border-[#1a1a22] p-5 sm:p-6 font-mono space-y-2 text-xs sm:text-sm">
+              <div className="text-[10px] text-gray-600 mb-2 tracking-widest uppercase text-center">
+                // SESSION_LOG // FINAL
+              </div>
+              {sequence.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center justify-center gap-2 animate-fade-in-up"
+                  style={{ animationDelay: `${item.delay}ms` }}
+                >
+                  <span className="text-emerald-400/70">{'>'}</span>
+                  <span className={item.done ? 'text-gray-300' : 'text-cyan-400 font-bold'}>
+                    {item.text}
+                  </span>
+                  {item.done ? (
+                    <span className="text-emerald-400/50 text-[10px]">✓</span>
+                  ) : (
+                    <span className="w-2 h-3.5 bg-cyan-400 animate-pulse inline-block" />
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <p className="text-sm text-gray-400 font-sans max-w-md mx-auto text-center">
+              {t('end_subtitle')}
+            </p>
+
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <button
+                type="button"
+                onClick={handleWhatsAppClick}
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-[#EDEDED] font-bold font-mono text-xs px-6 py-3 border border-emerald-400/60 shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all hover:scale-105 active:scale-95 touch-min"
+              >
+                <MessageSquare className="w-4 h-4" />
+                {t('end_connect_whatsapp')}
+              </button>
+              <Link
+                to="/#projects"
+                className="inline-flex items-center gap-2 bg-[#14141D]/80 hover:bg-[#1c1c28] text-cyan-300 font-bold font-mono text-xs px-6 py-3 border border-cyan-500/50 transition-all hover:border-cyan-400 touch-min"
+              >
+                <ChevronUp className="w-4 h-4" />
+                {t('end_connect_contact')}
+              </Link>
+            </div>
+          </div>
         </SectionReveal>
 
-        <CyberMicroDetails className="justify-center mt-8" count={6} offset={12} />
+        <CyberMicroDetails className="justify-center mt-8" count={6} offset={0} />
       </div>
     </section>
   )
