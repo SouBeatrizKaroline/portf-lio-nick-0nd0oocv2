@@ -19,7 +19,7 @@ export function ProjectsSection() {
   }, [])
 
   return (
-    <section id="projects" className="py-20 px-6 bg-[#080808] relative">
+    <section id="projects" className="py-16 sm:py-20 px-4 sm:px-6 bg-[#080808] relative">
       <div className="max-w-5xl mx-auto space-y-10">
         <SectionReveal>
           <HudFrame label="DATA_MODULES // PROJECT_DATABASE" status="ACTIVE">

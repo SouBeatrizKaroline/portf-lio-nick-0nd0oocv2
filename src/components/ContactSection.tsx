@@ -72,7 +72,7 @@ export function ContactSection() {
   ]
 
   return (
-    <section id="contact" className="py-20 px-6 bg-[#080808]">
+    <section id="contact" className="py-16 sm:py-20 px-4 sm:px-6 bg-[#080808]">
       <div className="max-w-4xl mx-auto">
         <SectionReveal>
           <HudFrame label="SYSTEM_CONNECTION // TERMINAL_NODE" status="ONLINE">
@@ -117,7 +117,8 @@ export function ContactSection() {
                     href={item.url}
                     target={item.url.startsWith('mailto:') ? '_self' : '_blank'}
                     rel="noreferrer"
-                    className={`flex items-center justify-between p-3.5 bg-[#101015] border border-[#262635] transition-all group ${
+                    aria-label={`${item.platform} - ${item.desc}`}
+                    className={`flex items-center justify-between p-3.5 bg-[#101015] border border-[#262635] transition-all group touch-min ${
                       item.featured ? 'bg-[#14121d] border-rose-500/40' : ''
                     } ${item.hoverGlow}`}
                   >
@@ -140,7 +141,7 @@ export function ContactSection() {
 
                     <div className="flex items-center gap-2 shrink-0 ml-2">
                       <span
-                        className={`px-2.5 py-1 border text-[9px] font-bold uppercase ${item.statusColor}`}
+                        className={`hidden sm:inline-block px-2.5 py-1 border text-[9px] font-bold uppercase ${item.statusColor}`}
                       >
                         {item.status}
                       </span>

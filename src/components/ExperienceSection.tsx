@@ -16,7 +16,7 @@ export function ExperienceSection() {
   }, [])
 
   return (
-    <section id="experience" className="py-20 px-6 bg-[#080808]">
+    <section id="experience" className="py-16 sm:py-20 px-4 sm:px-6 bg-[#080808]">
       <div className="max-w-5xl mx-auto space-y-10">
         <SectionReveal>
           <HudFrame label="EXPERIENCE_LOG" status="ONLINE">

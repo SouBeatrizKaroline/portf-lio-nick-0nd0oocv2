@@ -46,7 +46,7 @@ export function SkillRegistrySection() {
   }
 
   return (
-    <section id="skills" className="py-20 px-6 bg-[#080808] relative">
+    <section id="skills" className="py-16 sm:py-20 px-4 sm:px-6 bg-[#080808] relative">
       <div className="max-w-5xl mx-auto space-y-8">
         <SectionReveal>
           <HudFrame label="SKILL_REGISTRY // MATRIX_V2" status="SYNCED">

@@ -47,9 +47,9 @@ export function AtmosphericBackground() {
         <rect width="100%" height="100%" fill="url(#circuit)" />
       </svg>
 
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-purple-900/8 rounded-full blur-[140px]" />
-      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-cyan-900/8 rounded-full blur-[120px]" />
-      <div className="absolute top-1/2 left-1/3 w-[300px] h-[300px] bg-indigo-900/5 rounded-full blur-[100px]" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] sm:w-[700px] sm:h-[700px] bg-purple-900/8 rounded-full blur-[100px] sm:blur-[140px]" />
+      <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] bg-cyan-900/8 rounded-full blur-[80px] sm:blur-[120px]" />
+      <div className="hidden sm:block absolute top-1/2 left-1/3 w-[300px] h-[300px] bg-indigo-900/5 rounded-full blur-[100px]" />
 
       <div className="absolute top-[30%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent energy-line" />
       <div

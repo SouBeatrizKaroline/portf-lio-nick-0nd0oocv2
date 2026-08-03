@@ -25,7 +25,7 @@ export function NickAvatarShowcase() {
   ]
 
   return (
-    <div className="relative border border-[#2a2a35] bg-[#1A1A20]/90 backdrop-blur-md p-6 sm:p-8 hud-corners shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
+    <div className="relative border border-[#2a2a35] bg-[#1A1A20]/90 backdrop-blur-md p-4 sm:p-6 md:p-8 hud-corners shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
       {/* Sci-Fi Decal Tag */}
       <div className="flex items-center justify-between border-b border-[#2a2a35] pb-3 mb-6 font-mono text-xs">
         <div className="flex items-center gap-2 text-cyan-400 font-bold">

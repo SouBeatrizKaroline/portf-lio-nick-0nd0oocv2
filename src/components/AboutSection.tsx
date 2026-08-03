@@ -8,7 +8,10 @@ export function AboutSection() {
   const { t } = useLanguage()
 
   return (
-    <section id="about" className="py-20 px-6 bg-[#080808] space-y-12">
+    <section
+      id="about"
+      className="py-16 sm:py-20 px-4 sm:px-6 bg-[#080808] space-y-8 sm:space-y-12"
+    >
       <div className="max-w-5xl mx-auto">
         <SectionReveal>
           <HudFrame label="DEVELOPER_PROFILE" status="OPTIMAL">

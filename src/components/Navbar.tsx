@@ -22,6 +22,21 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileOpen(false)
+    }
+    window.addEventListener('keydown', handleEscape)
+    return () => window.removeEventListener('keydown', handleEscape)
+  }, [])
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [mobileOpen])
+
   const navItems = [
     { label: t('nav_home') || 'HOME', path: isHome ? '#home' : '/#home' },
     { label: t('nav_about') || 'ABOUT', path: isHome ? '#about' : '/#about' },
@@ -86,7 +101,8 @@ export function Navbar() {
               href="https://pls-nick.itch.io/"
               target="_blank"
               rel="noreferrer"
-              className="p-1.5 text-gray-400 hover:text-purple-400 transition-colors"
+              aria-label="Itch.io Games"
+              className="p-2 text-gray-400 hover:text-purple-400 transition-colors"
               title="Itch.io Games"
             >
               <Gamepad2 className="w-4 h-4" />
@@ -95,7 +111,8 @@ export function Navbar() {
               href="https://github.com/NicolePLSilva"
               target="_blank"
               rel="noreferrer"
-              className="p-1.5 text-gray-400 hover:text-cyan-400 transition-colors"
+              aria-label="GitHub Profile"
+              className="p-2 text-gray-400 hover:text-cyan-400 transition-colors"
               title="GitHub Profile"
             >
               <Github className="w-4 h-4" />
@@ -104,7 +121,8 @@ export function Navbar() {
               href="https://www.linkedin.com/in/nicole-maira/"
               target="_blank"
               rel="noreferrer"
-              className="p-1.5 text-gray-400 hover:text-blue-400 transition-colors"
+              aria-label="LinkedIn"
+              className="p-2 text-gray-400 hover:text-blue-400 transition-colors"
               title="LinkedIn"
             >
               <Linkedin className="w-4 h-4" />
@@ -113,7 +131,8 @@ export function Navbar() {
               href="https://wa.me/5571985304202"
               target="_blank"
               rel="noreferrer"
-              className="p-1.5 text-gray-400 hover:text-emerald-400 transition-colors"
+              aria-label="WhatsApp Direct"
+              className="p-2 text-gray-400 hover:text-emerald-400 transition-colors"
               title="WhatsApp Direct"
             >
               <MessageSquare className="w-4 h-4" />
@@ -126,7 +145,8 @@ export function Navbar() {
               <button
                 key={lang}
                 onClick={() => setLocale(lang)}
-                className={`px-2 py-0.5 transition-colors uppercase font-bold text-[10px] ${
+                aria-label={`Switch language to ${lang.toUpperCase()}`}
+                className={`px-3 py-1.5 transition-colors uppercase font-bold text-[10px] ${
                   locale === lang
                     ? 'bg-purple-600 text-[#EDEDED] shadow-[0_0_8px_rgba(168,85,247,0.5)]'
                     : 'text-gray-400 hover:text-[#EDEDED]'
@@ -141,7 +161,10 @@ export function Navbar() {
         {/* Mobile Menu Toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="lg:hidden p-2 text-gray-300 hover:text-cyan-400 border border-[#2a2a35] bg-[#14141D]"
+          aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-menu"
+          className="lg:hidden p-2.5 text-gray-300 hover:text-cyan-400 border border-[#2a2a35] bg-[#14141D] touch-min transition-colors"
         >
           {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
@@ -149,14 +172,20 @@ export function Navbar() {
 
       {/* Mobile Menu Overlay */}
       {mobileOpen && (
-        <div className="lg:hidden bg-[#080808]/98 backdrop-blur-xl border-b border-[#2a2a35] px-6 py-6 space-y-4 font-mono text-xs">
+        <div
+          id="mobile-menu"
+          role="menu"
+          aria-label="Mobile navigation"
+          className="lg:hidden bg-[#080808]/98 backdrop-blur-xl border-b border-[#2a2a35] px-4 sm:px-6 py-6 space-y-4 font-mono text-xs animate-fade-in-down"
+        >
           <div className="space-y-2">
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.path}
                 onClick={() => setMobileOpen(false)}
-                className="block text-gray-200 hover:text-cyan-400 uppercase tracking-wider py-1.5 border-b border-[#181820]"
+                role="menuitem"
+                className="block text-gray-200 hover:text-cyan-400 uppercase tracking-wider py-3 text-sm border-b border-[#181820] transition-colors"
               >
                 {item.label}
               </a>
@@ -169,7 +198,8 @@ export function Navbar() {
                 href="https://pls-nick.itch.io/"
                 target="_blank"
                 rel="noreferrer"
-                className="p-2 text-purple-400 border border-[#2a2a35] bg-[#14141D]"
+                aria-label="Itch.io Games"
+                className="p-2.5 text-purple-400 border border-[#2a2a35] bg-[#14141D] touch-min transition-colors"
               >
                 <Gamepad2 className="w-4 h-4" />
               </a>
@@ -177,7 +207,8 @@ export function Navbar() {
                 href="https://github.com/NicolePLSilva"
                 target="_blank"
                 rel="noreferrer"
-                className="p-2 text-cyan-400 border border-[#2a2a35] bg-[#14141D]"
+                aria-label="GitHub Profile"
+                className="p-2.5 text-cyan-400 border border-[#2a2a35] bg-[#14141D] touch-min transition-colors"
               >
                 <Github className="w-4 h-4" />
               </a>
@@ -185,7 +216,8 @@ export function Navbar() {
                 href="https://www.linkedin.com/in/nicole-maira/"
                 target="_blank"
                 rel="noreferrer"
-                className="p-2 text-blue-400 border border-[#2a2a35] bg-[#14141D]"
+                aria-label="LinkedIn Profile"
+                className="p-2.5 text-blue-400 border border-[#2a2a35] bg-[#14141D] touch-min transition-colors"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
@@ -199,7 +231,8 @@ export function Navbar() {
                     setLocale(lang)
                     setMobileOpen(false)
                   }}
-                  className={`px-2.5 py-1 text-[10px] uppercase border ${
+                  aria-label={`Switch language to ${lang.toUpperCase()}`}
+                  className={`px-3 py-2 text-[10px] uppercase border touch-min transition-colors ${
                     locale === lang
                       ? 'bg-purple-600 border-purple-500 text-[#EDEDED]'
                       : 'border-[#2a2a35] text-gray-400'

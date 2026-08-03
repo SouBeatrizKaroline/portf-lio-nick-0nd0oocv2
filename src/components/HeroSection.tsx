@@ -11,7 +11,7 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-[90vh] flex items-center justify-center pt-24 pb-16 px-4 sm:px-6 overflow-hidden"
+      className="relative min-h-[88vh] flex items-center justify-center pt-20 pb-12 px-4 sm:px-6 overflow-hidden"
     >
       <HeroFloatingPanels />
 
@@ -41,7 +41,7 @@ export function HeroSection() {
         </div>
 
         <div className="space-y-4">
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold font-display tracking-tight text-[#EDEDED] leading-none title-glow">
+          <h1 className="text-responsive-hero font-bold font-display tracking-tight text-[#EDEDED] title-glow">
             GAME DEVELOPER & <br />
             <span className="holo-text bg-gradient-to-r from-cyan-400 via-purple-400 to-rose-400 bg-clip-text text-transparent">
               GAMEPLAY PROGRAMMER
@@ -70,7 +70,7 @@ export function HeroSection() {
           ))}
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-3 pt-4 font-mono">
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 pt-4 font-mono">
           <a
             href="https://pls-nick.itch.io/"
             target="_blank"

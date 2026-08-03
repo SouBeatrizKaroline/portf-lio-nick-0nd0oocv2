@@ -49,7 +49,7 @@ export function DevConsoleModal({ isOpen, onClose }: DevConsoleModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
-      <div className="w-full max-w-lg border-2 border-purple-500/60 bg-[#0B0B0F] p-4 font-mono text-xs text-gray-200 shadow-[0_0_25px_rgba(139,92,246,0.4)]">
+      <div className="w-full max-w-lg border-2 border-purple-500/60 bg-[#0B0B0F] p-3 sm:p-4 font-mono text-xs text-gray-200 shadow-[0_0_25px_rgba(139,92,246,0.4)]">
         <div className="flex items-center justify-between border-b border-[#1a1a22] pb-2 mb-3">
           <div className="flex items-center gap-2 text-purple-400 font-bold">
             <Terminal className="w-4 h-4" />

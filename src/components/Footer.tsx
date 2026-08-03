@@ -1,14 +1,47 @@
 import { CyberDecal } from './CyberDecals'
 import { CyberMicroDetails } from './CyberMicroDetails'
-import { Github, Gamepad2, Linkedin, Mail, MessageSquare } from 'lucide-react'
+import { Github, Gamepad2, Linkedin, Mail, MessageSquare, ScanLine, Play } from 'lucide-react'
 
-export function Footer() {
+interface FooterProps {
+  scanlines?: boolean
+  onToggleScanlines?: () => void
+  onPressStart?: () => void
+}
+
+export function Footer({ scanlines = true, onToggleScanlines, onPressStart }: FooterProps) {
   return (
-    <footer className="relative bg-[#060608] border-t border-cyan-500/15 py-12 px-6 font-mono text-xs text-gray-400 overflow-hidden">
+    <footer className="relative bg-[#060608] border-t border-cyan-500/15 py-8 sm:py-12 px-4 sm:px-6 font-mono text-xs text-gray-400 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
 
       <div className="max-w-6xl mx-auto space-y-6">
         <CyberMicroDetails className="justify-center" count={8} offset={0} />
+
+        <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
+          {onToggleScanlines && (
+            <button
+              onClick={onToggleScanlines}
+              aria-label="Toggle scanlines overlay"
+              className={`flex items-center gap-1.5 px-3 py-2 border transition-colors touch-min ${
+                scanlines
+                  ? 'border-cyan-500/50 text-cyan-400 bg-cyan-950/30'
+                  : 'border-[#2a2a35] text-gray-500 hover:text-gray-300'
+              }`}
+            >
+              <ScanLine className="w-3.5 h-3.5" />
+              <span>SCANLINES</span>
+            </button>
+          )}
+          {onPressStart && (
+            <button
+              onClick={onPressStart}
+              aria-label="Press Start - Retro Arcade Mode"
+              className="flex items-center gap-1.5 px-3 py-2 border border-purple-500/50 text-purple-400 hover:bg-purple-950/40 transition-colors touch-min"
+            >
+              <Play className="w-3.5 h-3.5 fill-current" />
+              <span>PRESS START</span>
+            </button>
+          )}
+        </div>
 
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-3">

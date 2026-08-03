@@ -52,7 +52,7 @@ export default function ProjectDetail() {
         <ArrowLeft className="w-4 h-4" /> {t('nav_home')}
       </Link>
 
-      <HudFrame label={`PROJECT.${project.slug.toUpperCase()}`} className="p-8 sm:p-10 mb-8">
+      <HudFrame label={`PROJECT.${project.slug.toUpperCase()}`} className="p-5 sm:p-8 md:p-10 mb-8">
         <div className="aspect-video bg-[#141418] border border-[#1a1a22] mb-6 overflow-hidden">
           <img
             src={

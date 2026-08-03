@@ -34,7 +34,7 @@ export function PixelNick({
     >
       {/* Speech / System Scanner Bubble */}
       {(showSpeechBubble || speechText || hovered) && (
-        <div className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 bg-[#12121A] border border-cyan-400 text-cyan-300 font-mono text-[10px] px-3 py-1 rounded-none shadow-[0_0_15px_rgba(0,240,255,0.4)] whitespace-nowrap animate-bounce pointer-events-none">
+        <div className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 bg-[#12121A] border border-cyan-400 text-cyan-300 font-mono text-[10px] px-3 py-1 rounded-none shadow-[0_0_15px_rgba(0,240,255,0.4)] whitespace-nowrap max-w-[90vw] overflow-hidden animate-bounce pointer-events-none">
           <span className="text-purple-400 font-bold mr-1">[NICK_SCAN]:</span>
           {speechText ||
             (pose === 'idle'

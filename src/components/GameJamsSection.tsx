@@ -17,7 +17,7 @@ export function GameJamsSection() {
   }, [])
 
   return (
-    <section className="py-20 px-6 bg-[#080808]">
+    <section className="py-16 sm:py-20 px-4 sm:px-6 bg-[#080808]">
       <div className="max-w-4xl mx-auto">
         <SectionReveal>
           <ModuleHeader
@@ -42,6 +42,7 @@ export function GameJamsSection() {
                       'https://img.usecurling.com/p/600/350?q=pixel%20game%20jam&color=purple'
                     }
                     alt={jam.title}
+                    loading="lazy"
                     className="w-full h-40 object-cover border border-[#1a1a22] mb-4"
                   />
                   <div className="text-xs font-mono text-cyan-400 font-bold mb-1 flex items-center gap-1">

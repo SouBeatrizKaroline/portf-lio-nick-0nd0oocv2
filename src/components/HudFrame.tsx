@@ -17,7 +17,7 @@ export function HudFrame({
   return (
     <div
       className={cn(
-        'relative border border-[#2a2a35] bg-[#1A1A20]/85 backdrop-blur-lg p-6 sm:p-8 hud-corners shadow-[0_10px_40px_rgba(0,0,0,0.6)] transition-all duration-500 hover:border-cyan-500/30 hud-frame-glow overflow-hidden',
+        'relative border border-[#2a2a35] bg-[#1A1A20]/85 backdrop-blur-lg p-4 sm:p-6 md:p-8 hud-corners shadow-[0_10px_40px_rgba(0,0,0,0.6)] transition-all duration-500 hover:border-cyan-500/30 hud-frame-glow overflow-hidden',
         className,
       )}
     >

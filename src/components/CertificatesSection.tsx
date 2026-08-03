@@ -23,7 +23,7 @@ export function CertificatesSection() {
   }, [])
 
   return (
-    <section id="certificates" className="py-20 px-6 bg-[#0D0D10]">
+    <section id="certificates" className="py-16 sm:py-20 px-4 sm:px-6 bg-[#0D0D10]">
       <div className="max-w-5xl mx-auto space-y-10">
         <SectionReveal>
           <HudFrame label="CERTIFICATION_VAULT" status="VERIFIED">
