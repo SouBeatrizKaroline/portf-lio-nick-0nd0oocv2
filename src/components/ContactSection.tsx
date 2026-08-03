@@ -21,6 +21,12 @@ export function ContactSection() {
     window.open(`https://wa.me/${p}`, '_blank', 'noreferrer')
   }
 
+  const handleScrollToProjects = (e: React.MouseEvent) => {
+    e.preventDefault()
+    const el = document.getElementById('projects')
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
+  }
+
   const channels = [
     {
       name: t('connection_linkedin'),
