@@ -1,4 +1,4 @@
-export const GITHUB_USERNAME = 'nicolemaira'
+export const GITHUB_USERNAME = 'NicolePLSilva'
 
 export interface GithubRepo {
   id: number
@@ -17,7 +17,7 @@ export const FALLBACK_REPOS: GithubRepo[] = [
     name: 'metroidvania-2d',
     description:
       'Unity 2D Metroidvania prototype featuring Coyote Time, State Machine and URP Lighting.',
-    html_url: 'https://github.com/nicolemaira/metroidvania-2d',
+    html_url: 'https://github.com/NicolePLSilva/metroidvania-2d',
     stargazers_count: 24,
     forks_count: 5,
     language: 'C#',
@@ -27,7 +27,7 @@ export const FALLBACK_REPOS: GithubRepo[] = [
     id: 2,
     name: 'aspnet-management',
     description: 'Enterprise Web System in ASP.NET Core MVC with Entity Framework and SQL Server.',
-    html_url: 'https://github.com/nicolemaira/aspnet-management',
+    html_url: 'https://github.com/NicolePLSilva/aspnet-management',
     stargazers_count: 18,
     forks_count: 3,
     language: 'C#',
@@ -37,7 +37,7 @@ export const FALLBACK_REPOS: GithubRepo[] = [
     id: 3,
     name: 'csharp-interpreter',
     description: 'Custom lexical and syntactic parser tool written in C# .NET.',
-    html_url: 'https://github.com/nicolemaira/csharp-interpreter',
+    html_url: 'https://github.com/NicolePLSilva/csharp-interpreter',
     stargazers_count: 12,
     forks_count: 2,
     language: 'C#',

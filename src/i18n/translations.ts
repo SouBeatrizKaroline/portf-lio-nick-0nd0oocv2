@@ -26,11 +26,11 @@ export const translations = {
     about_title: 'SOBRE MIM',
     about_subtitle: 'CODE MEETS CREATIVITY',
     about_text_1:
-      'Sou Game Developer e Desenvolvedora de Software focada em transformar mecânicas complexas em experiências de jogo fluidas e envolventes.',
+      'Sou Game Developer e Software Engineer formada em Análise e Desenvolvimento de Sistemas, apaixonada por criar experiências interativas que combinam arquitetura de software robusta com design de gameplay envolvente.',
     about_text_2:
-      'Com bagagem em Análise e Desenvolvimento de Sistemas e experiência tanto em Unity/C# quanto em ambientes Corporativos/Backend (ASP.NET, Java), combino disciplina de arquitetura de software com paixão pela arte interativa.',
+      'Minha jornada une desenvolvimento de jogos em Unity/C# com experiência corporativa em ASP.NET e Java, permitindo-me trazer disciplina de engenharia para projetos criativos — desde sistemas de combate e controle de personagem até arquitetura de backend e cloud save.',
     about_text_3:
-      'Adoro participar de Game Jams, prototipar mecânicas de combate e explorar novas engines e pipelines gráficos.',
+      'Acredito que cada Game Jam, cada protótipo e cada linha de código são oportunidades de experimentar novas tecnologias, refinar arquiteturas e criar experiências memoráveis que jogadores vão amar.',
 
     timeline_title: 'TRAJETÓRIA',
     timeline_subtitle: 'TIMELINE DE LEVEL UP',
@@ -40,6 +40,11 @@ export const translations = {
 
     skills_title: 'HABILIDADES',
     skills_subtitle: 'SKILL TREE & NÍVEIS',
+    skills_cat_game_dev: 'Game Development',
+    skills_cat_languages: 'Linguagens',
+    skills_cat_backend: 'Backend',
+    skills_cat_engines: 'Engines',
+    skills_cat_tools: 'Ferramentas',
 
     projects_title: 'PROJETOS',
     projects_subtitle: 'PORTFÓLIO DE JOGOS & SISTEMAS',
@@ -72,6 +77,9 @@ export const translations = {
     itch_title: 'ITCH.IO / PLAYABLE',
     itch_subtitle: 'JOGUE DIRETAMENTE NO NAVEGADOR',
     itch_play: 'Jogar no Itch.io 🎮',
+    itch_games_title: 'JOGOS PUBLICADOS',
+    itch_games_subtitle: 'EXPLORE E JOUE NO NAVEGADOR',
+    itch_view_project: 'Ver Projeto',
 
     contact_title: 'CONTATO',
     contact_subtitle: 'INICIE UMA MISSÃO EM CONJUNTO',
@@ -81,16 +89,20 @@ export const translations = {
     contact_msg: 'Mensagem',
     contact_send: 'Enviar Mensagem',
     contact_success: 'MISSÃO ACEITA! Mensagem enviada com sucesso.',
+    contact_intro:
+      'Interessado em contratar, colaborar em um jogo ou conversar sobre desenvolvimento? Envie um sinal abaixo!',
+    contact_location: 'Localização: Brasil (Disponível para trabalho remoto mundial)',
+    contact_whatsapp: 'WhatsApp',
 
     footer_back_top: 'Voltar ao Topo ↑',
     footer_press_start: 'PRESS START',
     footer_scanlines: 'Scanlines CRT',
 
-    boot_line_1: 'INICIALIZANDO...',
-    boot_line_2: 'Carregando Perfil de Desenvolvedora...',
-    boot_line_3: 'Carregando Módulos Unity...',
-    boot_line_4: 'Conectando GitHub...',
-    boot_line_5: 'Portfólio Pronto.',
+    boot_line_1: 'INITIALIZING...',
+    boot_line_2: 'Loading Developer Profile...',
+    boot_line_3: 'Loading Unity Modules...',
+    boot_line_4: 'Synchronizing Projects...',
+    boot_line_5: 'Portfolio Ready.',
     boot_skip: 'Pressionar ESC / Clique para Pular [SKIP]',
     module_profile: 'Developer Profile',
     module_skills: 'Skills Database',
@@ -137,11 +149,11 @@ export const translations = {
     about_title: 'ABOUT ME',
     about_subtitle: 'CODE MEETS CREATIVITY',
     about_text_1:
-      'I am a Game Developer and Software Engineer focused on transforming complex mechanics into fluid, engaging game experiences.',
+      'I am a Game Developer and Software Engineer with a degree in Systems Analysis and Development, passionate about crafting interactive experiences that blend robust software architecture with engaging gameplay design.',
     about_text_2:
-      'With a background in Systems Analysis and experience in both Unity/C# and Corporate/Backend environments (ASP.NET, Java), I combine clean software architecture with interactive game art.',
+      'My journey combines Unity/C# game development with corporate experience in ASP.NET and Java, allowing me to bring engineering discipline to creative projects — from combat systems and character controllers to backend architecture and cloud save.',
     about_text_3:
-      'I love competing in Game Jams, prototyping combat mechanics, and exploring new graphics pipelines and engines.',
+      'I believe every Game Jam, every prototype, and every line of code is an opportunity to experiment with new technologies, refine architectures, and create memorable experiences that players will love.',
 
     timeline_title: 'TIMELINE',
     timeline_subtitle: 'LEVEL UP JOURNEY',
@@ -151,6 +163,11 @@ export const translations = {
 
     skills_title: 'SKILLS',
     skills_subtitle: 'SKILL TREE & LEVELS',
+    skills_cat_game_dev: 'Game Development',
+    skills_cat_languages: 'Languages',
+    skills_cat_backend: 'Backend',
+    skills_cat_engines: 'Engines',
+    skills_cat_tools: 'Tools',
 
     projects_title: 'PROJECTS',
     projects_subtitle: 'PORTFOLIO OF GAMES & SYSTEMS',
@@ -183,6 +200,9 @@ export const translations = {
     itch_title: 'ITCH.IO / PLAYABLE',
     itch_subtitle: 'PLAY DIRECTLY IN YOUR BROWSER',
     itch_play: 'Play on Itch.io 🎮',
+    itch_games_title: 'PUBLISHED GAMES',
+    itch_games_subtitle: 'EXPLORE AND PLAY IN YOUR BROWSER',
+    itch_view_project: 'View Project',
 
     contact_title: 'CONTACT',
     contact_subtitle: 'START A MISSION TOGETHER',
@@ -192,6 +212,10 @@ export const translations = {
     contact_msg: 'Message',
     contact_send: 'Send Message',
     contact_success: 'MISSION ACCEPTED! Message sent successfully.',
+    contact_intro:
+      'Interested in hiring, collaborating on a game, or discussing development? Send a signal below!',
+    contact_location: 'Location: Brazil (Available for remote work worldwide)',
+    contact_whatsapp: 'WhatsApp',
 
     footer_back_top: 'Back to Top ↑',
     footer_press_start: 'PRESS START',
@@ -200,7 +224,7 @@ export const translations = {
     boot_line_1: 'INITIALIZING...',
     boot_line_2: 'Loading Developer Profile...',
     boot_line_3: 'Loading Unity Modules...',
-    boot_line_4: 'Connecting GitHub...',
+    boot_line_4: 'Synchronizing Projects...',
     boot_line_5: 'Portfolio Ready.',
     boot_skip: 'Press ESC / Click to Skip [SKIP]',
     module_profile: 'Developer Profile',
@@ -248,11 +272,11 @@ export const translations = {
     about_title: 'SOBRE MÍ',
     about_subtitle: 'CODE MEETS CREATIVITY',
     about_text_1:
-      'Soy Game Developer y Desarrolladora de Software enfocada en transformar mecánicas complejas en experiencias fluidas y divertidas.',
+      'Soy Game Developer e Software Engineer graduada en Análisis y Desarrollo de Sistemas, apasionada por crear experiencias interactivas que combinan arquitectura de software robusta con diseño de gameplay envolvente.',
     about_text_2:
-      'Con formación en Análisis de Sistemas y experiencia tanto en Unity/C# como en entornos Corporativos/Backend (ASP.NET, Java), combino arquitectura limpia con arte interactivo.',
+      'Mi trayectoria combina desarrollo de juegos en Unity/C# con experiencia corporativa en ASP.NET y Java, permitiéndome aportar disciplina de ingeniería a proyectos creativos — desde sistemas de combate y control de personajes hasta arquitectura backend y guardado en la nube.',
     about_text_3:
-      'Me encanta participar en Game Jams, prototipar sistemas de combate y explorar nuevos motores gráficos.',
+      'Creo que cada Game Jam, cada prototipo y cada línea de código son oportunidades para experimentar con nuevas tecnologías, refinar arquitecturas y crear experiencias memorables que los jugadores amarán.',
 
     timeline_title: 'TRAYECTORIA',
     timeline_subtitle: 'CAMINO DE LEVEL UP',
@@ -262,6 +286,11 @@ export const translations = {
 
     skills_title: 'HABILIDADES',
     skills_subtitle: 'ARBOL DE HABILIDADES Y NIVELES',
+    skills_cat_game_dev: 'Game Development',
+    skills_cat_languages: 'Lenguajes',
+    skills_cat_backend: 'Backend',
+    skills_cat_engines: 'Motores',
+    skills_cat_tools: 'Herramientas',
 
     projects_title: 'PROYECTOS',
     projects_subtitle: 'PORTAFOLIO DE JUEGOS Y SISTEMAS',
@@ -294,6 +323,9 @@ export const translations = {
     itch_title: 'ITCH.IO / PLAYABLE',
     itch_subtitle: 'JUEGA DIRECTAMENTE EN EL NAVEGADOR',
     itch_play: 'Jugar en Itch.io 🎮',
+    itch_games_title: 'JUEGOS PUBLICADOS',
+    itch_games_subtitle: 'EXPLORA Y JUEGA EN EL NAVEGADOR',
+    itch_view_project: 'Ver Proyecto',
 
     contact_title: 'CONTACTO',
     contact_subtitle: 'INICIA UNA MISIÓN EN CONJUNTO',
@@ -303,15 +335,19 @@ export const translations = {
     contact_msg: 'Mensaje',
     contact_send: 'Enviar Mensaje',
     contact_success: '¡MISIÓN ACEPTADA! Mensaje enviado con éxito.',
+    contact_intro:
+      '¿Interesado en contratar, colaborar en un juego o conversar sobre desarrollo? ¡Envía una señal!',
+    contact_location: 'Ubicación: Brasil (Disponible para trabajo remoto mundial)',
+    contact_whatsapp: 'WhatsApp',
 
     footer_back_top: 'Volver Arriba ↑',
     footer_press_start: 'PRESS START',
     footer_scanlines: 'Scanlines CRT',
 
-    boot_line_1: 'INICIALIZANDO...',
+    boot_line_1: 'INITIALIZING...',
     boot_line_2: 'Cargando Perfil de Desarrolladora...',
     boot_line_3: 'Cargando Módulos Unity...',
-    boot_line_4: 'Conectando GitHub...',
+    boot_line_4: 'Sincronizando Proyectos...',
     boot_line_5: 'Portafolio Listo.',
     boot_skip: 'Presionar ESC / Clic para Omitir [SKIP]',
     module_profile: 'Developer Profile',

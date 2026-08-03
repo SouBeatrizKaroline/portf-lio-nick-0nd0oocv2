@@ -1,6 +1,6 @@
 import { useLanguage } from '@/hooks/use-language'
 import { PixelCat } from './PixelCat'
-import { Github, Linkedin, Mail, ExternalLink } from 'lucide-react'
+import { Github, Linkedin, Mail, ExternalLink, MessageCircle } from 'lucide-react'
 
 interface FooterProps {
   scanlines: boolean
@@ -30,33 +30,45 @@ export function Footer({ scanlines, onToggleScanlines, onPressStart }: FooterPro
 
         <div className="flex items-center gap-4 text-gray-300">
           <a
-            href="https://github.com/nicolemaira"
+            href="https://github.com/NicolePLSilva"
             target="_blank"
             rel="noreferrer"
             className="hover:text-purple-400 transition-colors"
+            title="GitHub"
           >
             <Github className="w-4 h-4" />
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/nicole-maira/"
             target="_blank"
             rel="noreferrer"
             className="hover:text-purple-400 transition-colors"
+            title="LinkedIn"
           >
             <Linkedin className="w-4 h-4" />
           </a>
           <a
-            href="https://nicolemaira.itch.io"
+            href="https://pls-nick.itch.io/"
             target="_blank"
             rel="noreferrer"
             className="hover:text-purple-400 transition-colors flex items-center gap-1"
+            title="Itch.io"
           >
             <ExternalLink className="w-4 h-4" />
-            Itch.io
           </a>
           <a
-            href="mailto:1aspiraqualquer@gmail.com"
+            href="https://wa.me/5571985304202"
+            target="_blank"
+            rel="noreferrer"
             className="hover:text-purple-400 transition-colors"
+            title="WhatsApp"
+          >
+            <MessageCircle className="w-4 h-4" />
+          </a>
+          <a
+            href="mailto:nicolemairaplsilva@gmail.com"
+            className="hover:text-purple-400 transition-colors"
+            title="Email"
           >
             <Mail className="w-4 h-4" />
           </a>

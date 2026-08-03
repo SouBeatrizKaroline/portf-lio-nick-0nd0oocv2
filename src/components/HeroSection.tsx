@@ -86,7 +86,7 @@ export function HeroSection() {
               <ArrowDown className="w-4 h-4" />
             </a>
             <a
-              href="https://github.com/nicolemaira"
+              href="https://github.com/NicolePLSilva"
               target="_blank"
               rel="noreferrer"
               className="border border-[#1a1a22] bg-[#101014] hover:border-purple-500/50 text-gray-300 hover:text-[#EDEDED] font-mono px-4 py-2.5 text-sm transition-all flex items-center gap-2"
@@ -95,7 +95,7 @@ export function HeroSection() {
               GitHub
             </a>
             <a
-              href="https://nicolemaira.itch.io"
+              href="https://pls-nick.itch.io/"
               target="_blank"
               rel="noreferrer"
               className="border border-[#1a1a22] bg-[#101014] hover:border-purple-500/50 text-gray-300 hover:text-[#EDEDED] font-mono px-4 py-2.5 text-sm transition-all flex items-center gap-2"
@@ -104,7 +104,7 @@ export function HeroSection() {
               Itch.io
             </a>
             <a
-              href="#contact"
+              href="mailto:nicolemairaplsilva@gmail.com"
               className="border border-[#1a1a22] bg-[#101014] hover:border-purple-500/50 text-gray-300 hover:text-[#EDEDED] font-mono px-4 py-2.5 text-sm transition-all flex items-center gap-2"
             >
               <Mail className="w-4 h-4" />

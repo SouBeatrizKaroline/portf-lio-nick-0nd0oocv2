@@ -4,7 +4,7 @@ import { useAchievements } from '@/hooks/use-achievements'
 import { sendContactMessage } from '@/services/contact'
 import { HudFrame } from './HudFrame'
 import { SectionReveal } from './SectionReveal'
-import { Mail, Send } from 'lucide-react'
+import { Mail, Send, MessageCircle } from 'lucide-react'
 
 export function ContactSection() {
   const { t } = useLanguage()
@@ -46,18 +46,25 @@ export function ContactSection() {
 
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-4 font-mono text-xs text-gray-300">
-                <p className="text-sm leading-relaxed">
-                  Interessado em contratar, colaborar em um jogo ou conversar sobre desenvolvimento?
-                  Envie um sinal abaixo!
-                </p>
-                <div className="p-4 bg-[#101014] border border-[#1a1a22] space-y-2">
-                  <div className="flex items-center gap-2 text-cyan-400">
+                <p className="text-sm leading-relaxed">{t('contact_intro')}</p>
+                <div className="p-4 bg-[#101014] border border-[#1a1a22] space-y-3">
+                  <a
+                    href="mailto:nicolemairaplsilva@gmail.com"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors"
+                  >
                     <Mail className="w-4 h-4" />
-                    <span>1aspiraqualquer@gmail.com</span>
-                  </div>
-                  <div className="text-gray-500">
-                    Localização: Brasil (Disponível para trabalho remoto mundial)
-                  </div>
+                    <span>nicolemairaplsilva@gmail.com</span>
+                  </a>
+                  <a
+                    href="https://wa.me/5571985304202"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2 text-green-400 hover:text-green-300 transition-colors"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    <span>{t('contact_whatsapp')}: +55 71 98530-4202</span>
+                  </a>
+                  <div className="text-gray-500">{t('contact_location')}</div>
                 </div>
               </div>
 

@@ -30,7 +30,7 @@ export function AboutSection() {
                     pose="coding"
                     scale={1.2}
                     showSpeechBubble
-                    speechText="C# & Unity Engine ✨"
+                    speechText="Game Dev & Unity ✨"
                   />
                   <div className="mt-2 text-[10px] font-mono text-purple-300 text-center">
                     Nick (Nicole Maira)

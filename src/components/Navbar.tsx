@@ -95,7 +95,7 @@ export function Navbar() {
           </div>
 
           <a
-            href="https://github.com/nicolemaira"
+            href="https://github.com/NicolePLSilva"
             target="_blank"
             rel="noreferrer"
             className="p-1.5 text-gray-400 hover:text-[#EDEDED] transition-colors"

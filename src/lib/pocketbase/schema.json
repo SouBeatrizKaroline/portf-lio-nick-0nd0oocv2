@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-03T19:07:46.982Z",
+  "generatedAt": "2026-08-03T19:32:01.376Z",
   "collections": [
     {
       "name": "users",
@@ -779,6 +779,88 @@
         }
       ],
       "indexes": ["CREATE INDEX idx_msg_status ON contact_messages (status)"]
+    },
+    {
+      "name": "itch_games",
+      "type": "base",
+      "apiRules": {
+        "list": "",
+        "view": "",
+        "create": null,
+        "update": null,
+        "delete": null
+      },
+      "fields": [
+        {
+          "name": "title",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "description_pt",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "description_en",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "description_es",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "cover_image",
+          "type": "file",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "itch_url",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "project_url",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "tech",
+          "type": "json",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "order",
+          "type": "number",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate"]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate", "onUpdate"]
+        }
+      ],
+      "indexes": ["CREATE INDEX idx_itch_games_order ON itch_games (\"order\")"]
     }
   ]
 }
