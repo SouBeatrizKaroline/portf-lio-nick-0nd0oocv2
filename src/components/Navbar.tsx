@@ -128,7 +128,7 @@ export function Navbar() {
               <Linkedin className="w-4 h-4" />
             </a>
             <a
-              href="https://wa.me/5511991467419"
+              href="https://wa.me/557185304202"
               target="_blank"
               rel="noreferrer"
               aria-label="WhatsApp Direct"

@@ -17,7 +17,7 @@ export function ContactSection() {
 
   const handleWhatsAppClick = (e: React.MouseEvent) => {
     e.preventDefault()
-    const p = '5511991467419'
+    const p = '557185304202'
     window.open(`https://wa.me/${p}`, '_blank', 'noreferrer')
   }
 
